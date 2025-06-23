@@ -20,6 +20,9 @@ const PositionDetail = () => {
     hasPrev
   } = useAchievementNavigation();
 
+  // Get current achievement ID - move this before useEffect that uses it
+  const currentAchievementId = searchParams.get('achievement') || currentPosition?.achievements[0]?.id;
+
   // Set default achievement if none specified
   useEffect(() => {
     if (currentPosition && !searchParams.get('achievement')) {
@@ -65,8 +68,6 @@ const PositionDetail = () => {
   const prevPosition = currentPositionIndex > 0 
     ? portfolioData.positions[currentPositionIndex - 1] 
     : null;
-
-  const currentAchievementId = searchParams.get('achievement') || currentPosition?.achievements[0]?.id;
 
   return (
     <div className="min-h-screen bg-background">
