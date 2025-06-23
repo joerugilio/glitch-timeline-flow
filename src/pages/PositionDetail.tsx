@@ -42,9 +42,11 @@ const PositionDetail = () => {
         </div>
       </div>;
   }
+  
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
   const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
   const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
+  
   return <div className="min-h-screen bg-background">
       <Navigation />
       
@@ -56,7 +58,7 @@ const PositionDetail = () => {
         <div className="absolute inset-0 bg-noise" />
         <div className="absolute inset-0 bg-gradient-dark" />
         
-        <div className="relative z-10 max-w-4xl mx-auto px-2 sm:px-3 lg:px-4">
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8">
           {/* Back Navigation Button */}
           <Button asChild variant="outline" className="mb-4 bg-background/80 backdrop-blur-sm border-border/60 hover:bg-background/90 hover:border-primary/40 transition-all">
             <Link to="/" aria-label="Back to timeline">

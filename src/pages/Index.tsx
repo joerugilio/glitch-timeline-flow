@@ -20,7 +20,7 @@ const Index = () => {
       {/* Content */}
       <div className="relative z-10">
         <Navigation />
-        <div className="px-1 py-1">
+        <div className="px-0 py-1">
           <PositionAccordion positions={portfolioData.positions} />
         </div>
       </div>

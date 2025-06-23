@@ -2,21 +2,26 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, MapPin, Calendar, Tag } from 'lucide-react';
 import { Position } from '../types/portfolio';
+
 interface PositionAccordionProps {
   positions: Position[];
 }
+
 const PositionAccordion: React.FC<PositionAccordionProps> = ({
   positions
 }) => {
   const [hoveredPosition, setHoveredPosition] = useState<string | null>(null);
+
   const handleMouseEnter = (positionId: string) => {
     console.log('Hovering over position:', positionId);
     setHoveredPosition(positionId);
   };
+
   const handleMouseLeave = () => {
     console.log('Mouse left position');
     setHoveredPosition(null);
   };
+
   return <div className="relative min-h-screen">
       {/* Background Image */}
       <div className="fixed inset-0 z-0">
@@ -34,7 +39,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
       {/* Content */}
       <div className="relative z-10 pt-20 pb-12">
-        <div className="max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <header className="text-center mb-12">
             <h1 data-text="Career Timeline" className="text-3xl font-bold mb-4 glitch md:text-3xl">
               Career Timeline
@@ -96,4 +101,5 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       </div>
     </div>;
 };
+
 export default PositionAccordion;
