@@ -153,27 +153,63 @@ const PositionDetail = () => {
             {/* Position Navigation */}
             <nav className="mt-6 pt-3 border-t border-border" aria-label="Position navigation">
               <div className="flex justify-between items-center">
-                {prevPosition ? <Link to={`/position/${prevPosition.id}?achievement=${prevPosition.achievements[0].id}`} className="flex items-center text-muted-foreground hover:text-foreground transition-colors group text-sm" aria-label={`Previous: ${prevPosition.title}`}>
-                    <ArrowLeft size={16} className="mr-1 group-hover:-translate-x-1 transition-transform" />
-                    <div className="text-left">
-                      <p className="text-xs">Previous</p>
-                      <p className="font-medium">{prevPosition.title}</p>
-                    </div>
-                  </Link> : <div />}
+                {prevPosition ? 
+                  <Button 
+                    asChild 
+                    variant="outline" 
+                    className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none" 
+                  >
+                    <Link 
+                      to={`/position/${prevPosition.id}?achievement=${prevPosition.achievements[0].id}`} 
+                      aria-label={`Previous: ${prevPosition.title}`}
+                      role="button"
+                    >
+                      <ArrowLeft size={16} className="mr-1" aria-hidden="true" />
+                      <div className="text-left">
+                        <p className="text-xs">Previous</p>
+                        <p className="font-medium">{prevPosition.title}</p>
+                      </div>
+                    </Link>
+                  </Button>
+                : <div />}
 
-                {nextPosition ? <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} className="flex items-center text-muted-foreground hover:text-foreground transition-colors group text-right text-sm" aria-label={`Next: ${nextPosition.title}`}>
-                    <div className="text-right">
-                      <p className="text-xs">Next</p>
-                      <p className="font-medium">{nextPosition.title}</p>
-                    </div>
-                    <ArrowLeft size={16} className="ml-1 rotate-180 group-hover:translate-x-1 transition-transform" />
-                  </Link> : <Link to="/" className="flex items-center text-primary hover:text-primary/80 transition-colors group text-sm" aria-label="Return to timeline">
-                    <div className="text-right">
-                      <p className="text-xs">Complete</p>
-                      <p className="font-medium">Back to Timeline</p>
-                    </div>
-                    <ExternalLink size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
-                  </Link>}
+                {nextPosition ? 
+                  <Button 
+                    asChild 
+                    variant="outline" 
+                    className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none" 
+                  >
+                    <Link 
+                      to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} 
+                      aria-label={`Next: ${nextPosition.title}`}
+                      role="button"
+                    >
+                      <div className="text-right">
+                        <p className="text-xs">Next</p>
+                        <p className="font-medium">{nextPosition.title}</p>
+                      </div>
+                      <ArrowLeft size={16} className="ml-1 rotate-180" aria-hidden="true" />
+                    </Link>
+                  </Button>
+                : 
+                  <Button 
+                    asChild 
+                    variant="outline" 
+                    className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none" 
+                  >
+                    <Link 
+                      to="/" 
+                      aria-label="Return to timeline"
+                      role="button"
+                    >
+                      <div className="text-right">
+                        <p className="text-xs">Complete</p>
+                        <p className="font-medium">Back to Timeline</p>
+                      </div>
+                      <ExternalLink size={16} className="ml-1" aria-hidden="true" />
+                    </Link>
+                  </Button>
+                }
               </div>
             </nav>
           </div>
