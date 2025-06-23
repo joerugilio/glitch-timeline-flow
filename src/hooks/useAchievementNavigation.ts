@@ -69,6 +69,34 @@ export const useAchievementNavigation = () => {
     return currentAchievementIndex > 0 || currentPositionIndex > 0;
   };
 
+  // Add keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Only handle arrow keys when not typing in an input
+      if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      switch (event.key) {
+        case 'ArrowLeft':
+          event.preventDefault();
+          if (hasPrev()) {
+            navigatePrev();
+          }
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          if (hasNext()) {
+            navigateNext();
+          }
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentAchievementIndex, currentPositionIndex, hasPrev(), hasNext()]);
+
   return {
     currentPosition,
     currentAchievement: currentPosition?.achievements[currentAchievementIndex],
