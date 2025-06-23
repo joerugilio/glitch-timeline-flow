@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Tag, ExternalLink } from 'lucide-react';
@@ -7,7 +6,6 @@ import AchievementImages from '../components/AchievementImages';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
-
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -27,51 +25,38 @@ const PositionDetail = () => {
   // Set default achievement if none specified
   useEffect(() => {
     if (currentPosition && !searchParams.get('achievement')) {
-      setSearchParams({ achievement: currentPosition.achievements[0].id });
+      setSearchParams({
+        achievement: currentPosition.achievements[0].id
+      });
     }
   }, [currentPosition, searchParams, setSearchParams]);
-
   if (!currentPosition) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+    return <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-lg font-bold mb-2">Position not found</h1>
           <Link to="/" className="text-primary hover:underline text-sm">
             Return to timeline
           </Link>
         </div>
-      </div>
-    );
+      </div>;
   }
-
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
-  const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 
-    ? portfolioData.positions[currentPositionIndex + 1] 
-    : null;
-  const prevPosition = currentPositionIndex > 0 
-    ? portfolioData.positions[currentPositionIndex - 1] 
-    : null;
-
-  return (
-    <div className="min-h-screen bg-background">
+  const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
+  const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
+  return <div className="min-h-screen bg-background">
       <Navigation />
       
       {/* Hero Section */}
       <div className="relative pt-12 pb-4">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: `url(${currentPosition.imageUrl})` }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center opacity-20" style={{
+        backgroundImage: `url(${currentPosition.imageUrl})`
+      }} />
         <div className="absolute inset-0 bg-noise" />
         <div className="absolute inset-0 bg-gradient-dark" />
         
         <div className="relative z-10 max-w-4xl mx-auto px-2 sm:px-3 lg:px-4">
           {/* Back Navigation */}
-          <Link
-            to="/"
-            className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-3 group text-sm"
-            aria-label="Back to timeline"
-          >
+          <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-3 group text-sm" aria-label="Back to timeline">
             <ArrowLeft size={16} className="mr-1 group-hover:-translate-x-1 transition-transform" />
             Back to Timeline
           </Link>
@@ -97,15 +82,10 @@ const PositionDetail = () => {
             </div>
 
             <div className="flex flex-wrap gap-1 mb-3">
-              {currentPosition.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/30"
-                >
+              {currentPosition.tags.map(tag => <span key={tag} className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/30">
                   <Tag size={8} className="mr-0.5" aria-hidden="true" />
                   {tag}
-                </span>
-              ))}
+                </span>)}
             </div>
 
             <p className="text-muted-foreground leading-relaxed text-sm mb-3">
@@ -116,23 +96,15 @@ const PositionDetail = () => {
           {/* Achievements Accordion */}
           <section>
             <h3 className="text-lg font-semibold mb-2 text-foreground">Key Achievements</h3>
-            <Accordion 
-              type="single" 
-              value={currentAchievementId || undefined}
-              onValueChange={(value) => {
-                if (value) {
-                  setSearchParams({ achievement: value });
-                }
-              }}
-              className="space-y-1"
-            >
-              {currentPosition.achievements.map((achievement) => (
-                <AccordionItem 
-                  key={achievement.id} 
-                  value={achievement.id}
-                  className="bg-card/60 backdrop-blur-sm border-2 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10"
-                >
-                  <AccordionTrigger className="px-3 py-3 hover:no-underline hover:bg-muted/30 rounded-t-lg text-sm font-semibold text-foreground hover:text-primary transition-all duration-200 data-[state=open]:text-primary data-[state=open]:bg-muted/20">
+            <Accordion type="single" value={currentAchievementId || undefined} onValueChange={value => {
+            if (value) {
+              setSearchParams({
+                achievement: value
+              });
+            }
+          }} className="space-y-1">
+              {currentPosition.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-2 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
+                  <AccordionTrigger className="px-3 py-3 hover:no-underline hover:bg-muted/10 rounded-t-lg text-sm font-semibold text-foreground hover:text-primary transition-all duration-200 data-[state=open]:text-primary data-[state=open]:bg-muted/20">
                     <span className="text-left">{achievement.title}</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-3 pb-3">
@@ -144,61 +116,38 @@ const PositionDetail = () => {
                       <AchievementImages images={achievement.images} />
                     </div>
                   </AccordionContent>
-                </AccordionItem>
-              ))}
+                </AccordionItem>)}
             </Accordion>
           </section>
 
           {/* Position Navigation */}
           <nav className="mt-6 pt-3 border-t border-border" aria-label="Position navigation">
             <div className="flex justify-between items-center">
-              {prevPosition ? (
-                <Link
-                  to={`/position/${prevPosition.id}?achievement=${prevPosition.achievements[0].id}`}
-                  className="flex items-center text-muted-foreground hover:text-foreground transition-colors group text-sm"
-                  aria-label={`Previous: ${prevPosition.title}`}
-                >
+              {prevPosition ? <Link to={`/position/${prevPosition.id}?achievement=${prevPosition.achievements[0].id}`} className="flex items-center text-muted-foreground hover:text-foreground transition-colors group text-sm" aria-label={`Previous: ${prevPosition.title}`}>
                   <ArrowLeft size={16} className="mr-1 group-hover:-translate-x-1 transition-transform" />
                   <div className="text-left">
                     <p className="text-xs">Previous</p>
                     <p className="font-medium">{prevPosition.title}</p>
                   </div>
-                </Link>
-              ) : (
-                <div />
-              )}
+                </Link> : <div />}
 
-              {nextPosition ? (
-                <Link
-                  to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`}
-                  className="flex items-center text-muted-foreground hover:text-foreground transition-colors group text-right text-sm"
-                  aria-label={`Next: ${nextPosition.title}`}
-                >
+              {nextPosition ? <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} className="flex items-center text-muted-foreground hover:text-foreground transition-colors group text-right text-sm" aria-label={`Next: ${nextPosition.title}`}>
                   <div className="text-right">
                     <p className="text-xs">Next</p>
                     <p className="font-medium">{nextPosition.title}</p>
                   </div>
                   <ArrowLeft size={16} className="ml-1 rotate-180 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              ) : (
-                <Link
-                  to="/"
-                  className="flex items-center text-primary hover:text-primary/80 transition-colors group text-sm"
-                  aria-label="Return to timeline"
-                >
+                </Link> : <Link to="/" className="flex items-center text-primary hover:text-primary/80 transition-colors group text-sm" aria-label="Return to timeline">
                   <div className="text-right">
                     <p className="text-xs">Complete</p>
                     <p className="font-medium">Back to Timeline</p>
                   </div>
                   <ExternalLink size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              )}
+                </Link>}
             </div>
           </nav>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PositionDetail;
