@@ -4,8 +4,10 @@ import { ArrowLeft, Calendar, MapPin, Tag, ExternalLink } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import AchievementImages from '../components/AchievementImages';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
+import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
+
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -55,11 +57,13 @@ const PositionDetail = () => {
         <div className="absolute inset-0 bg-gradient-dark" />
         
         <div className="relative z-10 max-w-4xl mx-auto px-2 sm:px-3 lg:px-4">
-          {/* Back Navigation */}
-          <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-3 group text-sm" aria-label="Back to timeline">
-            <ArrowLeft size={16} className="mr-1 group-hover:-translate-x-1 transition-transform" />
-            Back to Timeline
-          </Link>
+          {/* Back Navigation Button */}
+          <Button asChild variant="outline" className="mb-4 bg-background/80 backdrop-blur-sm border-border/60 hover:bg-background/90 hover:border-primary/40 transition-all">
+            <Link to="/" aria-label="Back to timeline">
+              <ArrowLeft size={16} className="mr-2" />
+              Back to Timeline
+            </Link>
+          </Button>
 
           {/* Header */}
           <header className="mb-4">
