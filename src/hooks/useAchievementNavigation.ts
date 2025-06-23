@@ -16,11 +16,6 @@ export const useAchievementNavigation = () => {
 
   const navigateToAchievement = (positionId: string, achievementId: string) => {
     navigate(`/position/${positionId}?achievement=${achievementId}`);
-    // Scroll to top immediately when navigating to a different position
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
   };
 
   const navigateNext = () => {
@@ -49,12 +44,12 @@ export const useAchievementNavigation = () => {
       const prevAchievement = currentPosition.achievements[currentAchievementIndex - 1];
       setSearchParams({ achievement: prevAchievement.id });
     } else {
-      // At first achievement, go to last achievement of previous position
+      // At first achievement, go to first achievement of previous position
       const prevPositionIndex = currentPositionIndex - 1;
       if (prevPositionIndex >= 0) {
         const prevPosition = portfolioData.positions[prevPositionIndex];
-        const lastAchievement = prevPosition.achievements[prevPosition.achievements.length - 1];
-        navigateToAchievement(prevPosition.id, lastAchievement.id);
+        const firstAchievement = prevPosition.achievements[0];
+        navigateToAchievement(prevPosition.id, firstAchievement.id);
       }
     }
   };

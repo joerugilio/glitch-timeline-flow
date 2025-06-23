@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Tag, ExternalLink } from 'lucide-react';
 import Navigation from '../components/Navigation';
@@ -10,6 +10,7 @@ import { portfolioData } from '../data/portfolio';
 
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const previousPositionId = useRef<string | null>(null);
   const {
     currentPosition,
     currentAchievement,
@@ -30,21 +31,40 @@ const PositionDetail = () => {
     }
   }, [currentPosition, searchParams, setSearchParams]);
 
-  // Auto-scroll to open accordion item when achievement changes
+  // Track position changes and handle cross-position navigation
   useEffect(() => {
-    if (currentAchievementId) {
-      // Small delay to ensure accordion animation completes
-      const timer = setTimeout(() => {
-        const accordionItem = document.querySelector(`[data-state="open"]`);
-        if (accordionItem) {
-          accordionItem.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-          });
-        }
-      }, 150);
+    if (currentPosition) {
+      const isPositionChange = previousPositionId.current && previousPositionId.current !== currentPosition.id;
+      
+      if (isPositionChange) {
+        // For cross-position navigation, stay at top and don't auto-scroll
+        window.scrollTo(0, 0);
+      }
+      
+      previousPositionId.current = currentPosition.id;
+    }
+  }, [currentPosition?.id]);
 
-      return () => clearTimeout(timer);
+  // Auto-scroll to open accordion item when achievement changes within same position
+  useEffect(() => {
+    if (currentAchievementId && currentPosition) {
+      // Only auto-scroll if we're staying within the same position
+      const isSamePosition = previousPositionId.current === currentPosition.id;
+      
+      if (isSamePosition) {
+        // Small delay to ensure accordion animation completes
+        const timer = setTimeout(() => {
+          const accordionItem = document.querySelector(`[data-state="open"]`);
+          if (accordionItem) {
+            accordionItem.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+          }
+        }, 150);
+
+        return () => clearTimeout(timer);
+      }
     }
   }, [currentAchievementId]);
 
