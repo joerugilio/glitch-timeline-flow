@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Tag, ExternalLink } from 'lucide-react';
@@ -7,6 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
+
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -31,6 +33,7 @@ const PositionDetail = () => {
       });
     }
   }, [currentPosition, searchParams, setSearchParams]);
+
   if (!currentPosition) {
     return <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -41,9 +44,11 @@ const PositionDetail = () => {
         </div>
       </div>;
   }
+
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
   const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
   const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
+
   return <div className="min-h-screen bg-background">
       <Navigation />
       
@@ -99,7 +104,7 @@ const PositionDetail = () => {
           {/* Achievements Accordion */}
           <section>
             <h3 className="text-lg font-semibold mb-2 text-foreground">Key Achievements</h3>
-            <Accordion type="single" value={currentAchievementId || undefined} onValueChange={value => {
+            <Accordion type="single" collapsible onValueChange={value => {
             if (value) {
               setSearchParams({
                 achievement: value
@@ -153,4 +158,5 @@ const PositionDetail = () => {
       </div>
     </div>;
 };
+
 export default PositionDetail;
