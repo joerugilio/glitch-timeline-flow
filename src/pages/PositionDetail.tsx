@@ -88,7 +88,7 @@ const PositionDetail = () => {
 
             {/* Header */}
             <header className="mb-4">
-              <h1 className="text-xl md:text-2xl font-bold mb-2 text-gradient">
+              <h1 className="text-xl md:text-2xl font-bold mb-0">
                 {currentPosition.title}
               </h1>
               <h2 className="text-lg md:text-xl text-accent font-semibold mb-2">
