@@ -11,6 +11,16 @@ interface PositionAccordionProps {
 const PositionAccordion: React.FC<PositionAccordionProps> = ({ positions }) => {
   const [hoveredPosition, setHoveredPosition] = useState<string | null>(null);
 
+  const handleMouseEnter = (positionId: string) => {
+    console.log('Hovering over position:', positionId);
+    setHoveredPosition(positionId);
+  };
+
+  const handleMouseLeave = () => {
+    console.log('Mouse left position');
+    setHoveredPosition(null);
+  };
+
   return (
     <div className="relative min-h-screen">
       {/* Background Image */}
@@ -21,11 +31,23 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({ positions }) => {
             backgroundImage: hoveredPosition 
               ? `url(${positions.find(p => p.id === hoveredPosition)?.imageUrl})`
               : 'none',
-            opacity: hoveredPosition ? 0.15 : 0
+            opacity: hoveredPosition ? 0.4 : 0
           }}
         />
-        <div className="absolute inset-0 bg-noise" />
-        <div className="absolute inset-0 bg-gradient-dark" />
+        <div 
+          className="absolute inset-0 bg-noise transition-opacity duration-700"
+          style={{
+            opacity: hoveredPosition ? 0.3 : 1
+          }}
+        />
+        <div 
+          className="absolute inset-0 transition-all duration-700"
+          style={{
+            background: hoveredPosition 
+              ? 'linear-gradient(135deg, hsl(var(--background) / 0.7) 0%, hsl(12 8% 12% / 0.8) 50%, hsl(var(--background) / 0.7) 100%)'
+              : 'linear-gradient(135deg, hsl(var(--background)) 0%, hsl(12 8% 12%) 50%, hsl(var(--background)) 100%)'
+          }}
+        />
       </div>
 
       {/* Content */}
@@ -46,10 +68,10 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({ positions }) => {
                 key={position.id}
                 to={`/position/${position.id}`}
                 className="block group"
-                onMouseEnter={() => setHoveredPosition(position.id)}
-                onMouseLeave={() => setHoveredPosition(null)}
-                onFocus={() => setHoveredPosition(position.id)}
-                onBlur={() => setHoveredPosition(null)}
+                onMouseEnter={() => handleMouseEnter(position.id)}
+                onMouseLeave={handleMouseLeave}
+                onFocus={() => handleMouseEnter(position.id)}
+                onBlur={handleMouseLeave}
                 role="listitem"
                 aria-label={`View details for ${position.title} at ${position.company}`}
               >
