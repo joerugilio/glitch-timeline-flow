@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Tag, ExternalLink } from 'lucide-react';
@@ -8,7 +7,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
-
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -33,7 +31,6 @@ const PositionDetail = () => {
       });
     }
   }, [currentPosition, searchParams, setSearchParams]);
-
   if (!currentPosition) {
     return <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -44,28 +41,20 @@ const PositionDetail = () => {
         </div>
       </div>;
   }
-
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
   const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
   const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
-
   return <div className="min-h-screen bg-background relative">
       {/* Background Image - Full Screen Cover */}
       <div className="fixed inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${currentPosition.imageUrl})`,
-            opacity: 0.9
-          }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+        backgroundImage: `url(${currentPosition.imageUrl})`,
+        opacity: 0.9
+      }} />
         <div className="absolute inset-0 bg-noise opacity-10" />
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, hsl(var(--background) / 0.3) 0%, hsl(12 8% 12% / 0.4) 50%, hsl(var(--background) / 0.3) 100%)'
-          }}
-        />
+        <div className="absolute inset-0" style={{
+        background: 'linear-gradient(135deg, hsl(var(--background) / 0.3) 0%, hsl(12 8% 12% / 0.4) 50%, hsl(var(--background) / 0.3) 100%)'
+      }} />
       </div>
 
       {/* Content */}
@@ -76,16 +65,8 @@ const PositionDetail = () => {
         <div className="pt-12 pb-4">
           <div className="w-full pt-4 px-4 sm:px-6 lg:px-8">
             {/* Back Navigation Button - WCAG AA Compliant */}
-            <Button 
-              asChild 
-              variant="outline" 
-              className="mb-4 bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none" 
-            >
-              <Link 
-                to="/" 
-                aria-label="Navigate back to career timeline"
-                role="button"
-              >
+            <Button asChild variant="outline" className="mb-4 bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none">
+              <Link to="/" aria-label="Navigate back to career timeline" role="button">
                 <ArrowLeft size={16} className="mr-2" aria-hidden="true" />
                 Back to Timeline
               </Link>
@@ -151,65 +132,35 @@ const PositionDetail = () => {
             </section>
 
             {/* Position Navigation */}
-            <nav className="mt-6 pt-3 border-t border-border" aria-label="Position navigation">
+            <nav aria-label="Position navigation" className="mt-6 pt-3">
               <div className="flex justify-between items-center">
-                {prevPosition ? 
-                  <Button 
-                    asChild 
-                    variant="outline" 
-                    className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none" 
-                  >
-                    <Link 
-                      to={`/position/${prevPosition.id}?achievement=${prevPosition.achievements[0].id}`} 
-                      aria-label={`Previous: ${prevPosition.title}`}
-                      role="button"
-                    >
+                {prevPosition ? <Button asChild variant="outline" className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none">
+                    <Link to={`/position/${prevPosition.id}?achievement=${prevPosition.achievements[0].id}`} aria-label={`Previous: ${prevPosition.title}`} role="button">
                       <ArrowLeft size={16} className="mr-1" aria-hidden="true" />
                       <div className="text-left">
                         <p className="text-xs">Previous</p>
                         <p className="font-medium">{prevPosition.title}</p>
                       </div>
                     </Link>
-                  </Button>
-                : <div />}
+                  </Button> : <div />}
 
-                {nextPosition ? 
-                  <Button 
-                    asChild 
-                    variant="outline" 
-                    className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none" 
-                  >
-                    <Link 
-                      to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} 
-                      aria-label={`Next: ${nextPosition.title}`}
-                      role="button"
-                    >
+                {nextPosition ? <Button asChild variant="outline" className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none">
+                    <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button">
                       <div className="text-right">
                         <p className="text-xs">Next</p>
                         <p className="font-medium">{nextPosition.title}</p>
                       </div>
                       <ArrowLeft size={16} className="ml-1 rotate-180" aria-hidden="true" />
                     </Link>
-                  </Button>
-                : 
-                  <Button 
-                    asChild 
-                    variant="outline" 
-                    className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none" 
-                  >
-                    <Link 
-                      to="/" 
-                      aria-label="Return to timeline"
-                      role="button"
-                    >
+                  </Button> : <Button asChild variant="outline" className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none">
+                    <Link to="/" aria-label="Return to timeline" role="button">
                       <div className="text-right">
                         <p className="text-xs">Complete</p>
                         <p className="font-medium">Back to Timeline</p>
                       </div>
                       <ExternalLink size={16} className="ml-1" aria-hidden="true" />
                     </Link>
-                  </Button>
-                }
+                  </Button>}
               </div>
             </nav>
           </div>
@@ -217,5 +168,4 @@ const PositionDetail = () => {
       </div>
     </div>;
 };
-
 export default PositionDetail;
