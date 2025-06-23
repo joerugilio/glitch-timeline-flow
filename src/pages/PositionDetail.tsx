@@ -108,7 +108,7 @@ const PositionDetail = () => {
                     <span className="text-left text-zinc-500">{achievement.title}</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-3 pb-3">
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       <p className="text-muted-foreground leading-relaxed text-sm">
                         {achievement.description}
                       </p>
