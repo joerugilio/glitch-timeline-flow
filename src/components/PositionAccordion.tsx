@@ -31,20 +31,20 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({ positions }) => {
             backgroundImage: hoveredPosition 
               ? `url(${positions.find(p => p.id === hoveredPosition)?.imageUrl})`
               : 'none',
-            opacity: hoveredPosition ? 0.4 : 0
+            opacity: hoveredPosition ? 0.9 : 0
           }}
         />
         <div 
           className="absolute inset-0 bg-noise transition-opacity duration-700"
           style={{
-            opacity: hoveredPosition ? 0.3 : 1
+            opacity: hoveredPosition ? 0.1 : 1
           }}
         />
         <div 
           className="absolute inset-0 transition-all duration-700"
           style={{
             background: hoveredPosition 
-              ? 'linear-gradient(135deg, hsl(var(--background) / 0.7) 0%, hsl(12 8% 12% / 0.8) 50%, hsl(var(--background) / 0.7) 100%)'
+              ? 'linear-gradient(135deg, hsl(var(--background) / 0.3) 0%, hsl(12 8% 12% / 0.4) 50%, hsl(var(--background) / 0.3) 100%)'
               : 'linear-gradient(135deg, hsl(var(--background)) 0%, hsl(12 8% 12%) 50%, hsl(var(--background)) 100%)'
           }}
         />
