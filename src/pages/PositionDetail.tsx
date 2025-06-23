@@ -7,7 +7,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
-
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -42,11 +41,9 @@ const PositionDetail = () => {
         </div>
       </div>;
   }
-  
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
   const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
   const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
-  
   return <div className="min-h-screen bg-background">
       <Navigation />
       
@@ -113,7 +110,7 @@ const PositionDetail = () => {
                   <AccordionTrigger className="px-3 py-3 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 bg-slate-200 hover:bg-slate-100 text-blue-500">
                     <span className="text-left text-zinc-500">{achievement.title}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-3 pb-3">
+                  <AccordionContent className="px-3 pt-3">
                     <div className="space-y-3">
                       <p className="text-muted-foreground leading-relaxed text-sm">
                         {achievement.description}
