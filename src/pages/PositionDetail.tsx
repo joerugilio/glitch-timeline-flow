@@ -7,6 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
+
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -66,8 +67,8 @@ const PositionDetail = () => {
           <div className="w-full pt-4 px-4">
             {/* Navigation Bar */}
             <nav className="flex justify-between items-center mb-4">
-              {/* Back Navigation Button - WCAG AA Compliant */}
-              <Button asChild variant="outline" className="bg-slate-800 text-white border-slate-600 hover:bg-slate-900 hover:border-slate-400 transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
+              {/* Back Navigation Button - Enhanced WCAG AA Compliant */}
+              <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
                 <Link to="/" aria-label="Navigate back to career timeline" role="button">
                   <ArrowLeft size={16} className="mr-2" aria-hidden="true" />
                   Back to Timeline
@@ -75,7 +76,7 @@ const PositionDetail = () => {
               </Button>
 
               {/* Next Navigation Button */}
-              {nextPosition && <Button asChild variant="outline" className="bg-slate-800 text-white border-slate-600 hover:bg-slate-900 hover:border-slate-400 transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
+              {nextPosition && <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
                   <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button">
                     <div className="text-right">
                       <p className="text-xs">Next</p>
@@ -145,10 +146,10 @@ const PositionDetail = () => {
               </Accordion>
             </section>
 
-            {/* Position Navigation */}
+            {/* Position Navigation - Enhanced WCAG AA Compliant */}
             <nav aria-label="Position navigation" className="mt-6 pt-3">
               <div className="flex justify-between items-center">
-                {prevPosition ? <Button asChild variant="outline" className="bg-slate-800 text-white border-slate-600 hover:bg-slate-900 hover:border-slate-400 transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
+                {prevPosition ? <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
                     <Link to={`/position/${prevPosition.id}?achievement=${prevPosition.achievements[0].id}`} aria-label={`Previous: ${prevPosition.title}`} role="button">
                       <ArrowLeft size={16} className="mr-1" aria-hidden="true" />
                       <div className="text-left">
@@ -158,7 +159,7 @@ const PositionDetail = () => {
                     </Link>
                   </Button> : <div />}
 
-                {nextPosition ? <Button asChild variant="outline" className="bg-slate-800 text-white border-slate-600 hover:bg-slate-900 hover:border-slate-400 transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
+                {nextPosition ? <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
                     <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button">
                       <div className="text-right">
                         <p className="text-xs">Next</p>
@@ -166,7 +167,7 @@ const PositionDetail = () => {
                       </div>
                       <ArrowLeft size={16} className="ml-1 rotate-180" aria-hidden="true" />
                     </Link>
-                  </Button> : <Button asChild variant="outline" className="bg-slate-800 text-white border-slate-600 hover:bg-slate-900 hover:border-slate-400 transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
+                  </Button> : <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
                     <Link to="/" aria-label="Return to timeline" role="button">
                       <div className="text-right">
                         <p className="text-xs">Complete</p>
@@ -182,4 +183,5 @@ const PositionDetail = () => {
       </div>
     </div>;
 };
+
 export default PositionDetail;
