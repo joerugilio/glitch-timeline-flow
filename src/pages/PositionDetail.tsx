@@ -131,7 +131,26 @@ const PositionDetail = () => {
             }} className="space-y-1">
                 {currentPosition.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-2 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
                     <AccordionTrigger className="px-3 py-3 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 bg-slate-200 hover:bg-slate-100 text-blue-500">
-                      <span className="text-left text-zinc-500">{achievement.title}</span>
+                      <div className="flex-1 text-left">
+                        <span className="text-zinc-500 block mb-2">{achievement.title}</span>
+                        {/* Image thumbnails strip */}
+                        <div className="flex gap-1 overflow-hidden">
+                          {achievement.images.slice(0, 4).map((image, index) => (
+                            <div key={index} className="w-8 h-6 rounded overflow-hidden border border-gray-300 flex-shrink-0">
+                              <img
+                                src={image.url}
+                                alt=""
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          ))}
+                          {achievement.images.length > 4 && (
+                            <div className="w-8 h-6 rounded bg-gray-300 border border-gray-400 flex items-center justify-center text-xs text-gray-600 flex-shrink-0">
+                              +{achievement.images.length - 4}
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </AccordionTrigger>
                     <AccordionContent className="px-3 pt-3">
                       <div className="space-y-3">
