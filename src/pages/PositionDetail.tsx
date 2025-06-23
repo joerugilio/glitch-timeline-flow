@@ -69,13 +69,26 @@ const PositionDetail = () => {
         {/* Hero Section */}
         <div className="pt-12 pb-4">
           <div className="w-full pt-4 px-4">
-            {/* Back Navigation Button - WCAG AA Compliant */}
-            <Button asChild variant="outline" className="mb-4 bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none">
-              <Link to="/" aria-label="Navigate back to career timeline" role="button">
-                <ArrowLeft size={16} className="mr-2" aria-hidden="true" />
-                Back to Timeline
-              </Link>
-            </Button>
+            {/* Navigation Bar */}
+            <nav className="flex justify-between items-center mb-4">
+              {/* Back Navigation Button - WCAG AA Compliant */}
+              <Button asChild variant="outline" className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none">
+                <Link to="/" aria-label="Navigate back to career timeline" role="button">
+                  <ArrowLeft size={16} className="mr-2" aria-hidden="true" />
+                  Back to Timeline
+                </Link>
+              </Button>
+
+              {/* Next Navigation Button */}
+              {nextPosition && (
+                <Button asChild variant="outline" className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none">
+                  <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button">
+                    Next
+                    <ArrowLeft size={16} className="ml-2 rotate-180" aria-hidden="true" />
+                  </Link>
+                </Button>
+              )}
+            </nav>
 
             {/* Header */}
             <header className="mb-4">
