@@ -83,8 +83,11 @@ const PositionDetail = () => {
               {nextPosition && (
                 <Button asChild variant="outline" className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none">
                   <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button">
-                    Next
-                    <ArrowLeft size={16} className="ml-2 rotate-180" aria-hidden="true" />
+                    <div className="text-right">
+                      <p className="text-xs">Next</p>
+                      <p className="font-medium">{nextPosition.title}</p>
+                    </div>
+                    <ArrowLeft size={16} className="ml-1 rotate-180" aria-hidden="true" />
                   </Link>
                 </Button>
               )}
