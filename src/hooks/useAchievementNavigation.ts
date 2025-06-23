@@ -1,3 +1,4 @@
+
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { portfolioData } from '../data/portfolio';
@@ -15,6 +16,11 @@ export const useAchievementNavigation = () => {
 
   const navigateToAchievement = (positionId: string, achievementId: string) => {
     navigate(`/position/${positionId}?achievement=${achievementId}`);
+    // Scroll to top immediately when navigating to a different position
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   const navigateNext = () => {
