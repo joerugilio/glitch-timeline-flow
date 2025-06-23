@@ -9,14 +9,18 @@ import { portfolioData } from '../data/portfolio';
 
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const previousPositionId = useRef<string | null>(null);
   const {
     currentPosition,
     currentAchievement,
     currentAchievementIndex
   } = useAchievementNavigation();
 
-  // Get current achievement ID - move this before useEffect that uses it
+  // Scroll to top when component mounts or position changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPosition?.id]);
+
+  // Get current achievement ID
   const currentAchievementId = searchParams.get('achievement') || currentPosition?.achievements[0]?.id;
 
   // Set default achievement if none specified
@@ -25,43 +29,6 @@ const PositionDetail = () => {
       setSearchParams({ achievement: currentPosition.achievements[0].id });
     }
   }, [currentPosition, searchParams, setSearchParams]);
-
-  // Track position changes and handle cross-position navigation
-  useEffect(() => {
-    if (currentPosition) {
-      const isPositionChange = previousPositionId.current && previousPositionId.current !== currentPosition.id;
-      
-      if (isPositionChange) {
-        // For cross-position navigation, stay at top and don't auto-scroll
-        window.scrollTo(0, 0);
-      }
-      
-      previousPositionId.current = currentPosition.id;
-    }
-  }, [currentPosition?.id]);
-
-  // Auto-scroll to open accordion item when achievement changes within same position
-  useEffect(() => {
-    if (currentAchievementId && currentPosition) {
-      // Only auto-scroll if we're staying within the same position
-      const isSamePosition = previousPositionId.current === currentPosition.id;
-      
-      if (isSamePosition) {
-        // Small delay to ensure accordion animation completes
-        const timer = setTimeout(() => {
-          const accordionItem = document.querySelector(`[data-state="open"]`);
-          if (accordionItem) {
-            accordionItem.scrollIntoView({
-              behavior: 'smooth',
-              block: 'center'
-            });
-          }
-        }, 150);
-
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [currentAchievementId]);
 
   if (!currentPosition) {
     return (
