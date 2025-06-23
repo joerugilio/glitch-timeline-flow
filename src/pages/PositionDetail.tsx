@@ -75,10 +75,18 @@ const PositionDetail = () => {
         {/* Hero Section */}
         <div className="pt-12 pb-4">
           <div className="w-full pt-4 px-4 sm:px-6 lg:px-8">
-            {/* Back Navigation Button */}
-            <Button asChild variant="outline" className="mb-4 bg-background/80 backdrop-blur-sm border-border/60 hover:bg-background/90 hover:border-primary/40 transition-all">
-              <Link to="/" aria-label="Back to timeline">
-                <ArrowLeft size={16} className="mr-2" />
+            {/* Back Navigation Button - WCAG AA Compliant */}
+            <Button 
+              asChild 
+              variant="outline" 
+              className="mb-4 bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none" 
+            >
+              <Link 
+                to="/" 
+                aria-label="Navigate back to career timeline"
+                role="button"
+              >
+                <ArrowLeft size={16} className="mr-2" aria-hidden="true" />
                 Back to Timeline
               </Link>
             </Button>
