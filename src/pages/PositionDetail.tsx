@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Tag, ExternalLink } from 'lucide-react';
@@ -28,6 +27,24 @@ const PositionDetail = () => {
     }
   }, [currentPosition, searchParams, setSearchParams]);
 
+  // Auto-scroll to open accordion item when achievement changes
+  useEffect(() => {
+    if (currentAchievementId) {
+      // Small delay to ensure accordion animation completes
+      const timer = setTimeout(() => {
+        const accordionItem = document.querySelector(`[data-state="open"]`);
+        if (accordionItem) {
+          accordionItem.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+        }
+      }, 150);
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentAchievementId]);
+
   if (!currentPosition) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -49,7 +66,7 @@ const PositionDetail = () => {
     ? portfolioData.positions[currentPositionIndex - 1] 
     : null;
 
-  const currentAchievementId = searchParams.get('achievement') || currentPosition.achievements[0]?.id;
+  const currentAchievementId = searchParams.get('achievement') || currentPosition?.achievements[0]?.id;
 
   return (
     <div className="min-h-screen bg-background">
