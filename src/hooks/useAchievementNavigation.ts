@@ -15,8 +15,6 @@ export const useAchievementNavigation = () => {
 
   const navigateToAchievement = (positionId: string, achievementId: string) => {
     navigate(`/position/${positionId}?achievement=${achievementId}`);
-    // Scroll to top immediately when navigating to a different position
-    window.scrollTo(0, 0);
   };
 
   const navigateNext = () => {
