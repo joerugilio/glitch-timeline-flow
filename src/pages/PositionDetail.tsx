@@ -3,7 +3,6 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Tag, ExternalLink } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import AchievementImages from '../components/AchievementImages';
-import AchievementNavigation from '../components/AchievementNavigation';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
@@ -14,11 +13,7 @@ const PositionDetail = () => {
   const {
     currentPosition,
     currentAchievement,
-    currentAchievementIndex,
-    navigateNext,
-    navigatePrev,
-    hasNext,
-    hasPrev
+    currentAchievementIndex
   } = useAchievementNavigation();
 
   // Get current achievement ID - move this before useEffect that uses it
@@ -179,15 +174,6 @@ const PositionDetail = () => {
                       </p>
                       
                       <AchievementImages images={achievement.images} />
-                      
-                      <AchievementNavigation
-                        onPrev={navigatePrev}
-                        onNext={navigateNext}
-                        hasPrev={hasPrev}
-                        hasNext={hasNext}
-                        currentIndex={currentAchievementIndex}
-                        totalAchievements={currentPosition.achievements.length}
-                      />
                     </div>
                   </AccordionContent>
                 </AccordionItem>
