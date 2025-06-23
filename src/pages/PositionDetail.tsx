@@ -104,8 +104,8 @@ const PositionDetail = () => {
             }
           }} className="space-y-1">
               {currentPosition.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-2 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
-                  <AccordionTrigger className="px-3 py-3 hover:no-underline hover:bg-muted/10 rounded-t-lg text-sm font-semibold text-foreground hover:text-primary transition-all duration-200 data-[state=open]:text-primary data-[state=open]:bg-muted/20">
-                    <span className="text-left">{achievement.title}</span>
+                  <AccordionTrigger className="px-3 py-3 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 bg-slate-200 hover:bg-slate-100 text-blue-500">
+                    <span className="text-left text-zinc-500">{achievement.title}</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-3 pb-3">
                     <div className="space-y-2">
