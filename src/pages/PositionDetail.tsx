@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Tag, ExternalLink } from 'lucide-react';
@@ -7,6 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
+
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -31,6 +33,7 @@ const PositionDetail = () => {
       });
     }
   }, [currentPosition, searchParams, setSearchParams]);
+
   if (!currentPosition) {
     return <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -41,9 +44,11 @@ const PositionDetail = () => {
         </div>
       </div>;
   }
+
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
   const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
   const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
+
   return <div className="min-h-screen bg-background relative">
       {/* Background Image - Full Screen Cover */}
       <div className="fixed inset-0 z-0">
@@ -63,7 +68,7 @@ const PositionDetail = () => {
         
         {/* Hero Section */}
         <div className="pt-12 pb-4">
-          <div className="w-full pt-4 px-4 sm:px-6 lg:px-8">
+          <div className="w-full pt-4 px-4">
             {/* Back Navigation Button - WCAG AA Compliant */}
             <Button asChild variant="outline" className="mb-4 bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none">
               <Link to="/" aria-label="Navigate back to career timeline" role="button">
@@ -168,4 +173,5 @@ const PositionDetail = () => {
       </div>
     </div>;
 };
+
 export default PositionDetail;

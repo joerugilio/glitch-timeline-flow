@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, MapPin, Calendar, Tag } from 'lucide-react';
@@ -39,12 +40,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
       {/* Content */}
       <div className="relative z-10 pt-20 pb-12">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4">
           <header className="text-center mb-12">
             <h1 data-text="Career Timeline" className="text-3xl font-bold mb-4 glitch md:text-3xl">
               Career Timeline
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground">
               A journey through product design, leadership, and innovation across multiple successful ventures
             </p>
           </header>
