@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Tag, ExternalLink } from 'lucide-react';
@@ -8,7 +7,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
-
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -33,7 +31,6 @@ const PositionDetail = () => {
       });
     }
   }, [currentPosition, searchParams, setSearchParams]);
-
   if (!currentPosition) {
     return <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -44,11 +41,9 @@ const PositionDetail = () => {
         </div>
       </div>;
   }
-
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
   const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
   const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
-
   return <div className="min-h-screen bg-background relative">
       {/* Background Image - Full Screen Cover */}
       <div className="fixed inset-0 z-0">
@@ -80,8 +75,7 @@ const PositionDetail = () => {
               </Button>
 
               {/* Next Navigation Button */}
-              {nextPosition && (
-                <Button asChild variant="outline" className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none">
+              {nextPosition && <Button asChild variant="outline" className="bg-white/95 backdrop-blur-sm border-slate-700 text-slate-900 hover:bg-slate-100 hover:border-slate-800 transition-all font-semibold focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:outline-none">
                   <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button">
                     <div className="text-right">
                       <p className="text-xs">Next</p>
@@ -89,8 +83,7 @@ const PositionDetail = () => {
                     </div>
                     <ArrowLeft size={16} className="ml-1 rotate-180" aria-hidden="true" />
                   </Link>
-                </Button>
-              )}
+                </Button>}
             </nav>
 
             {/* Header */}
@@ -120,7 +113,7 @@ const PositionDetail = () => {
                   </span>)}
               </div>
 
-              <p className="text-muted-foreground leading-relaxed text-sm mb-3">
+              <p className="leading-relaxed text-sm mb-3 text-slate-50">
                 {currentPosition.description}
               </p>
             </header>
@@ -189,5 +182,4 @@ const PositionDetail = () => {
       </div>
     </div>;
 };
-
 export default PositionDetail;
