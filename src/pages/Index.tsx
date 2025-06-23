@@ -8,7 +8,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <PositionAccordion positions={portfolioData.positions} />
+      <div className="px-2 py-2">
+        <PositionAccordion positions={portfolioData.positions} />
+      </div>
     </div>
   );
 };
