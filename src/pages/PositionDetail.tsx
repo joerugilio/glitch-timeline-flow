@@ -79,7 +79,7 @@ const PositionDetail = () => {
               {nextPosition && <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
                   <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button">
                     <div className="text-right">
-                      <p className="text-xs max-w-[660px]">Next</p>
+                      <p className="max-w-[660px] text-base">Next</p>
                       <p className="font-medium max-w-[660px]">{nextPosition.title}</p>
                     </div>
                     <ArrowLeft size={16} className="ml-1 rotate-180" aria-hidden="true" />
@@ -89,10 +89,10 @@ const PositionDetail = () => {
 
             {/* Header */}
             <header className="mb-2 backdrop-blur-xl  px-4 py-2">
-              <h1 className="text-xl mb-0 md:text-3xl font-normal">
+              <h1 className="text-xl mb-0 md:text-3xl font-light">
                 {currentPosition.title}
               </h1>
-              <h2 className="text-lg text-accent mb-4 md:text-3xl font-normal">
+              <h2 className="text-lg text-accent mb-4 font-extralight md:text-4xl">
                 {currentPosition.company}
               </h2>
 
@@ -103,18 +103,18 @@ const PositionDetail = () => {
                 </div>
                 <div className="flex items-center">
                   <MapPin size={12} className="mr-1" aria-hidden="true" />
-                  <span>{currentPosition.location}</span>
+                  <span className="font-medium">{currentPosition.location}</span>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-1 mb-3 p-1 rounded-full bg-black/25">
-                {currentPosition.tags.map(tag => <span key={tag} className="inline-flex items-center px-1.5 py-0.5 rounded-full font-medium bg-primary/20 text-primary text-sm">
+                {currentPosition.tags.map(tag => <span key={tag} className="inline-flex items-center px-1.5 py-0.5 rounded-full font-medium bg-primary/20 text-primary text-base">
                     <Tag size={8} className="mr-0.5" aria-hidden="true" />
                     {tag}
                   </span>)}
               </div>
 
-              <p className="leading-relaxed text-sm mb-3 text-slate-50 max-w-[660px]">
+              <p className="leading-relaxed mb-3 text-slate-50 max-w-[660px] text-base">
                 {currentPosition.description}
               </p>
             </header>
@@ -135,7 +135,7 @@ const PositionDetail = () => {
                 {currentPosition.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
                     <AccordionTrigger className="px-3 py-3 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-blue-500 bg-slate-400 hover:bg-white">
                       <div className="flex-1 text-left">
-                        <span className="block mb-2 text-slate-800">{achievement.title}</span>
+                        <span className="block mb-2 text-slate-800 text-lg">{achievement.title}</span>
                         {/* Image thumbnails strip - show only when collapsed */}
                         <div className={`flex gap-1 overflow-hidden transition-all duration-300 ${expandedItems.includes(achievement.id) ? 'opacity-0 h-0 transform scale-95' : 'opacity-100 h-6 transform scale-100'}`}>
                           {achievement.images.slice(0, 4).map((image, index) => <div key={index} className="w-8 h-6 rounded overflow-hidden border border-gray-300 flex-shrink-0">
@@ -176,7 +176,7 @@ const PositionDetail = () => {
                 {nextPosition ? <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
                     <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button" className="glitch">
                       <div className="text-right">
-                        <p className="text-xs max-w-[660px]">Next</p>
+                        <p className="max-w-[660px] text-base">Next</p>
                         <p className="font-medium max-w-[660px]">{nextPosition.title}</p>
                       </div>
                       <ArrowLeft size={16} className="ml-1 rotate-180" aria-hidden="true" />
