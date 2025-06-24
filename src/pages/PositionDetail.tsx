@@ -129,7 +129,7 @@ const PositionDetail = () => {
               }
             }} className="space-y-4">
                 {currentPosition.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
-                    <AccordionTrigger className="px-3 py-3 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-blue-500 bg-slate-400 hover:bg-white glitch">
+                    <AccordionTrigger className="px-3 py-3 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-blue-500 bg-slate-400 hover:bg-white">
                       <div className="flex-1 text-left">
                         <span className="block mb-2 text-slate-800">{achievement.title}</span>
                         {/* Image thumbnails strip */}
@@ -170,7 +170,7 @@ const PositionDetail = () => {
                   </Button> : <div />}
 
                 {nextPosition ? <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
-                    <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button">
+                    <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button" className="glitch">
                       <div className="text-right">
                         <p className="text-xs max-w-[660px]">Next</p>
                         <p className="font-medium max-w-[660px]">{nextPosition.title}</p>
