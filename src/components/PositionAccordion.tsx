@@ -58,7 +58,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                             {position.company}
                           </p>
                         </div>
-                        <div className="flex flex-row mt-1 md:mt-0 justify-center group-hover:text-foreground text-right text-primary-foreground ">
+                        <div className="flex flex-shrink flex-row mt-1 md:mt-0 justify-end group-hover:text-foreground text-right text-primary-foreground ">
                           <div className="flex items-center justify-end text-muted-foreground text-sm mb-1 ">
                             <Calendar size={14} className="mr-1" aria-hidden="true" />
                             <span>{position.period}</span>
