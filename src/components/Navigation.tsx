@@ -22,9 +22,9 @@ const Navigation = () => {
     icon: Mail
   }];
   const toggleMenu = () => setIsOpen(!isOpen);
-  return <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border" role="navigation" aria-label="Main navigation">
+  return <nav role="navigation" aria-label="Main navigation" className="fixed top-0 left-0 right-0 z-50 bg-background/10 backdrop-blur-lg border-0 ">
       <div className="w-full px-2 sm:px-4 lg:px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" aria-label="Portfolio home" className="text-xl font-bold hover:opacity-80 transition-opacity">
             Portfolio
