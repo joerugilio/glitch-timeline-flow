@@ -54,7 +54,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                           <h2 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">
                             {position.title}
                           </h2>
-                          <p className="text-lg text-accent font-medium">
+                          <p className="text-lg text-primary font-medium">
                             {position.company}
                           </p>
                         </div>
@@ -75,7 +75,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                       </p>
 
                       <div className="flex flex-wrap gap-1 mb-3">
-                        {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/30">
+                        {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary">
                             <Tag size={10} className="mr-1" aria-hidden="true" />
                             {tag}
                           </span>)}
