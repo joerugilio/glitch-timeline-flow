@@ -36,7 +36,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       <div className="relative z-10 pt-12 pb-12">
         <div className="w-full px-4">
           <header className="text-center mb-8 h-1/4 ">
-            <h1 data-text="Career Timeline" className="text-3xl mb-2 glitch text-left md:text-2xl font-normal">
+            <h1 data-text="Career Timeline" className="text-3xl mb-2 text-left md:text-2xl font-normal">
               Career Timeline
             </h1>
             <p className="text-muted-foreground text-left font-normal text-lg">
