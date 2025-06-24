@@ -62,10 +62,10 @@ const PositionDetail = () => {
         <Navigation />
         
         {/* Hero Section */}
-        <div className="pt-12 pb-4">
+        <div className="pt-6 pb-4">
           <div className="w-full pt-4 px-4">
             {/* Navigation Bar */}
-            <nav className="flex justify-between items-center mb-4">
+            <nav className="flex justify-between items-center mb-6">
               {/* Back Navigation Button - Enhanced WCAG AA Compliant */}
               <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
                 <Link to="/" aria-label="Navigate back to career timeline" role="button">
@@ -91,7 +91,7 @@ const PositionDetail = () => {
               <h1 className="text-xl md:text-2xl font-bold mb-0">
                 {currentPosition.title}
               </h1>
-              <h2 className="text-lg md:text-xl text-accent font-semibold mb-2">
+              <h2 className="text-lg md:text-xl text-accent font-semibold mb-4">
                 {currentPosition.company}
               </h2>
 
@@ -127,7 +127,7 @@ const PositionDetail = () => {
                   achievement: value[value.length - 1]
                 });
               }
-            }} className="space-y-1">
+            }} className="space-y-1 ">
                 {currentPosition.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10 mb-4">
                     <AccordionTrigger className="px-3 py-3 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-blue-500 bg-slate-400 hover:bg-white ">
                       <div className="flex-1 text-left">
