@@ -7,11 +7,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
-
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
-  
   const {
     currentPosition,
     currentAchievement,
@@ -110,7 +108,7 @@ const PositionDetail = () => {
               </div>
 
               <div className="flex flex-wrap gap-1 mb-3 p-1 rounded-full bg-black/25">
-                {currentPosition.tags.map(tag => <span key={tag} className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary">
+                {currentPosition.tags.map(tag => <span key={tag} className="inline-flex items-center px-1.5 py-0.5 rounded-full font-medium bg-primary/20 text-primary text-sm">
                     <Tag size={8} className="mr-0.5" aria-hidden="true" />
                     {tag}
                   </span>)}
@@ -124,32 +122,22 @@ const PositionDetail = () => {
             {/* Achievements Accordion */}
             <section className="px-8 py-4 ">
               <h3 className="text-lg font-semibold mb-2 text-foreground">Key Achievements</h3>
-              <Accordion 
-                type="multiple" 
-                onValueChange={value => {
-                  // Update expanded items state
-                  setExpandedItems(value);
-                  // Update search params with the last opened achievement
-                  if (value.length > 0) {
-                    setSearchParams({
-                      achievement: value[value.length - 1]
-                    });
-                  }
-                }} 
-                className="space-y-4"
-              >
+              <Accordion type="multiple" onValueChange={value => {
+              // Update expanded items state
+              setExpandedItems(value);
+              // Update search params with the last opened achievement
+              if (value.length > 0) {
+                setSearchParams({
+                  achievement: value[value.length - 1]
+                });
+              }
+            }} className="space-y-4">
                 {currentPosition.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
                     <AccordionTrigger className="px-3 py-3 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-blue-500 bg-slate-400 hover:bg-white">
                       <div className="flex-1 text-left">
                         <span className="block mb-2 text-slate-800">{achievement.title}</span>
                         {/* Image thumbnails strip - show only when collapsed */}
-                        <div 
-                          className={`flex gap-1 overflow-hidden transition-all duration-300 ${
-                            expandedItems.includes(achievement.id) 
-                              ? 'opacity-0 h-0 transform scale-95' 
-                              : 'opacity-100 h-6 transform scale-100'
-                          }`}
-                        >
+                        <div className={`flex gap-1 overflow-hidden transition-all duration-300 ${expandedItems.includes(achievement.id) ? 'opacity-0 h-0 transform scale-95' : 'opacity-100 h-6 transform scale-100'}`}>
                           {achievement.images.slice(0, 4).map((image, index) => <div key={index} className="w-8 h-6 rounded overflow-hidden border border-gray-300 flex-shrink-0">
                               <img src={image.url} alt="" className="w-full h-full object-cover" />
                             </div>)}
@@ -209,5 +197,4 @@ const PositionDetail = () => {
       </div>
     </div>;
 };
-
 export default PositionDetail;
