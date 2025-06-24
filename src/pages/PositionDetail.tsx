@@ -52,9 +52,9 @@ const PositionDetail = () => {
         opacity: 0.9
       }} />
         <div className="absolute inset-0 bg-noise opacity-10" />
-        <div className="absolute inset-0" style={{
+        <div style={{
         background: 'linear-gradient(135deg, hsl(var(--background) / 0.3) 0%, hsl(12 8% 12% / 0.4) 50%, hsl(var(--background) / 0.3) 100%)'
-      }} />
+      }} className="absolute inset-0 backdrop-blur-sm " />
       </div>
 
       {/* Content */}
