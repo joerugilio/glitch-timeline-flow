@@ -7,7 +7,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
-
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -45,7 +44,7 @@ const PositionDetail = () => {
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
   const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
   const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
-  return <div className="min-h-screen bg-background relative">
+  return <div className="min-h-screen bg-background relative backdrop-blur-lg">
       {/* Background Image - Full Screen Cover */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
@@ -135,20 +134,12 @@ const PositionDetail = () => {
                         <span className="text-zinc-500 block mb-2">{achievement.title}</span>
                         {/* Image thumbnails strip */}
                         <div className="flex gap-1 overflow-hidden">
-                          {achievement.images.slice(0, 4).map((image, index) => (
-                            <div key={index} className="w-8 h-6 rounded overflow-hidden border border-gray-300 flex-shrink-0">
-                              <img
-                                src={image.url}
-                                alt=""
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                          ))}
-                          {achievement.images.length > 4 && (
-                            <div className="w-8 h-6 rounded bg-gray-300 border border-gray-400 flex items-center justify-center text-xs text-gray-600 flex-shrink-0">
+                          {achievement.images.slice(0, 4).map((image, index) => <div key={index} className="w-8 h-6 rounded overflow-hidden border border-gray-300 flex-shrink-0">
+                              <img src={image.url} alt="" className="w-full h-full object-cover" />
+                            </div>)}
+                          {achievement.images.length > 4 && <div className="w-8 h-6 rounded bg-gray-300 border border-gray-400 flex items-center justify-center text-xs text-gray-600 flex-shrink-0">
                               +{achievement.images.length - 4}
-                            </div>
-                          )}
+                            </div>}
                         </div>
                       </div>
                     </AccordionTrigger>
@@ -202,5 +193,4 @@ const PositionDetail = () => {
       </div>
     </div>;
 };
-
 export default PositionDetail;
