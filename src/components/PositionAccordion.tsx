@@ -51,7 +51,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                     <div className="flex-1">
                       <div className="flex flex-col md:flex-row  md:justify-between mb-0">
                         <div>
-                          <h2 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                          <h2 className="text-xl md:text-2xl font-semibold text-primary group-hover:text-foreground  transition-colors">
                             {position.title}
                           </h2>
                           <p className="text-lg text-accent font-medium">
