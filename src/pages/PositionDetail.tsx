@@ -63,7 +63,7 @@ const PositionDetail = () => {
         
         {/* Hero Section */}
         <div className="pt-6 pb-4">
-          <div className="w-full pt-4 px-4">
+          <div className="w-full pt-4 px-4 mb-8 pb-8">
             {/* Navigation Bar */}
             <nav className="flex justify-between items-center mb-6">
               {/* Back Navigation Button - Enhanced WCAG AA Compliant */}
