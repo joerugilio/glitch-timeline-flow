@@ -88,7 +88,7 @@ const PositionDetail = () => {
             </nav>
 
             {/* Header */}
-            <header className="mb-2 backdrop-blur-xl  px-4 py-2">
+            <header className="mb-2 backdrop-blur-xl  px-4 py-2 rounded-full">
               <h1 className="text-xl mb-0 md:text-3xl font-light">
                 {currentPosition.title}
               </h1>
@@ -99,11 +99,11 @@ const PositionDetail = () => {
               <div className="flex flex-col md:flex-row md:items-center gap-2 text-muted-foreground mb-2 text-sm">
                 <div className="flex items-center">
                   <Calendar size={12} className="mr-1" aria-hidden="true" />
-                  <span className="font-medium">{currentPosition.period}</span>
+                  <span className="font-normal text-base">{currentPosition.period}</span>
                 </div>
                 <div className="flex items-center">
                   <MapPin size={12} className="mr-1" aria-hidden="true" />
-                  <span className="font-medium">{currentPosition.location}</span>
+                  <span className="font-normal">{currentPosition.location}</span>
                 </div>
               </div>
 
@@ -114,7 +114,7 @@ const PositionDetail = () => {
                   </span>)}
               </div>
 
-              <p className="leading-relaxed mb-3 text-slate-50 max-w-[660px] text-lg">
+              <p className="leading-relaxed mb-3 text-slate-50 max-w-[660px] text-lg font-normal">
                 {currentPosition.description}
               </p>
             </header>
