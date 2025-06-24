@@ -54,12 +54,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                           <h2 className="text-xl md:text-2xl font-semibold text-primary group-hover:text-foreground  transition-colors">
                             {position.title}
                           </h2>
-                          <p className="text-lg text-accent font-medium">
+                          <p className="text-lg text-accent font-medium group-hover:text-foreground ">
                             {position.company}
                           </p>
                         </div>
-                        <div className="flex flex-row  mt-1 md:mt-0 justify-baseline">
-                          <div className="flex items-center text-muted-foreground text-sm mb-1">
+                        <div className="flex flex-col mt-1 md:mt-0 justify-start ">
+                          <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
                             <Calendar size={14} className="mr-1" aria-hidden="true" />
                             <span>{position.period}</span>
                           </div>
@@ -70,12 +70,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                         </div>
                       </div>
 
-                      <p className="text-muted-foreground mb-1 leading-relaxed">
+                      <p className="text-muted-foreground mb-1 leading-relaxed group-hover:text-foreground ">
                         {position.blurb}
                       </p>
 
                       <div className="flex flex-wrap gap-1 mb-3">
-                        {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary">
+                        {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary group-hover:text-foreground ">
                             <Tag size={10} className="mr-1" aria-hidden="true" />
                             {tag}
                           </span>)}
