@@ -1,35 +1,56 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, MapPin, Calendar, Tag } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import { Position } from '../types/portfolio';
+
 interface PositionAccordionProps {
   positions: Position[];
 }
+
 const PositionAccordion: React.FC<PositionAccordionProps> = ({
   positions
 }) => {
   const [hoveredPosition, setHoveredPosition] = useState<string | null>(null);
+
   const handleMouseEnter = (positionId: string) => {
     console.log('Hovering over position:', positionId);
     setHoveredPosition(positionId);
   };
+
   const handleMouseLeave = () => {
     console.log('Mouse left position');
     setHoveredPosition(null);
   };
-  return <div className="relative min-h-screen">
+
+  return (
+    <div className="relative min-h-screen">
       {/* Background Image */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out" style={{
-        backgroundImage: hoveredPosition ? `url(${positions.find(p => p.id === hoveredPosition)?.imageUrl})` : 'none',
-        opacity: hoveredPosition ? 0.9 : 0
-      }} />
-        <div className="absolute inset-0 bg-noise transition-opacity duration-700" style={{
-        opacity: hoveredPosition ? 0.1 : 1
-      }} />
-        <div className="absolute inset-0 transition-all duration-700" style={{
-        background: hoveredPosition ? 'linear-gradient(135deg, hsl(var(--background) / 0.3) 0%, hsl(12 8% 12% / 0.4) 50%, hsl(var(--background) / 0.3) 100%)' : 'linear-gradient(135deg, hsl(var(--background)) 0%, hsl(12 8% 12%) 50%, hsl(var(--background)) 100%)'
-      }} />
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out" 
+          style={{
+            backgroundImage: hoveredPosition 
+              ? `url(${positions.find(p => p.id === hoveredPosition)?.imageUrl})` 
+              : 'none',
+            opacity: hoveredPosition ? 0.9 : 0
+          }} 
+        />
+        <div 
+          className="absolute inset-0 bg-noise transition-opacity duration-700" 
+          style={{
+            opacity: hoveredPosition ? 0.1 : 1
+          }} 
+        />
+        <div 
+          className="absolute inset-0 transition-all duration-700" 
+          style={{
+            background: hoveredPosition 
+              ? 'linear-gradient(135deg, hsl(var(--background) / 0.3) 0%, hsl(12 8% 12% / 0.4) 50%, hsl(var(--background) / 0.3) 100%)' 
+              : 'linear-gradient(135deg, hsl(var(--background)) 0%, hsl(12 8% 12%) 50%, hsl(var(--background)) 100%)'
+          }} 
+        />
       </div>
 
       {/* Content */}
@@ -44,56 +65,81 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
             </p>
           </header>
 
-          <div className="space-y-3" role="list" aria-label="Career positions">
-            {positions.map((position, index) => <Link key={position.id} to={`/position/${position.id}`} className="block group" onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} onFocus={() => handleMouseEnter(position.id)} onBlur={handleMouseLeave} role="listitem" aria-label={`View details for ${position.title} at ${position.company}`}>
-                <div className="backdrop-blur-lg border-0 rounded-lg hover-lift hover:border-primary/50 transition-all duration-300 py-0 bg-[#1b1f1b]/[0.24] px-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <div className="flex flex-col md:flex-row  md:justify-between mb-0">
-                        <div>
-                          <h2 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                            {position.title}
-                          </h2>
-                          <p className="text-lg text-accent font-medium">
-                            {position.company}
-                          </p>
+          <Accordion type="single" collapsible className="space-y-3" role="list" aria-label="Career positions">
+            {positions.map((position, index) => (
+              <AccordionItem key={position.id} value={position.id} className="border-0">
+                <div 
+                  onMouseEnter={() => handleMouseEnter(position.id)} 
+                  onMouseLeave={handleMouseLeave}
+                  onFocus={() => handleMouseEnter(position.id)} 
+                  onBlur={handleMouseLeave}
+                  role="listitem"
+                >
+                  <AccordionTrigger className="backdrop-blur-lg border-0 rounded-lg hover-lift hover:border-primary/50 transition-all duration-300 py-0 bg-[#1b1f1b]/[0.24] px-3 hover:no-underline">
+                    <div className="flex items-center justify-between w-full">
+                      <div className="flex-1 text-left">
+                        <div className="flex flex-col md:flex-row md:justify-between mb-0">
+                          <div>
+                            <h2 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                              {position.title}
+                            </h2>
+                            <p className="text-lg text-accent font-medium">
+                              {position.company}
+                            </p>
+                          </div>
+                          <div className="flex flex-row mt-1 md:mt-0 justify-baseline">
+                            <div className="flex items-center text-muted-foreground text-sm mb-1">
+                              <Calendar size={14} className="mr-1" aria-hidden="true" />
+                              <span>{position.period}</span>
+                            </div>
+                            <div className="flex items-justify-baseline text-muted-foreground text-sm mx-4">
+                              <MapPin size={14} className="mr-1" aria-hidden="true" />
+                              <span>{position.location}</span>
+                            </div>
+                          </div>
                         </div>
-                        <div className="flex flex-row  mt-1 md:mt-0 justify-baseline">
-                          <div className="flex items-center text-muted-foreground text-sm mb-1">
-                            <Calendar size={14} className="mr-1" aria-hidden="true" />
-                            <span>{position.period}</span>
-                          </div>
-                          <div className="flex items-justify-baseline text-muted-foreground text-sm mx-4">
-                            <MapPin size={14} className="mr-1" aria-hidden="true" />
-                            <span>{position.location}</span>
-                          </div>
+
+                        <p className="text-muted-foreground mb-1 leading-relaxed">
+                          {position.blurb}
+                        </p>
+
+                        <div className="flex flex-wrap gap-1 mb-3">
+                          {position.tags.slice(0, 4).map(tag => (
+                            <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary">
+                              <Tag size={10} className="mr-1" aria-hidden="true" />
+                              {tag}
+                            </span>
+                          ))}
+                          {position.tags.length > 4 && (
+                            <span className="text-xs text-muted-foreground px-2 py-1">
+                              +{position.tags.length - 4} more
+                            </span>
+                          )}
                         </div>
                       </div>
 
-                      <p className="text-muted-foreground mb-1 leading-relaxed">
-                        {position.blurb}
-                      </p>
-
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary">
-                            <Tag size={10} className="mr-1" aria-hidden="true" />
-                            {tag}
-                          </span>)}
-                        {position.tags.length > 4 && <span className="text-xs text-muted-foreground px-2 py-1">
-                            +{position.tags.length - 4} more
-                          </span>}
+                      <div className="ml-3">
+                        <ChevronRight size={24} className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" aria-hidden="true" />
                       </div>
                     </div>
-
-                    <div className="ml-3">
-                      <ChevronRight size={24} className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" aria-hidden="true" />
-                    </div>
-                  </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-3 pt-0 pb-3">
+                    <Link 
+                      to={`/position/${position.id}`}
+                      className="block w-full text-center py-2 px-4 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                      aria-label={`View details for ${position.title} at ${position.company}`}
+                    >
+                      View Details
+                    </Link>
+                  </AccordionContent>
                 </div>
-              </Link>)}
-          </div>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default PositionAccordion;
