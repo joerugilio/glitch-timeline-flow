@@ -7,6 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
+
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -31,6 +32,7 @@ const PositionDetail = () => {
       });
     }
   }, [currentPosition, searchParams, setSearchParams]);
+
   if (!currentPosition) {
     return <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -41,9 +43,11 @@ const PositionDetail = () => {
         </div>
       </div>;
   }
+
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
   const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
   const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
+
   return <div className="min-h-screen bg-background relative ">
       {/* Background Image - Full Screen Cover */}
       <div className="fixed inset-0 z-0">
@@ -78,8 +82,8 @@ const PositionDetail = () => {
               {nextPosition && <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
                   <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button">
                     <div className="text-right">
-                      <p className="text-xs">Next</p>
-                      <p className="font-medium">{nextPosition.title}</p>
+                      <p className="text-xs max-w-[660px]">Next</p>
+                      <p className="font-medium max-w-[660px]">{nextPosition.title}</p>
                     </div>
                     <ArrowLeft size={16} className="ml-1 rotate-180" aria-hidden="true" />
                   </Link>
@@ -113,7 +117,7 @@ const PositionDetail = () => {
                   </span>)}
               </div>
 
-              <p className="leading-relaxed text-sm mb-3 text-slate-50 max-w-[800px]">
+              <p className="leading-relaxed text-sm mb-3 text-slate-50 max-w-[660px]">
                 {currentPosition.description}
               </p>
             </header>
@@ -145,7 +149,7 @@ const PositionDetail = () => {
                     </AccordionTrigger>
                     <AccordionContent className="px-3 pt-3">
                       <div className="space-y-3">
-                        <p className="text-muted-foreground leading-relaxed text-sm max-w-[800px]">
+                        <p className="text-muted-foreground leading-relaxed text-sm max-w-[660px]">
                           {achievement.description}
                         </p>
                         
@@ -163,8 +167,8 @@ const PositionDetail = () => {
                     <Link to={`/position/${prevPosition.id}?achievement=${prevPosition.achievements[0].id}`} aria-label={`Previous: ${prevPosition.title}`} role="button">
                       <ArrowLeft size={16} className="mr-1" aria-hidden="true" />
                       <div className="text-left">
-                        <p className="text-xs">Previous</p>
-                        <p className="font-medium">{prevPosition.title}</p>
+                        <p className="text-xs max-w-[660px]">Previous</p>
+                        <p className="font-medium max-w-[660px]">{prevPosition.title}</p>
                       </div>
                     </Link>
                   </Button> : <div />}
@@ -172,16 +176,16 @@ const PositionDetail = () => {
                 {nextPosition ? <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
                     <Link to={`/position/${nextPosition.id}?achievement=${nextPosition.achievements[0].id}`} aria-label={`Next: ${nextPosition.title}`} role="button">
                       <div className="text-right">
-                        <p className="text-xs">Next</p>
-                        <p className="font-medium">{nextPosition.title}</p>
+                        <p className="text-xs max-w-[660px]">Next</p>
+                        <p className="font-medium max-w-[660px]">{nextPosition.title}</p>
                       </div>
                       <ArrowLeft size={16} className="ml-1 rotate-180" aria-hidden="true" />
                     </Link>
                   </Button> : <Button asChild variant="outline" className="bg-slate-900 text-white border-slate-700 hover:bg-black hover:border-slate-500 hover:text-white hover:shadow-lg transition-all font-semibold focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none">
                     <Link to="/" aria-label="Return to timeline" role="button">
                       <div className="text-right">
-                        <p className="text-xs">Complete</p>
-                        <p className="font-medium">Back to Timeline</p>
+                        <p className="text-xs max-w-[660px]">Complete</p>
+                        <p className="font-medium max-w-[660px]">Back to Timeline</p>
                       </div>
                       <ExternalLink size={16} className="ml-1" aria-hidden="true" />
                     </Link>
@@ -193,4 +197,5 @@ const PositionDetail = () => {
       </div>
     </div>;
 };
+
 export default PositionDetail;
