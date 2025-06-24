@@ -23,7 +23,7 @@ const Navigation = () => {
   }];
   const toggleMenu = () => setIsOpen(!isOpen);
   return <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border" role="navigation" aria-label="Main navigation">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-2 sm:px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" aria-label="Portfolio home" className="text-xl font-bold hover:opacity-80 transition-opacity">
@@ -32,7 +32,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="flex items-center space-x-8">
+            <div className="flex items-center space-x-2">
               {navItems.map(item => {
               const isActive = location.pathname === item.href;
               return <Link key={item.href} to={item.href} className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground hover:bg-muted'}`} aria-current={isActive ? 'page' : undefined}>
