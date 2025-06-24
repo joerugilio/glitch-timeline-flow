@@ -107,7 +107,7 @@ const PositionDetail = () => {
               </div>
 
               <div className="flex flex-wrap gap-1 mb-3 bg-black/65 p-1 rounded-full ">
-                {currentPosition.tags.map(tag => <span key={tag} className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/30">
+                {currentPosition.tags.map(tag => <span key={tag} className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border-0 ">
                     <Tag size={8} className="mr-0.5" aria-hidden="true" />
                     {tag}
                   </span>)}
