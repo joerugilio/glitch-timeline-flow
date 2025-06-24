@@ -75,7 +75,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                       </p>
 
                       <div className="flex flex-wrap gap-1 mb-3">
-                        {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20">
+                        {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
                             <Tag size={10} className="mr-1" aria-hidden="true" />
                             {tag}
                           </span>)}
