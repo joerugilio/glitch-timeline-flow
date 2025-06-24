@@ -88,10 +88,10 @@ const PositionDetail = () => {
 
             {/* Header */}
             <header className="mb-2 backdrop-blur-xl  px-4 py-2">
-              <h1 className="text-xl font-bold mb-0 md:text-xl">
+              <h1 className="text-xl mb-0 md:text-3xl font-normal">
                 {currentPosition.title}
               </h1>
-              <h2 className="text-lg text-accent font-semibold mb-4 md:text-3xl">
+              <h2 className="text-lg text-accent mb-4 md:text-3xl font-normal">
                 {currentPosition.company}
               </h2>
 
@@ -106,7 +106,7 @@ const PositionDetail = () => {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-1 mb-3 bg-black/65 p-1 rounded-full ">
+              <div className="flex flex-wrap gap-1 mb-3 p-1 rounded-full bg-black/25">
                 {currentPosition.tags.map(tag => <span key={tag} className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary">
                     <Tag size={8} className="mr-0.5" aria-hidden="true" />
                     {tag}
@@ -131,7 +131,7 @@ const PositionDetail = () => {
                 {currentPosition.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
                     <AccordionTrigger className="px-3 py-3 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-blue-500 bg-slate-400 hover:bg-white ">
                       <div className="flex-1 text-left">
-                        <span className="block mb-2 text-slate-500">{achievement.title}</span>
+                        <span className="block mb-2 text-slate-800">{achievement.title}</span>
                         {/* Image thumbnails strip */}
                         <div className="flex gap-1 overflow-hidden">
                           {achievement.images.slice(0, 4).map((image, index) => <div key={index} className="w-8 h-6 rounded overflow-hidden border border-gray-300 flex-shrink-0">
