@@ -89,10 +89,10 @@ const PositionDetail = () => {
 
             {/* Header */}
             <header className="mb-2 backdrop-blur-xl  px-4 py-2 rounded-full">
-              <h1 className="text-xl mb-0 md:text-3xl font-light">
+              <h1 className="text-xl mb-0 md:text-3xl font-normal">
                 {currentPosition.title}
               </h1>
-              <h2 className="text-lg text-accent mb-4 font-extralight md:text-4xl">
+              <h2 className="text-lg text-primary mb-4 md:text-4xl font-normal">
                 {currentPosition.company}
               </h2>
 
@@ -108,7 +108,7 @@ const PositionDetail = () => {
               </div>
 
               <div className="flex flex-wrap gap-1 mb-3 p-1 rounded-full bg-black/25">
-                {currentPosition.tags.map(tag => <span key={tag} className="inline-flex items-center px-1.5 py-0.5 rounded-full font-medium bg-primary/20 text-primary text-base">
+                {currentPosition.tags.map(tag => <span key={tag} className="inline-flex items-center px-2 py-0.1 rounded-full bg-primary/20 text-primary font-normal text-base">
                     <Tag size={8} className="mr-0.5" aria-hidden="true" />
                     {tag}
                   </span>)}
