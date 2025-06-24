@@ -46,10 +46,10 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
           <div className="space-y-3" role="list" aria-label="Career positions">
             {positions.map((position, index) => <Link key={position.id} to={`/position/${position.id}`} className="block group" onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} onFocus={() => handleMouseEnter(position.id)} onBlur={handleMouseLeave} role="listitem" aria-label={`View details for ${position.title} at ${position.company}`}>
-                <div className="backdrop-blur-lg border-0 rounded-lg p-2 hover-lift hover:border-primary/50 transition-all duration-300 py-0 bg-[#1b1f1b]/[0.24] px-3">
+                <div className="backdrop-blur-lg border-0 rounded-lg hover-lift hover:border-primary/50 transition-all duration-300 py-0 bg-[#1b1f1b]/[0.24] px-3">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                      <div className="flex flex-col md:flex-row  md:justify-between mb-1">
                         <div>
                           <h2 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">
                             {position.title}
@@ -70,7 +70,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                         </div>
                       </div>
 
-                      <p className="text-muted-foreground mb-3 leading-relaxed">
+                      <p className="text-muted-foreground mb-1 leading-relaxed">
                         {position.blurb}
                       </p>
 
