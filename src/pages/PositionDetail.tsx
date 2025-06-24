@@ -44,7 +44,7 @@ const PositionDetail = () => {
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
   const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
   const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
-  return <div className="min-h-screen bg-background relative backdrop-blur-lg">
+  return <div className="min-h-screen backdrop-blur-lg bg-background relative ">
       {/* Background Image - Full Screen Cover */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
