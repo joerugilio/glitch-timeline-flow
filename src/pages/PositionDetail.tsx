@@ -119,7 +119,7 @@ const PositionDetail = () => {
             </header>
 
             {/* Achievements Accordion */}
-            <section>
+            <section className="px-8 py-4 ">
               <h3 className="text-lg font-semibold mb-2 text-foreground">Key Achievements</h3>
               <Accordion type="multiple" onValueChange={value => {
               if (value.length > 0) {
