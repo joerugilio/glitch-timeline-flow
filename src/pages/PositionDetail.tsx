@@ -7,7 +7,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
-
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -32,7 +31,6 @@ const PositionDetail = () => {
       });
     }
   }, [currentPosition, searchParams, setSearchParams]);
-
   if (!currentPosition) {
     return <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -43,11 +41,9 @@ const PositionDetail = () => {
         </div>
       </div>;
   }
-
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
   const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
   const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
-
   return <div className="min-h-screen bg-background relative ">
       {/* Background Image - Full Screen Cover */}
       <div className="fixed inset-0 z-0">
@@ -132,7 +128,7 @@ const PositionDetail = () => {
                 });
               }
             }} className="space-y-1">
-                {currentPosition.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-2 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
+                {currentPosition.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60  border-4 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 ">
                     <AccordionTrigger className="px-3 py-3 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-blue-500 bg-slate-400 hover:bg-white ">
                       <div className="flex-1 text-left">
                         <span className="block mb-2 text-slate-500">{achievement.title}</span>
@@ -197,5 +193,4 @@ const PositionDetail = () => {
       </div>
     </div>;
 };
-
 export default PositionDetail;
