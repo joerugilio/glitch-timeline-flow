@@ -107,7 +107,7 @@ const PositionDetail = () => {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-1 mb-3 p-1 rounded-full bg-black/25">
+              <div className="flex flex-wrap gap-1 mb-3 p-1 rounded-full bg-black/15">
                 {currentPosition.tags.map(tag => <span key={tag} className="inline-flex items-center px-2 py-0.1 rounded-full bg-primary/20 text-primary font-normal text-base">
                     <Tag size={8} className="mr-0.5" aria-hidden="true" />
                     {tag}
@@ -121,7 +121,7 @@ const PositionDetail = () => {
 
             {/* Achievements Accordion */}
             <section className="px-8 py-4 ">
-              <h3 className="text-lg font-semibold mb-2 text-foreground">Key Achievements</h3>
+              <h3 className="text-lg font-semibold mb-2 text-muted-foreground ">Key Achievements</h3>
               <Accordion type="multiple" onValueChange={value => {
               // Update expanded items state
               setExpandedItems(value);
