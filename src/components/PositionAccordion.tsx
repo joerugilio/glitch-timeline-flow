@@ -65,7 +65,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                           </div>
                           <div className="flex items-justify-baseline text-muted-foreground text-sm mx-4">
                             <MapPin size={14} className="mr-1" aria-hidden="true" />
-                            <span>{position.location}</span>
+                            <span className="h-auto ">{position.location}</span>
                           </div>
                         </div>
                       </div>
