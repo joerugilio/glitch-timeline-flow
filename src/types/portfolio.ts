@@ -2,7 +2,7 @@
 export interface AchievementImage {
   url: string;
   alt: string;
-  caption?: string;
+  caption: string;
 }
 
 export interface Achievement {

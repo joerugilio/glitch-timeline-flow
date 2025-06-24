@@ -70,7 +70,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                         </div>
                       </div>
 
-                      <p className="text-muted-foreground mb-1 leading-relaxed group-hover:text-foreground ">
+                       <p className="text-muted-foreground mb-1 leading-relaxed group-hover:text-foreground ">
                         {position.blurb}
                       </p>
 
