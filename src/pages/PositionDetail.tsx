@@ -87,7 +87,7 @@ const PositionDetail = () => {
             </nav>
 
             {/* Header */}
-            <header className="mb-4 backdrop-blur-xl ">
+            <header className="mb-2 backdrop-blur-xl  px-4 py-2">
               <h1 className="text-xl md:text-2xl font-bold mb-0">
                 {currentPosition.title}
               </h1>
