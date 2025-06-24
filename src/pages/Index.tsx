@@ -1,14 +1,20 @@
+
 import React from 'react';
 import Navigation from '../components/Navigation';
 import PositionAccordion from '../components/PositionAccordion';
 import { portfolioData } from '../data/portfolio';
+
 const Index = () => {
-  return <div className="min-h-screen bg-background">
+  return (
+    <div className="min-h-screen bg-background relative">
       {/* Background Image */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" style={{
-        backgroundImage: 'url(https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5)'
-      }} />
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5)'
+          }}
+        />
       </div>
       
       {/* Content */}
@@ -18,6 +24,8 @@ const Index = () => {
           <PositionAccordion positions={portfolioData.positions} />
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
