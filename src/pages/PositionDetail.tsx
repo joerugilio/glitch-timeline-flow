@@ -114,7 +114,7 @@ const PositionDetail = () => {
                   </span>)}
               </div>
 
-              <p className="leading-relaxed mb-3 text-slate-50 max-w-[660px] text-base">
+              <p className="leading-relaxed mb-3 text-slate-50 max-w-[660px] text-lg">
                 {currentPosition.description}
               </p>
             </header>
@@ -149,7 +149,7 @@ const PositionDetail = () => {
                     </AccordionTrigger>
                     <AccordionContent className="px-3 pt-3">
                       <div className="space-y-3">
-                        <p className="text-white leading-relaxed text-sm max-w-[660px]">
+                        <p className="text-white leading-relaxed max-w-[660px] text-base font-normal">
                           {achievement.description}
                         </p>
                         
