@@ -7,7 +7,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import { portfolioData } from '../data/portfolio';
-
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -88,7 +87,7 @@ const PositionDetail = () => {
             </nav>
 
             {/* Header */}
-            <header className="mb-4">
+            <header className="mb-4 backdrop-blur-xl ">
               <h1 className="text-xl md:text-2xl font-bold mb-0">
                 {currentPosition.title}
               </h1>
