@@ -49,7 +49,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                 <div className="backdrop-blur-lg border-0 rounded-lg hover-lift hover:border-primary/50 transition-all duration-300 py-0 bg-[#1b1f1b]/[0.24] px-3">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <div className="flex flex-col md:flex-row  md:justify-between mb-1">
+                      <div className="flex flex-col md:flex-row  md:justify-between mb-0">
                         <div>
                           <h2 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">
                             {position.title}
@@ -58,12 +58,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                             {position.company}
                           </p>
                         </div>
-                        <div className="flex flex-col md:text-right mt-1 md:mt-0">
+                        <div className="flex flex-row  mt-1 md:mt-0 justify-baseline">
                           <div className="flex items-center text-muted-foreground text-sm mb-1">
                             <Calendar size={14} className="mr-1" aria-hidden="true" />
                             <span>{position.period}</span>
                           </div>
-                          <div className="flex items-center text-muted-foreground text-sm">
+                          <div className="flex items-justify-baseline text-muted-foreground text-sm mx-4">
                             <MapPin size={14} className="mr-1" aria-hidden="true" />
                             <span>{position.location}</span>
                           </div>
