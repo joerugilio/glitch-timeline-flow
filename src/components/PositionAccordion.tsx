@@ -108,13 +108,13 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
       <div className="relative z-10 pt-12 pb-12">
         <div className="w-full px-[15px]">
-          <header className="text-center mb-8 w-1/4">
+          <header className="text-center mb-8 h-1/4">
             <h2 className="hero-title caption-timeline mb-4">
               <span>user-centered leadership robust-ops strategy + brand-science</span>
               
             </h2>
             
-            <div className="hero-subtitle caption-timeline w-screen">
+            <div className="hero-subtitle caption-timeline pl-[20vw]">
               <span>UX Product & Design Principal</span> 
               <span>Multiple Exits B2C, B2B</span>
               <span>Award Winning Regulated AI ML <Sparkles className="inline w-4 h-4 ml-1" /></span>
