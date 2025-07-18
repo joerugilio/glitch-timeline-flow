@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Calendar, MapPin, Tag, TrendingUp, Building2 } from 'lucide-react';
+import { Calendar, MapPin, Tag, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import AchievementImages from './AchievementImages';
 import { Position } from '../types/portfolio';
@@ -118,12 +119,20 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       <div className="relative z-10 pt-12 pb-12">
         <div className="w-full px-[15px]">
           <header className="text-center mb-8 h-1/4">
-            <h1 className="text-3xl mb-2 text-left md:text-2xl font-normal">
-              Strategic UX & Brand-Science
-            </h1>
-            <p className="text-muted-foreground text-left font-normal text-lg">
-              A journey through product design, leadership, and innovation across multiple successful ventures
-            </p>
+            <h2 className="hero-title caption-timeline mb-4">
+              <span>User-Centered Leadership</span>
+              <span>Differentiation</span>
+              <span><em>Robust Ops</em></span>
+              <span>Brand-Science</span>
+            </h2>
+            
+            <div className="hero-subtitle caption-timeline">
+              <span>UX Product & Design Principal</span> 
+              <span>Multiple Exits B2C, B2B</span>
+              <span>Award Winning Regulated AI ML <Sparkles className="inline w-4 h-4 ml-1" /></span>
+              <span>SaaS Brand eCom Mrktg</span>
+              <span>Consumer-Grade Enterprise</span>
+            </div>
           </header>
 
           <div className="space-y-[1vh] mt-[3vh] mx-10 mb-10">
