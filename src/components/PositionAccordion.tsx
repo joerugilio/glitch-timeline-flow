@@ -156,11 +156,11 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                           </div>
                         </div>
 
-                        <p className="text-muted-foreground mb-1 leading-relaxed">
+                        <p className="text-muted-foreground mb-1 leading-relaxed pl-[2vw]">
                           {position.blurb}
                         </p>
 
-                        <div className="flex flex-wrap justify-between items-end gap-1 mb-3">
+                        <div className="flex flex-wrap justify-between items-end gap-1 mb-3 pl-[2vw]">
                           <div className="flex flex-wrap gap-1">
                             {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
                                 {tag}
