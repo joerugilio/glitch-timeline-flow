@@ -129,7 +129,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
             </p>
           </header>
 
-          <div className="space-y-3 m-10">
+          <div className="space-y-[1vh] m-10">
             <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-3">
               {positions.map(position => <AccordionItem key={position.id} value={position.id} className="border-0">
                   <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="bg-[#1b1f1b]/30 p-3 rounded-lg hover:bg-[#1b1f1b] hover:border-primary/30 data-[state=open]:bg-[#1b1f1b] data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 border border-transparent transition-all duration-300 hover:no-underline py-0 px-[15px]">
