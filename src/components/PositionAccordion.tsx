@@ -203,18 +203,18 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({ positions }) => {
                     </div>
                   </AccordionTrigger>
 
-                  <AccordionContent className="px-3 pt-3">
-                    <div className="backdrop-blur-xl px-4 py-4 rounded-sm space-y-6">
+                  <AccordionContent className="px-2 pt-2">
+                    <div className="backdrop-blur-xl px-2 py-2 rounded-sm space-y-3">
                       {/* Position Header Details */}
-                      <header className="mb-6">
-                        <p className="leading-relaxed mb-3 text-slate-50 max-w-[660px] text-lg font-normal">
+                      <header className="mb-3">
+                        <p className="leading-relaxed mb-2 text-slate-50 max-w-[660px] text-lg font-normal">
                           {position.description}
                         </p>
                       </header>
 
                       {/* Achievements Accordion */}
-                      <section className="px-4 py-4">
-                        <h3 className="text-lg font-semibold mb-2 text-muted-foreground">Key Achievements</h3>
+                      <section className="px-2 py-2">
+                        <h3 className="text-lg font-semibold mb-1 text-muted-foreground">Key Achievements</h3>
                         <Accordion 
                           type="multiple" 
                           value={expandedAchievements[position.id] || []}
@@ -226,9 +226,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({ positions }) => {
                               value={achievement.id} 
                               className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10"
                             >
-                              <AccordionTrigger className="px-3 py-3 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-blue-500 bg-slate-400 hover:bg-white">
+                              <AccordionTrigger className="px-2 py-2 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-blue-500 bg-slate-400 hover:bg-white">
                                 <div className="flex-1 text-left">
-                                  <span className="block mb-2 text-slate-800 text-lg">{achievement.title}</span>
+                                  <span className="block mb-1 text-slate-800 text-lg">{achievement.title}</span>
                                   {/* Image thumbnails strip - show only when collapsed */}
                                   <div className={`flex gap-1 overflow-hidden transition-all duration-300 ${
                                     (expandedAchievements[position.id] || []).includes(achievement.id) 
@@ -248,8 +248,8 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({ positions }) => {
                                   </div>
                                 </div>
                               </AccordionTrigger>
-                              <AccordionContent className="px-3 pt-3">
-                                <div className="space-y-3">
+                              <AccordionContent className="px-2 pt-2">
+                                <div className="space-y-2">
                                   <p className="text-white leading-relaxed max-w-[660px] text-base font-normal">
                                     {achievement.description}
                                   </p>
