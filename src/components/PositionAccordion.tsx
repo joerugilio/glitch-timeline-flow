@@ -125,7 +125,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
               <span>differentiation + brand-science</span>
             </h2>
             
-            <div className="hero-subtitle caption-timeline pl-10">
+            <div className="hero-subtitle caption-timeline pl-[20vw]">
               <span>UX Product & Design Principal</span> 
               <span>Multiple Exits B2C, B2B</span>
               <span>Award Winning Regulated AI ML <Sparkles className="inline w-4 h-4 ml-1" /></span>
