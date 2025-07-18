@@ -90,10 +90,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({ positions }) => {
     setHoveredPosition(null);
   };
 
-  // Get current background image (expanded position takes priority over hover)
+  // Get current background image (hover takes priority over expanded)
   const getCurrentBackgroundImage = () => {
-    const expandedPosition = expandedPositions.length > 0 ? expandedPositions[0] : null;
-    const targetPosition = expandedPosition || hoveredPosition;
+    const targetPosition = hoveredPosition || (expandedPositions.length > 0 ? expandedPositions[0] : null);
     
     if (targetPosition) {
       const position = positions.find(p => p.id === targetPosition);
