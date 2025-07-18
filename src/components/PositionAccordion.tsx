@@ -111,7 +111,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
       {/* Content */}
       <div className="relative z-10 pt-12 pb-12">
-        <div className="w-full px-4">
+        <div className="w-full px-[15px]">
           <header className="text-center mb-8 h-1/4">
             <h1 className="text-3xl mb-2 text-left md:text-2xl font-normal">
               Career Timeline
