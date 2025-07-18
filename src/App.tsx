@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 import Index from "./pages/Index";
 import PositionDetail from "./pages/PositionDetail";
 import NotFound from "./pages/NotFound";
@@ -18,6 +18,23 @@ const queryClient = new QueryClient({
   },
 });
 
+// Redirect component for old position URLs
+const PositionRedirect: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const searchParams = new URLSearchParams(window.location.search);
+  const achievement = searchParams.get('achievement');
+  
+  const redirectParams = new URLSearchParams();
+  if (id) {
+    redirectParams.set('position', id);
+    if (achievement) {
+      redirectParams.set('achievement', achievement);
+    }
+  }
+  
+  return <Navigate to={`/?${redirectParams.toString()}`} replace />;
+};
+
 const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
@@ -27,7 +44,7 @@ const App: React.FC = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/position/:id" element={<PositionDetail />} />
+            <Route path="/position/:id" element={<PositionRedirect />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
