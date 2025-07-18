@@ -40,7 +40,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
   }, [searchParams]);
 
-  // Update URL when accordion state changes
   const updateURL = (newExpandedPositions: string[], newExpandedAchievements: {
     [key: string]: string[];
   }) => {
@@ -103,7 +102,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
   const currentImageUrl = getCurrentBackgroundImage();
 
   return <div className="relative min-h-screen">
-      {/* Background Image */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out" style={{
         backgroundImage: currentImageUrl ? `url(${currentImageUrl})` : 'none',
@@ -117,7 +115,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       }} />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 pt-12 pb-12">
         <div className="w-full px-[15px]">
           <header className="text-center mb-8 h-1/4">
@@ -131,8 +128,8 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
           <div className="space-y-[1vh] mt-[3vh] mx-10 mb-10">
             <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
-              {positions.map(position => <AccordionItem key={position.id} value={position.id} className="border-0">
-                  <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="bg-[#1b1f1b]/30 p-3 rounded-lg hover:bg-[#1b1f1b] hover:border-primary/30 data-[state=open]:bg-[#1b1f1b] data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 border border-transparent transition-all duration-300 hover:no-underline py-0 px-[15px]">
+              {positions.map(position => <AccordionItem key={position.id} value={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
+                  <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline py-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none">
                     <div className="flex items-center justify-between w-full">
                       <div className="flex-1 text-left">
                         <div className="flex flex-col md:flex-row md:justify-between mb-0">
@@ -190,7 +187,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                     </div>
                   </AccordionTrigger>
 
-                  <AccordionContent className="px-2 pt-2">
+                  <AccordionContent className="px-2 pt-2 rounded-b-lg">
                     <div className="backdrop-blur-xl px-2 py-2 rounded-sm space-y-3">
                       {/* Position Header Details */}
                       <header className="mb-3">
