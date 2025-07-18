@@ -49,7 +49,7 @@
   .hero-title {
     font-size: 25vh;
     font-weight: 100;
-    line-height: 0.85;
+    line-height: 0.75;
     letter-spacing: -0.04em;
     @apply text-primary mb-4;
     display: flex;
