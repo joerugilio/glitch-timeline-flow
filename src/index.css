@@ -47,11 +47,21 @@
 @layer utilities {
   /* Hero Section Styles */
   .hero-title {
-    @apply text-3xl md:text-4xl font-bold text-primary mb-4;
+    font-size: 25vh;
+    font-weight: 100;
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+    @apply text-primary mb-4;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 35vh;
+    }
   }
 
   .hero-title span {
