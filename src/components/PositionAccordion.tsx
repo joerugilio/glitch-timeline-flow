@@ -155,7 +155,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({ positions }) => {
                   className="border-0"
                 >
                   <AccordionTrigger
-                    className="bg-[#1b1f1b]/[0.24] p-3 rounded-lg hover:bg-[#1b1f1b]/[0.4] hover:border-primary/30 border border-transparent transition-all duration-300 hover:no-underline"
+                    className="bg-[#1b1f1b] p-3 rounded-lg hover:bg-[#1b1f1b] hover:border-primary/30 data-[state=open]:bg-[#1b1f1b] data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 border border-transparent transition-all duration-300 hover:no-underline"
                     onMouseEnter={() => handleMouseEnter(position.id)}
                     onMouseLeave={handleMouseLeave}
                   >
