@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Calendar, MapPin, Tag } from 'lucide-react';
+import { Calendar, MapPin, Tag, TrendingUp, Building2 } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import AchievementImages from './AchievementImages';
 import { Position } from '../types/portfolio';
+
 interface PositionAccordionProps {
   positions: Position[];
 }
+
 const PositionAccordion: React.FC<PositionAccordionProps> = ({
   positions
 }) => {
@@ -52,6 +54,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     setSearchParams(params);
   };
+
   const handlePositionChange = (value: string[]) => {
     setExpandedPositions(value);
 
@@ -67,6 +70,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(value, newExpandedAchievements);
   };
+
   const handleAchievementChange = (positionId: string, value: string[]) => {
     const newExpandedAchievements = {
       ...expandedAchievements,
@@ -75,10 +79,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(expandedPositions, newExpandedAchievements);
   };
+
   const handleMouseEnter = (positionId: string) => {
     console.log('Hovering over position:', positionId);
     setHoveredPosition(positionId);
   };
+
   const handleMouseLeave = () => {
     console.log('Mouse left position');
     setHoveredPosition(null);
@@ -93,7 +99,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     return null;
   };
+
   const currentImageUrl = getCurrentBackgroundImage();
+
   return <div className="relative min-h-screen">
       {/* Background Image */}
       <div className="fixed inset-0 z-0">
@@ -152,13 +160,31 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                           {position.blurb}
                         </p>
 
-                        <div className="flex flex-wrap gap-1 mb-3">
-                          {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
-                              {tag}
-                            </span>)}
-                          {position.tags.length > 4 && <span className="text-xs text-muted-foreground px-2 py-1">
-                              +{position.tags.length - 4} more
-                            </span>}
+                        <div className="flex flex-wrap justify-between items-end gap-1 mb-3">
+                          <div className="flex flex-wrap gap-1">
+                            {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
+                                {tag}
+                              </span>)}
+                            {position.tags.length > 4 && <span className="text-xs text-muted-foreground px-2 py-1">
+                                +{position.tags.length - 4} more
+                              </span>}
+                          </div>
+                          
+                          {position.exit && (
+                            <div className="flex items-center gap-1">
+                              {position.exit.type === 'IPO' ? (
+                                <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-green-500/20 text-green-400 text-sm border border-green-500/30">
+                                  <TrendingUp size={12} className="mr-1" />
+                                  IPO
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-blue-500/20 text-blue-400 text-sm border border-blue-500/30">
+                                  <Building2 size={12} className="mr-1" />
+                                  Acquired by {position.exit.company}
+                                </span>
+                              )}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -213,4 +239,5 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       </div>
     </div>;
 };
+
 export default PositionAccordion;

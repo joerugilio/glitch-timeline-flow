@@ -1,4 +1,5 @@
 
+
 export interface AchievementImage {
   url: string;
   alt: string;
@@ -12,6 +13,12 @@ export interface Achievement {
   images: AchievementImage[];
 }
 
+export interface Exit {
+  type: 'IPO' | 'Acquisition';
+  company?: string;
+  details: string;
+}
+
 export interface Position {
   id: string;
   title: string;
@@ -23,8 +30,10 @@ export interface Position {
   tags: string[];
   imageUrl: string;
   achievements: Achievement[];
+  exit?: Exit;
 }
 
 export interface PortfolioData {
   positions: Position[];
 }
+

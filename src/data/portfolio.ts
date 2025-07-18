@@ -175,6 +175,10 @@ export const portfolioData: PortfolioData = {
       description: 'Led product development from concept to public exit. Managed entire product lifecycle including user research, design, development, and go-to-market strategy.',
       tags: ['full-stack-product-management', 'public exit', 'full pl', 'market leadership'],
       imageUrl: 'https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?w=1200&h=800&fit=crop',
+      exit: {
+        type: 'IPO',
+        details: 'Successful public offering'
+      },
       achievements: [
         {
           id: 'ipo-strategy',
@@ -288,6 +292,11 @@ export const portfolioData: PortfolioData = {
       description: 'Led design for consumer-facing products with focus on user acquisition and retention. Drove design strategy that contributed to successful acquisition by major tech company.',
       tags: ['full-stack ux', 'private exit', 'data-science', 'market leadership'],
       imageUrl: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200&h=800&fit=crop',
+      exit: {
+        type: 'Acquisition',
+        company: 'TechGiant Corp',
+        details: '$150M strategic acquisition'
+      },
       achievements: [
         {
           id: 'user-growth-design',
