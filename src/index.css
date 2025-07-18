@@ -69,7 +69,7 @@
   }
 
   .hero-subtitle {
-    @apply text-lg text-muted-foreground;
+    @apply text-lg text-white;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
