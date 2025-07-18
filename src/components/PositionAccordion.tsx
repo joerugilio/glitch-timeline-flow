@@ -1,12 +1,15 @@
+
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Calendar, MapPin, Tag } from 'lucide-react';
+import { Calendar, MapPin, Tag, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import AchievementImages from './AchievementImages';
 import { Position } from '../types/portfolio';
+
 interface PositionAccordionProps {
   positions: Position[];
 }
+
 const PositionAccordion: React.FC<PositionAccordionProps> = ({
   positions
 }) => {
@@ -38,7 +41,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
   }, [searchParams]);
 
-  // Update URL when accordion state changes
   const updateURL = (newExpandedPositions: string[], newExpandedAchievements: {
     [key: string]: string[];
   }) => {
@@ -52,6 +54,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     setSearchParams(params);
   };
+
   const handlePositionChange = (value: string[]) => {
     setExpandedPositions(value);
 
@@ -67,6 +70,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(value, newExpandedAchievements);
   };
+
   const handleAchievementChange = (positionId: string, value: string[]) => {
     const newExpandedAchievements = {
       ...expandedAchievements,
@@ -75,10 +79,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(expandedPositions, newExpandedAchievements);
   };
+
   const handleMouseEnter = (positionId: string) => {
     console.log('Hovering over position:', positionId);
     setHoveredPosition(positionId);
   };
+
   const handleMouseLeave = () => {
     console.log('Mouse left position');
     setHoveredPosition(null);
@@ -93,9 +99,10 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     return null;
   };
+
   const currentImageUrl = getCurrentBackgroundImage();
+
   return <div className="relative min-h-screen">
-      {/* Background Image */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out" style={{
         backgroundImage: currentImageUrl ? `url(${currentImageUrl})` : 'none',
@@ -109,24 +116,31 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       }} />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 pt-12 pb-12">
         <div className="w-full px-[15px]">
           <header className="text-center mb-8 h-1/4">
-            <h1 className="text-3xl mb-2 text-left md:text-2xl font-normal">
-              Career Timeline
-            </h1>
-            <p className="text-muted-foreground text-left font-normal text-lg">
-              A journey through product design, leadership, and innovation across multiple successful ventures
-            </p>
+            <h2 className="hero-title caption-timeline mb-4">
+              <span>User-Centered Leadership</span>
+              <span>Differentiation</span>
+              <span>Robust Ops</span>
+              <span>Brand-Science</span>
+            </h2>
+            
+            <div className="hero-subtitle caption-timeline">
+              <span>UX Product & Design Principal</span> 
+              <span>Multiple Exits B2C, B2B</span>
+              <span>Award Winning Regulated AI ML <Sparkles className="inline w-4 h-4 ml-1" /></span>
+              <span>SaaS Brand eCom Mrktg</span>
+              <span>Consumer-Grade Enterprise</span>
+            </div>
           </header>
 
-          <div className="space-y-3 m-10">
-            <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-3">
-              {positions.map(position => <AccordionItem key={position.id} value={position.id} className="border-0">
-                  <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="bg-[#1b1f1b]/30 p-3 rounded-lg hover:bg-[#1b1f1b] hover:border-primary/30 data-[state=open]:bg-[#1b1f1b] data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 border border-transparent transition-all duration-300 hover:no-underline py-0 px-[15px]">
+          <div className="space-y-[1vh] mt-[3vh] mx-10 mb-10">
+            <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
+              {positions.map(position => <AccordionItem key={position.id} value={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
+                  <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline py-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none">
                     <div className="flex items-center justify-between w-full">
-                      <div className="flex-1 text-left pl-10">
+                      <div className="flex-1 text-left">
                         <div className="flex flex-col md:flex-row md:justify-between mb-0">
                           <div>
                             <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal">
@@ -148,23 +162,41 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                           </div>
                         </div>
 
-                        <p className="text-muted-foreground mb-1 leading-relaxed">
+                        <p className="text-muted-foreground mb-1 leading-relaxed pl-[2vw]">
                           {position.blurb}
                         </p>
 
-                        <div className="flex flex-wrap gap-1 mb-3">
-                          {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
-                              {tag}
-                            </span>)}
-                          {position.tags.length > 4 && <span className="text-xs text-muted-foreground px-2 py-1">
-                              +{position.tags.length - 4} more
-                            </span>}
+                        <div className="flex flex-wrap justify-between items-end gap-1 mb-3 pl-[2vw]">
+                          <div className="flex flex-wrap gap-1">
+                            {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
+                                {tag}
+                              </span>)}
+                            {position.tags.length > 4 && <span className="text-xs text-muted-foreground px-2 py-1">
+                                +{position.tags.length - 4} more
+                              </span>}
+                          </div>
+                          
+                          {position.exit && (
+                            <div className="flex items-center gap-1">
+                              {position.exit.type === 'IPO' ? (
+                                <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-green-500/20 text-green-400 text-sm border border-green-500/30">
+                                  <TrendingUp size={12} className="mr-1" />
+                                  IPO
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-blue-500/20 text-blue-400 text-sm border border-blue-500/30">
+                                  <Building2 size={12} className="mr-1" />
+                                  Acquired by {position.exit.company}
+                                </span>
+                              )}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
                   </AccordionTrigger>
 
-                  <AccordionContent className="px-2 pt-2">
+                  <AccordionContent className="px-2 pt-2 rounded-b-lg">
                     <div className="backdrop-blur-xl px-2 py-2 rounded-sm space-y-3">
                       {/* Position Header Details */}
                       <header className="mb-3">
@@ -213,4 +245,5 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       </div>
     </div>;
 };
+
 export default PositionAccordion;
