@@ -122,7 +122,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
               <span>user-centered leadership</span>
               <span>differentiation</span>
               <span>robust ops</span>
-              <span>brand-science</span>
+              <span>differentiation + brand-science</span>
             </h2>
             
             <div className="hero-subtitle caption-timeline pl-10">
