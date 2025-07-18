@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Calendar, MapPin, Tag } from 'lucide-react';
@@ -208,15 +207,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({ positions }) => {
                     <div className="backdrop-blur-xl px-4 py-4 rounded-sm space-y-6">
                       {/* Position Header Details */}
                       <header className="mb-6">
-                        <div className="flex flex-wrap gap-1 mb-3 p-1 rounded-full bg-black/15">
-                          {position.tags.map(tag => (
-                            <span key={tag} className="inline-flex items-center px-2 py-0.1 rounded-full bg-primary/20 text-primary font-normal text-base">
-                              <Tag size={8} className="mr-0.5" aria-hidden="true" />
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-
                         <p className="leading-relaxed mb-3 text-slate-50 max-w-[660px] text-lg font-normal">
                           {position.description}
                         </p>
