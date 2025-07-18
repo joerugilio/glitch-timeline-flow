@@ -122,7 +122,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
         <div className="w-full px-[15px]">
           <header className="text-center mb-8 h-1/4">
             <h1 className="text-3xl mb-2 text-left md:text-2xl font-normal">
-              Career Timeline
+              Strategic UX & Brand-Science
             </h1>
             <p className="text-muted-foreground text-left font-normal text-lg">
               A journey through product design, leadership, and innovation across multiple successful ventures
