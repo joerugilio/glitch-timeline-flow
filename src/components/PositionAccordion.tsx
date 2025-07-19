@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Calendar, MapPin, Tag, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
+import { Button } from './ui/button';
 import AchievementImages from './AchievementImages';
 import { Position } from '../types/portfolio';
 
@@ -130,6 +131,22 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
               <span>Consumer-Grade Enterprise</span>
             </div>
           </header>
+
+          {/* Button Row */}
+          <div className="flex justify-center gap-4 mb-8 max-w-[992px] mx-auto">
+            <Button variant="outline" className="flex-1 max-w-[200px]">
+              All Positions
+            </Button>
+            <Button variant="outline" className="flex-1 max-w-[200px]">
+              Leadership
+            </Button>
+            <Button variant="outline" className="flex-1 max-w-[200px]">
+              Product Design
+            </Button>
+            <Button variant="outline" className="flex-1 max-w-[200px]">
+              Exits Only
+            </Button>
+          </div>
 
           <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10 max-w-[992px]">
             <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
