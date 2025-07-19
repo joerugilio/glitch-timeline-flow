@@ -134,7 +134,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10 max-w-[992px]">
             <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
               {positions.map(position => <AccordionItem key={position.id} value={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
-                  <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline py-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-destructive/20">
+                  <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline py-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-destructive/20 mt-[5px]">
                     <div className="flex items-center justify-between w-full">
                       <div className="flex-1 text-left">
                         <div className="flex flex-col md:flex-row md:justify-between mb-0">
