@@ -110,16 +110,15 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
         <div className="w-full px-[15px]">
           <header className="text-center mb-8 h-1/4">
             <h2 className="hero-title caption-timeline mb-4">
-              <span className="text-[6vh] md:text-inherit">user-centered leadership robust-ops strategy + brand-science</span>
-              
+              <span>user-centered leadership robust-ops strategy + brand-science</span>
             </h2>
             
             <div className="hero-subtitle caption-timeline pl-[20vw]">
-              <span>UX Product & Design Principal, Multiple Exits B2C B2B, Award Winning Regulated AI ML, SaaS, Brand, eCom, Mrktg, Consumer-Grade Enterprise</span> 
-              
-              
-              
-              
+              <span>UX Product & Design Principal</span> 
+              <span>Multiple Exits B2C, B2B</span>
+              <span>Award Winning Regulated AI ML <Sparkles className="inline w-4 h-4 ml-1" /></span>
+              <span>SaaS Brand eCom Mrktg</span>
+              <span>Consumer-Grade Enterprise</span>
             </div>
           </header>
 
@@ -192,7 +191,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                         <h3 className="text-lg font-semibold mb-1 text-muted-foreground">Key Achievements</h3>
                         <Accordion type="multiple" value={expandedAchievements[position.id] || []} onValueChange={value => handleAchievementChange(position.id, value)}>
                           {position.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
-                              <AccordionTrigger className="px-2 py-2 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-green-500 bg-slate-400 hover:bg-white">
+                              <AccordionTrigger className="px-2 py-2 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-blue-500 bg-slate-400 hover:bg-white">
                                 <div className="flex-1 text-left">
                                   <span className="block mb-1 text-slate-800 text-lg">{achievement.title}</span>
                                   {/* Image thumbnails strip - show only when collapsed */}
