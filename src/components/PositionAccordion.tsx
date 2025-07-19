@@ -5,11 +5,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './
 import { Button } from './ui/button';
 import AchievementImages from './AchievementImages';
 import { Position } from '../types/portfolio';
-
 interface PositionAccordionProps {
   positions: Position[];
 }
-
 const PositionAccordion: React.FC<PositionAccordionProps> = ({
   positions
 }) => {
@@ -40,7 +38,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       setExpandedAchievements(achievementMap);
     }
   }, [searchParams]);
-
   const updateURL = (newExpandedPositions: string[], newExpandedAchievements: {
     [key: string]: string[];
   }) => {
@@ -54,7 +51,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     setSearchParams(params);
   };
-
   const handlePositionChange = (value: string[]) => {
     setExpandedPositions(value);
 
@@ -70,7 +66,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(value, newExpandedAchievements);
   };
-
   const handleAchievementChange = (positionId: string, value: string[]) => {
     const newExpandedAchievements = {
       ...expandedAchievements,
@@ -79,12 +74,10 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(expandedPositions, newExpandedAchievements);
   };
-
   const handleMouseEnter = (positionId: string) => {
     console.log('Hovering over position:', positionId);
     setHoveredPosition(positionId);
   };
-
   const handleMouseLeave = () => {
     console.log('Mouse left position');
     setHoveredPosition(null);
@@ -99,9 +92,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     return null;
   };
-
   const currentImageUrl = getCurrentBackgroundImage();
-
   return <div className="relative min-h-screen">
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out" style={{
@@ -134,9 +125,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
           {/* Button Row */}
           <div className="flex justify-center gap-4 mb-8 max-w-[992px] mx-auto">
-            <Button variant="outline" className="flex-1 max-w-[200px]">
-              All Positions
-            </Button>
+            
             <Button variant="outline" className="flex-1 max-w-[200px]">
               Leadership
             </Button>
@@ -252,5 +241,4 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       </div>
     </div>;
 };
-
 export default PositionAccordion;
