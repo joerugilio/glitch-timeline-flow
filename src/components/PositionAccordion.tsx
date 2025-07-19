@@ -134,18 +134,27 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10 max-w-[992px]">
             <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
               {positions.map(position => <AccordionItem key={position.id} value={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
-                  <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
-                    <div className="flex items-center justify-between w-full">
-                      <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
-                        <div className="flex flex-col md:flex-row md:justify-between mb-0">
-                          <div>
-                            <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal">
-                              {position.title}
-                            </h2>
-                            <p className="text-lg text-accent font-normal">
-                              {position.company}
-                            </p>
+                    <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
+                      <div className="flex items-center justify-between w-full">
+                        <div className="flex items-center gap-4 flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
+                          {/* Company Logo */}
+                          <div className="w-12 h-4 rounded border border-gray-300 overflow-hidden flex-shrink-0">
+                            <img 
+                              src={`https://images.unsplash.com/photo-${['1618160702438-9b02ab6515c9', '1582562124811-c09040d0a901', '1501286353178-1ec881214838'][Math.floor(Math.random() * 3)]}`}
+                              alt={`${position.company} logo`}
+                              className="w-full h-full object-cover"
+                            />
                           </div>
+                          
+                          <div className="flex flex-col md:flex-row md:justify-between mb-0 flex-1">
+                            <div>
+                              <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal">
+                                {position.title}
+                              </h2>
+                              <p className="text-lg text-accent font-normal">
+                                {position.company}
+                              </p>
+                            </div>
                           <div className="flex flex-shrink flex-row mt-1 md:mt-0 justify-end text-right text-primary-foreground">
                             <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
                               <Calendar size={14} className="mr-1" aria-hidden="true" />
