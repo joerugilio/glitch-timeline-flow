@@ -200,7 +200,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                         <h3 className="text-lg font-semibold mb-1 text-muted-foreground">Key Achievements</h3>
                         <Accordion type="multiple" value={expandedAchievements[position.id] || []} onValueChange={value => handleAchievementChange(position.id, value)}>
                           {position.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
-                              <AccordionTrigger className="px-2 py-2 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-green-500 bg-slate-400 hover:bg-white">
+                              <AccordionTrigger className="px-2 py-2 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-green-500 bg-green-500/20 hover:bg-green-500/30">
                                 <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
                                   <span className="block mb-1 text-slate-800 text-lg">{achievement.title}</span>
                                   {/* Image thumbnails strip - show only when collapsed */}
