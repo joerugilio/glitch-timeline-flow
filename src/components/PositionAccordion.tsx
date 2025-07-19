@@ -4,9 +4,11 @@ import { Calendar, MapPin, Tag, TrendingUp, Building2, Sparkles } from 'lucide-r
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import AchievementImages from './AchievementImages';
 import { Position } from '../types/portfolio';
+
 interface PositionAccordionProps {
   positions: Position[];
 }
+
 const PositionAccordion: React.FC<PositionAccordionProps> = ({
   positions
 }) => {
@@ -37,6 +39,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       setExpandedAchievements(achievementMap);
     }
   }, [searchParams]);
+
   const updateURL = (newExpandedPositions: string[], newExpandedAchievements: {
     [key: string]: string[];
   }) => {
@@ -50,6 +53,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     setSearchParams(params);
   };
+
   const handlePositionChange = (value: string[]) => {
     setExpandedPositions(value);
 
@@ -65,6 +69,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(value, newExpandedAchievements);
   };
+
   const handleAchievementChange = (positionId: string, value: string[]) => {
     const newExpandedAchievements = {
       ...expandedAchievements,
@@ -73,10 +78,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(expandedPositions, newExpandedAchievements);
   };
+
   const handleMouseEnter = (positionId: string) => {
     console.log('Hovering over position:', positionId);
     setHoveredPosition(positionId);
   };
+
   const handleMouseLeave = () => {
     console.log('Mouse left position');
     setHoveredPosition(null);
@@ -91,7 +98,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     return null;
   };
+
   const currentImageUrl = getCurrentBackgroundImage();
+
   return <div className="relative min-h-screen">
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out" style={{
@@ -125,7 +134,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10 max-w-[992px]">
             <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
               {positions.map(position => <AccordionItem key={position.id} value={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
-                  <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-destructive/20">
+                  <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
                     <div className="flex items-center justify-between w-full">
                       <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
                         <div className="flex flex-col md:flex-row md:justify-between mb-0">
@@ -226,4 +235,5 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       </div>
     </div>;
 };
+
 export default PositionAccordion;
