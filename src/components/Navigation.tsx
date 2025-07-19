@@ -34,9 +34,23 @@ const Navigation = () => {
           <div className="hidden md:block">
             <div className="flex items-center space-x-2">
               {navItems.map(item => {
-              const isActive = location.pathname === item.href;
-              return;
-            })}
+                const isActive = location.pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      isActive 
+                        ? 'text-primary bg-primary/10' 
+                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                    }`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    <item.icon size={18} aria-hidden="true" />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -51,12 +65,25 @@ const Navigation = () => {
       {isOpen && <div id="mobile-menu" className="md:hidden bg-card border-b border-border" role="menu">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navItems.map(item => {
-          const isActive = location.pathname === item.href;
-          return <Link key={item.href} to={item.href} className={`flex items-center space-x-3 px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground hover:bg-muted'}`} onClick={() => setIsOpen(false)} role="menuitem" aria-current={isActive ? 'page' : undefined}>
+              const isActive = location.pathname === item.href;
+              return (
+                <Link 
+                  key={item.href} 
+                  to={item.href} 
+                  className={`flex items-center space-x-3 px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                    isActive 
+                      ? 'text-primary bg-primary/10' 
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                  }`} 
+                  onClick={() => setIsOpen(false)} 
+                  role="menuitem" 
+                  aria-current={isActive ? 'page' : undefined}
+                >
                   <item.icon size={20} aria-hidden="true" />
                   <span>{item.label}</span>
-                </Link>;
-        })}
+                </Link>
+              );
+            })}
           </div>
         </div>}
     </nav>;
