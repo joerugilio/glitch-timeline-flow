@@ -4,11 +4,9 @@ import { Calendar, MapPin, Tag, TrendingUp, Building2, Sparkles } from 'lucide-r
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import AchievementImages from './AchievementImages';
 import { Position } from '../types/portfolio';
-
 interface PositionAccordionProps {
   positions: Position[];
 }
-
 const PositionAccordion: React.FC<PositionAccordionProps> = ({
   positions
 }) => {
@@ -39,7 +37,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       setExpandedAchievements(achievementMap);
     }
   }, [searchParams]);
-
   const updateURL = (newExpandedPositions: string[], newExpandedAchievements: {
     [key: string]: string[];
   }) => {
@@ -53,7 +50,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     setSearchParams(params);
   };
-
   const handlePositionChange = (value: string[]) => {
     setExpandedPositions(value);
 
@@ -69,7 +65,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(value, newExpandedAchievements);
   };
-
   const handleAchievementChange = (positionId: string, value: string[]) => {
     const newExpandedAchievements = {
       ...expandedAchievements,
@@ -78,12 +73,10 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(expandedPositions, newExpandedAchievements);
   };
-
   const handleMouseEnter = (positionId: string) => {
     console.log('Hovering over position:', positionId);
     setHoveredPosition(positionId);
   };
-
   const handleMouseLeave = () => {
     console.log('Mouse left position');
     setHoveredPosition(null);
@@ -98,9 +91,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     return null;
   };
-
   const currentImageUrl = getCurrentBackgroundImage();
-
   return <div className="relative min-h-screen">
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out" style={{
@@ -202,7 +193,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                           {position.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
                               <AccordionTrigger className="px-2 py-2 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-green-500 bg-green-500/20 hover:bg-green-500/30">
                                 <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
-                                  <span className="block mb-1 text-slate-800 text-lg">{achievement.title}</span>
+                                  <span className="block mb-1 text-lg text-white">{achievement.title}</span>
                                   {/* Image thumbnails strip - show only when collapsed */}
                                   <div className={`flex gap-1 overflow-hidden transition-all duration-300 ${(expandedAchievements[position.id] || []).includes(achievement.id) ? 'opacity-0 h-0 transform scale-95' : 'opacity-100 h-6 transform scale-100'}`}>
                                     {achievement.images.slice(0, 4).map((image, index) => <div key={index} className="w-8 h-6 rounded overflow-hidden border border-gray-300 flex-shrink-0">
@@ -235,5 +226,4 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       </div>
     </div>;
 };
-
 export default PositionAccordion;
