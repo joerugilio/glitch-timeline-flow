@@ -35,10 +35,7 @@ const Navigation = () => {
             <div className="flex items-center space-x-2">
               {navItems.map(item => {
               const isActive = location.pathname === item.href;
-              return <Link key={item.href} to={item.href} className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground hover:bg-muted'}`} aria-current={isActive ? 'page' : undefined}>
-                    <item.icon size={16} aria-hidden="true" />
-                    <span>{item.label}</span>
-                  </Link>;
+              return;
             })}
             </div>
           </div>
