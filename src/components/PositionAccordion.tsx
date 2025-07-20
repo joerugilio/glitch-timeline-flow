@@ -226,7 +226,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
             {/* Split Content Container */}
             <div className={`transition-all duration-500 ease-in-out h-auto ${
-              selectedView === 'gantt' || selectedView === 'timeline' ? 'w-full' : 'w-fit mx-auto'
+              selectedView === 'gantt' ? 'w-full' 
+              : selectedView === 'timeline' ? 'w-full'
+              : 'w-fit mx-auto'
             } ${
               selectedView === 'split' 
                 ? 'flex gap-4 items-start' 
@@ -248,9 +250,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                         <AccordionItem key={position.id} value={position.id} data-accordion-item={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
                           <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
                             <div className="flex items-center justify-between w-full">
-                              <div className="flex items-start w-full backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
+                              <div className="flex flex-col sm:flex-row items-start w-full backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
                                 <LogoPlaceholder />
-                                <div className="flex-1 ml-3">
+                                <div className="flex-1 ml-0 sm:ml-3 mt-3 sm:mt-0">
                                   <div className="flex flex-col md:flex-row md:justify-between mb-0">
                                     <div>
                                       <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal text-left">
