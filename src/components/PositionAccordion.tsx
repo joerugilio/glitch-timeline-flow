@@ -272,14 +272,13 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                           <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
                             <div className="flex items-center justify-between w-full">
                               <div className="flex items-start w-full backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
-                                <LogoPlaceholder />
-                                <div className="flex-1 pl-2">
+                                <div className="flex-1">
                                   <div className="flex flex-col md:flex-row md:justify-between mb-0">
                                     <div>
-                                      <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal">
+                                      <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal text-left">
                                         {position.title}
                                       </h2>
-                                      <p className="text-lg text-accent font-normal">
+                                      <p className="text-lg text-accent font-normal text-left">
                                         {position.company}
                                       </p>
                                     </div>
