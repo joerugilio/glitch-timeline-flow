@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Calendar, MapPin, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Position } from '../types/portfolio';
@@ -162,42 +163,42 @@ const GanttChart: React.FC<GanttChartProps> = ({
                   </div>
                 </div>
 
-                {/* Hover details - matching accordion layout */}
+                {/* Hover details - mobile responsive */}
                 {hoveredPosition === position.id && (
-                  <div className="absolute z-[60] bottom-full left-0 mb-2 p-4 bg-card/90 backdrop-blur-sm border border-border/60 rounded-lg shadow-lg min-w-96 max-w-lg">
-                    <div className="space-y-3">
-                      {/* Header - matching accordion style */}
+                  <div className="absolute z-[60] bottom-full left-0 mb-2 p-3 md:p-4 bg-card/90 backdrop-blur-sm border border-border/60 rounded-lg shadow-lg w-full sm:w-auto sm:min-w-80 md:min-w-96 md:max-w-lg">
+                    <div className="space-y-2 md:space-y-3">
+                      {/* Header - mobile responsive */}
                       <div className="flex flex-col md:flex-row md:justify-between">
                         <div>
-                          <h2 className="text-xl md:text-2xl text-primary font-normal">
+                          <h2 className="text-lg md:text-xl lg:text-2xl text-primary font-normal">
                             {position.title}
                           </h2>
-                          <p className="text-lg text-accent font-normal">
+                          <p className="text-base md:text-lg text-accent font-normal">
                             {position.company}
                           </p>
                         </div>
-                        <div className="flex flex-col mt-1 md:mt-0 text-right">
-                          <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
+                        <div className="flex flex-col mt-1 md:mt-0 text-left md:text-right">
+                          <div className="flex items-center justify-start md:justify-end text-muted-foreground text-sm mb-1">
                             <Calendar size={14} className="mr-1" />
                             <span>{position.period}</span>
                           </div>
-                          <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
+                          <div className="flex items-center justify-start md:justify-end text-muted-foreground text-sm mb-1">
                             <MapPin size={14} className="mr-1" />
                             <span>{position.location}</span>
                           </div>
                         </div>
                       </div>
 
-                      {/* Blurb - matching accordion style */}
-                      <p className="text-muted-foreground leading-relaxed pl-[2vw]">
+                      {/* Blurb - mobile responsive padding */}
+                      <p className="text-muted-foreground leading-relaxed pl-4 md:pl-6 lg:pl-[2vw] text-sm md:text-base">
                         {position.blurb}
                       </p>
 
-                      {/* Tags and Exit info - matching accordion layout */}
-                      <div className="flex flex-wrap justify-between items-end gap-1 pl-[2vw]">
+                      {/* Tags and Exit info - mobile responsive */}
+                      <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-end gap-2 pl-4 md:pl-6 lg:pl-[2vw]">
                         <div className="flex flex-wrap gap-1">
                           {position.tags.slice(0, 4).map(tag => (
-                            <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
+                            <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-xs md:text-sm">
                               {tag}
                             </span>
                           ))}
@@ -209,16 +210,17 @@ const GanttChart: React.FC<GanttChartProps> = ({
                         </div>
                         
                         {position.exit && (
-                          <div className="flex items-center gap-1">
+                          <div className="flex items-center gap-1 mt-2 sm:mt-0">
                             {position.exit.type === 'IPO' ? (
-                              <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-green-500/20 text-green-400 text-sm border border-green-500/30">
+                              <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-green-500/20 text-green-400 text-xs md:text-sm border border-green-500/30">
                                 <TrendingUp size={12} className="mr-1" />
                                 IPO
                               </span>
                             ) : (
-                              <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-blue-500/20 text-blue-400 text-sm border border-blue-500/30">
+                              <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-blue-500/20 text-blue-400 text-xs md:text-sm border border-blue-500/30">
                                 <Building2 size={12} className="mr-1" />
-                                Acquired by {position.exit.company}
+                                <span className="hidden sm:inline">Acquired by </span>
+                                {position.exit.company}
                               </span>
                             )}
                           </div>
@@ -263,12 +265,13 @@ const GanttChart: React.FC<GanttChartProps> = ({
           })}
         </div>
 
-        {/* Legend */}
+        {/* Legend - mobile responsive */}
         <div className="mt-6 pt-3 border-t border-primary/20">
-          <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
-            <div className="flex items-center gap-1">
+          <div className="flex flex-wrap gap-2 md:gap-4 text-xs text-muted-foreground">
+            <div className="flex items-center gap-1 whitespace-nowrap">
               <div className="w-3 h-1 bg-green-500/40"></div>
-              <span>Achievements (click to expand)</span>
+              <span className="hidden sm:inline">Achievements (click to expand)</span>
+              <span className="sm:hidden">Achievements</span>
             </div>
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 bg-green-500/20 border border-green-500/30 rounded"></div>
@@ -276,10 +279,14 @@ const GanttChart: React.FC<GanttChartProps> = ({
             </div>
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 bg-blue-500/20 border border-blue-500/30 rounded"></div>
-              <span>Acquisition</span>
+              <span className="hidden sm:inline">Acquisition</span>
+              <span className="sm:hidden">ACQ</span>
             </div>
-            <div className="flex items-center gap-1">
-              <span className="text-muted-foreground">Click position bars to view details</span>
+            <div className="flex items-center gap-1 w-full sm:w-auto">
+              <span className="text-muted-foreground text-xs">
+                <span className="hidden sm:inline">Click position bars to view details</span>
+                <span className="sm:hidden">Tap bars for details</span>
+              </span>
             </div>
           </div>
         </div>
