@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Calendar, MapPin, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Position } from '../types/portfolio';
 import { parsePeriod, getTimelineRange } from '../utils/dateUtils';
+import LogoPlaceholder from './LogoPlaceholder';
 
 interface GanttChartProps {
   positions: Position[];
@@ -116,7 +117,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
               <div key={position.id} className="relative">
                 {/* Position bar */}
                 <div
-                  className="relative h-16 bg-primary/20 rounded border border-primary/30 hover:border-primary/50 transition-all duration-300 cursor-pointer"
+                  className="relative h-20 bg-primary/20 rounded border border-primary/30 hover:border-primary/50 transition-all duration-300 cursor-pointer"
                   style={positionStyle}
                   onMouseEnter={() => handlePositionMouseEnter(position.id)}
                   onMouseLeave={handlePositionMouseLeave}
@@ -127,33 +128,9 @@ const GanttChart: React.FC<GanttChartProps> = ({
                     <span className="text-primary-foreground text-sm font-medium">View Details</span>
                   </div>
 
-                  {/* Position content */}
-                  <div className="absolute inset-0 p-2 flex items-center justify-between bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] transition-all duration-300">
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-sm font-medium text-primary truncate">
-                        {position.title}
-                      </h4>
-                      <p className="text-xs text-accent truncate">
-                        {position.company}
-                      </p>
-                    </div>
-                    
-                    {/* Exit indicator */}
-                    {position.exit && (
-                      <div className="flex-shrink-0 ml-2">
-                        {position.exit.type === 'IPO' ? (
-                          <span className="inline-flex items-center px-1 py-0.5 rounded text-xs bg-green-500/20 text-green-400 border border-green-500/30">
-                            <TrendingUp size={10} className="mr-1" />
-                            IPO
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center px-1 py-0.5 rounded text-xs bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                            <Building2 size={10} className="mr-1" />
-                            ACQ
-                          </span>
-                        )}
-                      </div>
-                    )}
+                  {/* Logo content */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] transition-all duration-300">
+                    <LogoPlaceholder />
                   </div>
 
                   {/* Achievement milestones */}

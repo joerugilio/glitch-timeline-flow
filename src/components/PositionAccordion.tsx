@@ -4,35 +4,12 @@ import { Calendar, MapPin, Tag, TrendingUp, Building2, Sparkles } from 'lucide-r
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import AchievementImages from './AchievementImages';
 import GanttChart from './GanttChart';
+import LogoPlaceholder from './LogoPlaceholder';
 import { Position } from '../types/portfolio';
 
 interface PositionAccordionProps {
   positions: Position[];
 }
-
-// Simple 3x1 ratio SVG placeholder logo component
-const LogoPlaceholder = () => (
-  <svg 
-    width="60" 
-    height="20" 
-    viewBox="0 0 60 20" 
-    className="flex-shrink-0 mr-3"
-    fill="none" 
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <rect 
-      width="60" 
-      height="20" 
-      rx="4" 
-      fill="hsl(var(--muted))" 
-      stroke="hsl(var(--border))" 
-      strokeWidth="1"
-    />
-    <circle cx="12" cy="10" r="3" fill="hsl(var(--primary))" />
-    <rect x="20" y="7" width="35" height="2" rx="1" fill="hsl(var(--primary))" />
-    <rect x="20" y="11" width="25" height="2" rx="1" fill="hsl(var(--muted-foreground))" />
-  </svg>
-);
 
 const PositionAccordion: React.FC<PositionAccordionProps> = ({
   positions
@@ -270,7 +247,8 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                           <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
                             <div className="flex items-center justify-between w-full">
                               <div className="flex items-start w-full backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
-                                <div className="flex-1">
+                                <LogoPlaceholder />
+                                <div className="flex-1 ml-3">
                                   <div className="flex flex-col md:flex-row md:justify-between mb-0">
                                     <div>
                                       <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal text-left">
