@@ -250,9 +250,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
             </div>
 
             {/* Split Content Container */}
-            <div className={`transition-all duration-500 ease-in-out ${
+            <div className={`transition-all duration-500 ease-in-out h-auto items-start ${
               selectedView === 'split' 
-                ? 'flex gap-4' 
+                ? 'flex gap-4 flex-shrink-0' 
                 : 'flex justify-center'
             }`}>
               
