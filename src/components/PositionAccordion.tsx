@@ -169,7 +169,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       </div>
 
       <div className="relative z-10 pt-12 pb-12">
-        <div className="w-full px-[15px]">
+        <div className="w-full">
           <header className="text-center mb-8 h-1/4">
             <h2 className="hero-title caption-timeline mb-4">
               <span>user-centered leadership robust-ops strategy + brand-science</span> 
@@ -187,7 +187,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           <div className="w-full" data-split-content>
             {/* Sticky Navigation */}
             <div className="sticky top-8 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 mb-8" data-sticky-nav>
-              <div className="max-w-[992px] mx-auto py-1">
+              <div className="w-full py-1">
                 <div className="grid grid-cols-2 gap-4">
                   <button
                     onClick={() => handleTabClick('timeline')}
@@ -216,7 +216,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
             {/* Split Content Container */}
             <div className={`transition-all duration-500 ease-in-out ${
               selectedView === 'split' 
-                ? 'flex gap-4 justify-center' 
+                ? 'flex gap-4' 
                 : 'flex justify-center'
             }`}>
               
@@ -226,7 +226,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                   ? 'w-full' 
                   : selectedView === 'gantt' 
                     ? 'hidden' 
-                    : 'w-[40vw] transform scale-75 origin-top'
+                    : 'w-[90%] transform scale-75 origin-top'
               }`}>
                 <div className="w-full">
                   <div className="space-y-[1vh] mt-[3vh] mb-10">
