@@ -135,16 +135,20 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           </header>
 
           {/* Tabs Container */}
-          <div className="max-w-[992px] mx-auto">
-            <Tabs defaultValue="browse-timeline" className="w-full">
-              {/* Tab Navigation */}
-              <TabsList className="grid w-full grid-cols-2 mb-8">
-                <TabsTrigger value="browse-timeline">Browse Timeline</TabsTrigger>
-                <TabsTrigger value="quick-details">Quick Details</TabsTrigger>
-              </TabsList>
+          <Tabs defaultValue="browse-timeline" className="w-full">
+            {/* Sticky Tab Navigation */}
+            <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 mb-8">
+              <div className="max-w-[992px] mx-auto py-4">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="browse-timeline">Browse Timeline</TabsTrigger>
+                  <TabsTrigger value="quick-details">Quick Details</TabsTrigger>
+                </TabsList>
+              </div>
+            </div>
 
-              {/* Browse Timeline Tab Content */}
-              <TabsContent value="browse-timeline" className="mt-0">
+            {/* Browse Timeline Tab Content */}
+            <TabsContent value="browse-timeline" className="mt-0">
+              <div className="max-w-[992px] mx-auto">
                 <div className={`transition-all duration-500 ${expandedPositions.length > 0 ? 'w-full' : 'w-[70%] mx-auto'}`}>
                   <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10">
                     <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
@@ -214,14 +218,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
                           <AccordionContent className="px-2 pt-2 rounded-b-lg">
                             <div className="backdrop-blur-xl px-2 py-2 rounded-sm space-y-3">
-                              {/* Position Header Details */}
                               <header className="mb-3">
                                 <p className="leading-relaxed mb-2 text-slate-50 max-w-[660px] text-lg font-normal">
                                   {position.description}
                                 </p>
                               </header>
 
-                              {/* Achievements Accordion */}
                               <section className="px-2 py-2">
                                 <h3 className="text-lg font-semibold mb-1 text-muted-foreground">Key Achievements</h3>
                                 <Accordion type="multiple" value={expandedAchievements[position.id] || []} onValueChange={value => handleAchievementChange(position.id, value)}>
@@ -230,7 +232,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                                       <AccordionTrigger className="px-2 py-2 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-green-500 bg-green-500/20 hover:bg-green-500/30">
                                         <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
                                           <span className="block mb-1 text-lg text-white">{achievement.title}</span>
-                                          {/* Image thumbnails strip - show only when collapsed */}
                                           <div className={`flex gap-1 overflow-hidden transition-all duration-300 ${(expandedAchievements[position.id] || []).includes(achievement.id) ? 'opacity-0 h-0 transform scale-95' : 'opacity-100 h-6 transform scale-100'}`}>
                                             {achievement.images.slice(0, 4).map((image, index) => (
                                               <div key={index} className="w-8 h-6 rounded overflow-hidden border border-gray-300 flex-shrink-0">
@@ -265,14 +266,16 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                     </Accordion>
                   </div>
                 </div>
-              </TabsContent>
+              </div>
+            </TabsContent>
 
-              {/* Quick Details Tab Content */}
-              <TabsContent value="quick-details" className="mt-0">
+            {/* Quick Details Tab Content */}
+            <TabsContent value="quick-details" className="mt-0">
+              <div className="max-w-[992px] mx-auto">
                 <GanttChart positions={positions} />
-              </TabsContent>
-            </Tabs>
-          </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>
