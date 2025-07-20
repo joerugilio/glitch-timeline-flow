@@ -69,7 +69,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
   };
 
   return (
-    <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10 max-w-[992px]">
+    <div className="space-y-[1vh] mt-[3vh] mb-10">
       <div className="bg-[#1b1f1b]/30 rounded-lg p-4">
         <h3 className="text-xl text-primary mb-4 font-normal">Experience</h3>
         

@@ -355,7 +355,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                   ? 'w-full' 
                   : selectedView === 'timeline' 
                     ? 'hidden' 
-                    : 'w-[40vw] transform scale-50 origin-top'
+                    : 'w-[90%] transform scale-50 origin-top'
               }`}>
                 <GanttChart positions={positions} onPositionClick={handleGanttPositionClick} />
               </div>
