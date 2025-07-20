@@ -156,9 +156,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
   };
 
   const handleTabClick = (newView: 'split' | 'timeline' | 'gantt') => {
-    const currentView = selectedView;
-    const targetView = currentView === newView ? 'split' : newView;
-    setSelectedView(targetView);
+    setSelectedView(newView);
     
     // Scroll to position sticky nav at top after state change
     setTimeout(() => {
