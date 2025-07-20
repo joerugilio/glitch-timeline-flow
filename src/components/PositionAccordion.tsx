@@ -23,6 +23,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
   // Refs for scroll navigation
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
+  const buttonRowRef = useRef<HTMLDivElement>(null);
 
   // Initialize state from URL parameters
   useEffect(() => {
@@ -96,8 +97,19 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
   // Scroll handler functions
   const handleBrowseTimelineClick = () => {
-    // Scroll to top of page
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Calculate navigation header height (estimated)
+    const navHeaderHeight = 80;
+    
+    // Get button row position and scroll to position it below nav header
+    if (buttonRowRef.current) {
+      const buttonRowTop = buttonRowRef.current.getBoundingClientRect().top + window.scrollY;
+      const targetScrollTop = buttonRowTop - navHeaderHeight;
+      
+      window.scrollTo({ 
+        top: Math.max(0, targetScrollTop), 
+        behavior: 'smooth' 
+      });
+    }
     
     // Scroll horizontally to show accordion view (left)
     if (horizontalContainerRef.current) {
@@ -109,8 +121,19 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
   };
 
   const handleQuickDetailsClick = () => {
-    // Scroll to top of page
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Calculate navigation header height (estimated)
+    const navHeaderHeight = 80;
+    
+    // Get button row position and scroll to position it below nav header
+    if (buttonRowRef.current) {
+      const buttonRowTop = buttonRowRef.current.getBoundingClientRect().top + window.scrollY;
+      const targetScrollTop = buttonRowTop - navHeaderHeight;
+      
+      window.scrollTo({ 
+        top: Math.max(0, targetScrollTop), 
+        behavior: 'smooth' 
+      });
+    }
     
     // Scroll horizontally to show Gantt chart view (right)
     if (horizontalContainerRef.current) {
@@ -166,7 +189,10 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           </header>
 
           {/* Button Row */}
-          <div className="flex justify-center gap-4 mb-8 max-w-[992px] mx-auto">
+          <div 
+            ref={buttonRowRef}
+            className="flex justify-center gap-4 mb-8 max-w-[992px] mx-auto"
+          >
             <Button 
               variant="outline" 
               className="flex-1 max-w-[40vw]"
