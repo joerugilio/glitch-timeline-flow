@@ -273,7 +273,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                             <div className="flex items-center justify-between w-full">
                               <div className="flex items-start w-full backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
                                 <LogoPlaceholder />
-                                <div className="flex-1">
+                                <div className="flex-1 pl-2">
                                   <div className="flex flex-col md:flex-row md:justify-between mb-0">
                                     <div>
                                       <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal">
@@ -298,13 +298,13 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                                   </div>
 
                                   {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
-                                    <p className="text-muted-foreground mb-1 leading-relaxed pl-[2vw]">
+                                    <p className="text-muted-foreground mb-1 leading-relaxed">
                                       {position.blurb}
                                     </p>
                                   )}
 
                                   {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
-                                    <div className="flex flex-wrap justify-between items-end gap-1 mb-3 pl-[2vw]">
+                                    <div className="flex flex-wrap justify-between items-end gap-1 mb-3">
                                       <div className="flex flex-wrap gap-1">
                                         {position.tags.slice(0, 4).map(tag => (
                                           <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
