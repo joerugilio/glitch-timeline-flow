@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Calendar, MapPin, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Position } from '../types/portfolio';
@@ -148,7 +147,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
 
                 {/* Hover details - matching accordion layout */}
                 {hoveredPosition === position.id && (
-                  <div className="absolute z-10 bottom-full left-0 mb-2 p-4 bg-card/90 backdrop-blur-sm border border-border/60 rounded-lg shadow-lg min-w-96 max-w-lg">
+                  <div className="absolute z-[60] bottom-full left-0 mb-2 p-4 bg-card/90 backdrop-blur-sm border border-border/60 rounded-lg shadow-lg min-w-96 max-w-lg">
                     <div className="space-y-3">
                       {/* Header - matching accordion style */}
                       <div className="flex flex-col md:flex-row md:justify-between">
