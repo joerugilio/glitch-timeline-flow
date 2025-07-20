@@ -39,7 +39,7 @@ const About = () => {
         
 
         {/* Biography Section */}
-        <section className="px-4 py-16 bg-muted/30">
+        <section className="px-4 bg-muted/30 py-[16px]">
           <div className="max-w-4xl mx-auto">
             {biography.map((section, index) => <div key={section.id} className={`mb-16 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''} lg:flex lg:gap-12 lg:items-center`}>
                 <div className="lg:flex-1">
