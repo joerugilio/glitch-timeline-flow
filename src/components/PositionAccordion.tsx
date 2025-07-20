@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Calendar, MapPin, Tag, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import AchievementImages from './AchievementImages';
 import GanttChart from './GanttChart';
 import { Position } from '../types/portfolio';
@@ -20,6 +19,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
   const [expandedAchievements, setExpandedAchievements] = useState<{
     [positionId: string]: string[];
   }>({});
+  const [selectedView, setSelectedView] = useState<'split' | 'timeline' | 'gantt'>('split');
 
   // Initialize state from URL parameters
   useEffect(() => {
@@ -42,12 +42,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
   }, [searchParams]);
 
-  // Scroll to middle position between tabs on mount
+  // Scroll to middle position on mount
   useEffect(() => {
     const scrollToMiddle = () => {
-      const tabsContainer = document.querySelector('[data-tabs-content]');
-      if (tabsContainer) {
-        const containerHeight = tabsContainer.scrollHeight;
+      const splitContainer = document.querySelector('[data-split-content]');
+      if (splitContainer) {
+        const containerHeight = splitContainer.scrollHeight;
         const viewportHeight = window.innerHeight;
         const middlePosition = (containerHeight - viewportHeight) / 2;
         window.scrollTo({ top: middlePosition, behavior: 'smooth' });
@@ -150,21 +150,51 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
             </div>
           </header>
 
-          {/* Tabs Container */}
-          <Tabs defaultValue="browse-timeline" className="w-full" data-tabs-content>
-            {/* Sticky Tab Navigation */}
+          {/* Custom Split View Container */}
+          <div className="w-full" data-split-content>
+            {/* Sticky Navigation */}
             <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 mb-8">
               <div className="max-w-[992px] mx-auto py-4">
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="browse-timeline">Browse Timeline</TabsTrigger>
-                  <TabsTrigger value="quick-details">Quick Details</TabsTrigger>
-                </TabsList>
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    onClick={() => setSelectedView(selectedView === 'timeline' ? 'split' : 'timeline')}
+                    className={`p-3 rounded-md font-medium transition-all duration-300 ${
+                      selectedView === 'timeline' 
+                        ? 'bg-primary text-primary-foreground' 
+                        : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                    }`}
+                  >
+                    Browse Timeline
+                  </button>
+                  <button
+                    onClick={() => setSelectedView(selectedView === 'gantt' ? 'split' : 'gantt')}
+                    className={`p-3 rounded-md font-medium transition-all duration-300 ${
+                      selectedView === 'gantt' 
+                        ? 'bg-primary text-primary-foreground' 
+                        : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                    }`}
+                  >
+                    Quick Details
+                  </button>
+                </div>
               </div>
             </div>
 
-            {/* Browse Timeline Tab Content */}
-            <TabsContent value="browse-timeline" className="mt-0">
-              <div className="max-w-[992px] mx-auto">
+            {/* Split Content Container */}
+            <div className={`transition-all duration-500 ease-in-out ${
+              selectedView === 'split' 
+                ? 'flex gap-4 justify-center' 
+                : 'flex justify-center'
+            }`}>
+              
+              {/* Timeline Section */}
+              <div className={`transition-all duration-500 ease-in-out ${
+                selectedView === 'timeline' 
+                  ? 'w-full max-w-[992px]' 
+                  : selectedView === 'gantt' 
+                    ? 'hidden' 
+                    : 'w-[40vw] transform scale-75 origin-top'
+              }`}>
                 <div className={`transition-all duration-500 ${expandedPositions.length > 0 ? 'w-full' : 'w-[70%] mx-auto'}`}>
                   <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10">
                     <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
@@ -283,15 +313,19 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                   </div>
                 </div>
               </div>
-            </TabsContent>
 
-            {/* Quick Details Tab Content */}
-            <TabsContent value="quick-details" className="mt-0">
-              <div className="max-w-[992px] mx-auto">
+              {/* Gantt Chart Section */}
+              <div className={`transition-all duration-500 ease-in-out ${
+                selectedView === 'gantt' 
+                  ? 'w-full max-w-[992px]' 
+                  : selectedView === 'timeline' 
+                    ? 'hidden' 
+                    : 'w-[40vw] transform scale-75 origin-top'
+              }`}>
                 <GanttChart positions={positions} />
               </div>
-            </TabsContent>
-          </Tabs>
+            </div>
+          </div>
         </div>
       </div>
     </div>
