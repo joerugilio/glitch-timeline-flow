@@ -96,7 +96,8 @@
   .hero-subtitle {
     @apply text-sm text-white;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.25rem;
     text-align: left;
     max-width: 600px;
