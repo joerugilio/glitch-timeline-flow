@@ -42,21 +42,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
   }, [searchParams]);
 
-  // Scroll to middle position on mount
-  useEffect(() => {
-    const scrollToMiddle = () => {
-      const splitContainer = document.querySelector('[data-split-content]');
-      if (splitContainer) {
-        const containerHeight = splitContainer.scrollHeight;
-        const viewportHeight = window.innerHeight;
-        const middlePosition = (containerHeight - viewportHeight) / 2;
-        window.scrollTo({ top: middlePosition, behavior: 'smooth' });
-      }
-    };
-    
-    // Delay to ensure content is rendered
-    setTimeout(scrollToMiddle, 100);
-  }, []);
 
   const updateURL = (newExpandedPositions: string[], newExpandedAchievements: {
     [key: string]: string[];
