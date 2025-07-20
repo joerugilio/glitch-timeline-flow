@@ -10,6 +10,30 @@ interface PositionAccordionProps {
   positions: Position[];
 }
 
+// Simple 3x1 ratio SVG placeholder logo component
+const LogoPlaceholder = () => (
+  <svg 
+    width="60" 
+    height="20" 
+    viewBox="0 0 60 20" 
+    className="flex-shrink-0 mr-3"
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect 
+      width="60" 
+      height="20" 
+      rx="4" 
+      fill="hsl(var(--muted))" 
+      stroke="hsl(var(--border))" 
+      strokeWidth="1"
+    />
+    <circle cx="12" cy="10" r="3" fill="hsl(var(--primary))" />
+    <rect x="20" y="7" width="35" height="2" rx="1" fill="hsl(var(--primary))" />
+    <rect x="20" y="11" width="25" height="2" rx="1" fill="hsl(var(--muted-foreground))" />
+  </svg>
+);
+
 const PositionAccordion: React.FC<PositionAccordionProps> = ({
   positions
 }) => {
@@ -247,60 +271,65 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                         <AccordionItem key={position.id} value={position.id} data-accordion-item={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
                           <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
                             <div className="flex items-center justify-between w-full">
-                              <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
-                                <div className="flex flex-col md:flex-row md:justify-between mb-0">
-                                  <div>
-                                    <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal">
-                                      {position.title}
-                                    </h2>
-                                    <p className="text-lg text-accent font-normal">
-                                      {position.company}
+                              <div className="flex items-start w-full backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
+                                <LogoPlaceholder />
+                                <div className="flex-1">
+                                  <div className="flex flex-col md:flex-row md:justify-between mb-0">
+                                    <div>
+                                      <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal">
+                                        {position.title}
+                                      </h2>
+                                      <p className="text-lg text-accent font-normal">
+                                        {position.company}
+                                      </p>
+                                    </div>
+                                    <div className="flex flex-shrink flex-row mt-1 md:mt-0 justify-end text-right text-primary-foreground">
+                                      <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
+                                        <Calendar size={14} className="mr-1" aria-hidden="true" />
+                                        <span>{position.period}</span>
+                                      </div>
+                                      <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
+                                        <MapPin size={14} className="mr-1" aria-hidden="true" />
+                                        <span className="h-auto">{position.location}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
+                                    <p className="text-muted-foreground mb-1 leading-relaxed pl-[2vw]">
+                                      {position.blurb}
                                     </p>
-                                  </div>
-                                  <div className="flex flex-shrink flex-row mt-1 md:mt-0 justify-end text-right text-primary-foreground">
-                                    <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
-                                      <Calendar size={14} className="mr-1" aria-hidden="true" />
-                                      <span>{position.period}</span>
-                                    </div>
-                                    <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
-                                      <MapPin size={14} className="mr-1" aria-hidden="true" />
-                                      <span className="h-auto">{position.location}</span>
-                                    </div>
-                                  </div>
-                                </div>
+                                  )}
 
-                                {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
-                                  <p className="text-muted-foreground mb-1 leading-relaxed pl-[2vw]">
-                                    {position.blurb}
-                                  </p>
-                                )}
-
-                                <div className="flex flex-wrap justify-between items-end gap-1 mb-3 pl-[2vw]">
-                                  <div className="flex flex-wrap gap-1">
-                                    {position.tags.slice(0, 4).map(tag => (
-                                      <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
-                                        {tag}
-                                      </span>
-                                    ))}
-                                    {position.tags.length > 4 && (
-                                      <span className="text-xs text-muted-foreground px-2 py-1">
-                                        +{position.tags.length - 4} more
-                                      </span>
-                                    )}
-                                  </div>
-                                  
-                                  {position.exit && (
-                                    <div className="flex items-center gap-1">
-                                      {position.exit.type === 'IPO' ? (
-                                        <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-green-500/20 text-green-400 text-sm border border-green-500/30">
-                                          <TrendingUp size={12} className="mr-1" />
-                                          IPO
-                                        </span>
-                                      ) : (
-                                        <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-blue-500/20 text-blue-400 text-sm border border-blue-500/30">
-                                          <Building2 size={12} className="mr-1" />
-                                          Acquired by {position.exit.company}
-                                        </span>
+                                  {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
+                                    <div className="flex flex-wrap justify-between items-end gap-1 mb-3 pl-[2vw]">
+                                      <div className="flex flex-wrap gap-1">
+                                        {position.tags.slice(0, 4).map(tag => (
+                                          <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
+                                            {tag}
+                                          </span>
+                                        ))}
+                                        {position.tags.length > 4 && (
+                                          <span className="text-xs text-muted-foreground px-2 py-1">
+                                            +{position.tags.length - 4} more
+                                          </span>
+                                        )}
+                                      </div>
+                                      
+                                      {position.exit && (
+                                        <div className="flex items-center gap-1">
+                                          {position.exit.type === 'IPO' ? (
+                                            <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-green-500/20 text-green-400 text-sm border border-green-500/30">
+                                              <TrendingUp size={12} className="mr-1" />
+                                              IPO
+                                            </span>
+                                          ) : (
+                                            <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-blue-500/20 text-blue-400 text-sm border border-blue-500/30">
+                                              <Building2 size={12} className="mr-1" />
+                                              Acquired by {position.exit.company}
+                                            </span>
+                                          )}
+                                        </div>
                                       )}
                                     </div>
                                   )}
