@@ -237,7 +237,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                   ? 'w-full' 
                   : selectedView === 'gantt' 
                     ? 'hidden' 
-                    : 'w-[90%] transform scale-50 origin-top'
+                    : 'w-[45%] transform scale-75 origin-top'
               }`}>
                 <div className="w-full">
                   <div className="space-y-[1vh] mt-[3vh] mb-10">
@@ -373,7 +373,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                   ? 'w-full' 
                   : selectedView === 'timeline' 
                     ? 'hidden' 
-                    : 'w-[90%] transform scale-50 origin-top'
+                    : 'w-[55%] transform scale-75 origin-top'
               }`}>
                 <GanttChart 
                   positions={positions} 
