@@ -5,10 +5,12 @@ import { parsePeriod, getTimelineRange } from '../utils/dateUtils';
 
 interface GanttChartProps {
   positions: Position[];
+  onPositionClick?: (positionId: string) => void;
 }
 
 const GanttChart: React.FC<GanttChartProps> = ({
-  positions
+  positions,
+  onPositionClick
 }) => {
   const [hoveredPosition, setHoveredPosition] = useState<string | null>(null);
   const [selectedAchievements, setSelectedAchievements] = useState<{
@@ -60,6 +62,12 @@ const GanttChart: React.FC<GanttChartProps> = ({
     }));
   };
 
+  const handlePositionClick = (positionId: string) => {
+    if (onPositionClick) {
+      onPositionClick(positionId);
+    }
+  };
+
   return (
     <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10 max-w-[992px]">
       <div className="bg-[#1b1f1b]/30 rounded-lg p-4">
@@ -94,6 +102,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
                   style={positionStyle}
                   onMouseEnter={() => setHoveredPosition(position.id)}
                   onMouseLeave={() => setHoveredPosition(null)}
+                  onClick={() => handlePositionClick(position.id)}
                 >
                   {/* Position content */}
                   <div className="absolute inset-0 p-2 flex items-center justify-between">
@@ -130,7 +139,10 @@ const GanttChart: React.FC<GanttChartProps> = ({
                       <div
                         key={achievement.id}
                         className="flex-1 cursor-pointer"
-                        onClick={() => toggleAchievement(achievement.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleAchievement(achievement.id);
+                        }}
                       >
                         <div
                           className={`h-1 transition-all duration-200 ${
@@ -260,6 +272,9 @@ const GanttChart: React.FC<GanttChartProps> = ({
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 bg-blue-500/20 border border-blue-500/30 rounded"></div>
               <span>Acquisition</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="text-muted-foreground">Click position bars to view details</span>
             </div>
           </div>
         </div>

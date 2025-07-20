@@ -97,6 +97,30 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     updateURL(expandedPositions, newExpandedAchievements);
   };
 
+  const handleGanttPositionClick = (positionId: string) => {
+    // Switch to timeline view
+    setSelectedView('timeline');
+    
+    // Open the clicked position in the accordion
+    const newExpandedPositions = [positionId];
+    setExpandedPositions(newExpandedPositions);
+    
+    // Clear achievements for clean state
+    const newExpandedAchievements: { [key: string]: string[] } = {};
+    setExpandedAchievements(newExpandedAchievements);
+    
+    // Update URL
+    updateURL(newExpandedPositions, newExpandedAchievements);
+    
+    // Scroll to position after view transition
+    setTimeout(() => {
+      const element = document.querySelector(`[data-accordion-item="${positionId}"]`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 500);
+  };
+
   const handleMouseEnter = (positionId: string) => {
     console.log('Hovering over position:', positionId);
     setHoveredPosition(positionId);
@@ -199,7 +223,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                   <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10">
                     <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
                       {positions.map(position => (
-                        <AccordionItem key={position.id} value={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
+                        <AccordionItem key={position.id} value={position.id} data-accordion-item={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
                           <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
                             <div className="flex items-center justify-between w-full">
                               <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
@@ -322,7 +346,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                     ? 'hidden' 
                     : 'w-[40vw] transform scale-75 origin-top'
               }`}>
-                <GanttChart positions={positions} />
+                <GanttChart positions={positions} onPositionClick={handleGanttPositionClick} />
               </div>
             </div>
           </div>
