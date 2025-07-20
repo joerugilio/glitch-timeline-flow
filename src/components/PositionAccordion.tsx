@@ -129,9 +129,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
             <Button variant="outline" className="flex-1 max-w-[20vw]">Browse Timeline</Button>
             
             <Button variant="outline" className="flex-1 max-w-[20vw]">Quick Details</Button>
-            <Button variant="outline" className="flex-1 max-w-[20vw]">
-              Exits Only
-            </Button>
           </div>
 
           {/* Horizontal Layout Container */}
