@@ -226,7 +226,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                   ? 'w-full' 
                   : selectedView === 'gantt' 
                     ? 'hidden' 
-                    : 'w-[90%] transform scale-75 origin-top'
+                    : 'w-[90%] transform scale-50 origin-top'
               }`}>
                 <div className="w-full">
                   <div className="space-y-[1vh] mt-[3vh] mb-10">
@@ -257,9 +257,11 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                                   </div>
                                 </div>
 
-                                <p className="text-muted-foreground mb-1 leading-relaxed pl-[2vw]">
-                                  {position.blurb}
-                                </p>
+                                {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
+                                  <p className="text-muted-foreground mb-1 leading-relaxed pl-[2vw]">
+                                    {position.blurb}
+                                  </p>
+                                )}
 
                                 <div className="flex flex-wrap justify-between items-end gap-1 mb-3 pl-[2vw]">
                                   <div className="flex flex-wrap gap-1">
@@ -353,7 +355,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                   ? 'w-full' 
                   : selectedView === 'timeline' 
                     ? 'hidden' 
-                    : 'w-[40vw] transform scale-75 origin-top'
+                    : 'w-[40vw] transform scale-50 origin-top'
               }`}>
                 <GanttChart positions={positions} onPositionClick={handleGanttPositionClick} />
               </div>
