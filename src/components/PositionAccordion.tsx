@@ -42,6 +42,22 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
   }, [searchParams]);
 
+  // Scroll to middle position between tabs on mount
+  useEffect(() => {
+    const scrollToMiddle = () => {
+      const tabsContainer = document.querySelector('[data-tabs-content]');
+      if (tabsContainer) {
+        const containerHeight = tabsContainer.scrollHeight;
+        const viewportHeight = window.innerHeight;
+        const middlePosition = (containerHeight - viewportHeight) / 2;
+        window.scrollTo({ top: middlePosition, behavior: 'smooth' });
+      }
+    };
+    
+    // Delay to ensure content is rendered
+    setTimeout(scrollToMiddle, 100);
+  }, []);
+
   const updateURL = (newExpandedPositions: string[], newExpandedAchievements: {
     [key: string]: string[];
   }) => {
@@ -135,7 +151,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           </header>
 
           {/* Tabs Container */}
-          <Tabs defaultValue="browse-timeline" className="w-full">
+          <Tabs defaultValue="browse-timeline" className="w-full" data-tabs-content>
             {/* Sticky Tab Navigation */}
             <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 mb-8">
               <div className="max-w-[992px] mx-auto py-4">
