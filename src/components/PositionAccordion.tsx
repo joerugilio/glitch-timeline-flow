@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Calendar, MapPin, Tag, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
@@ -6,9 +6,11 @@ import { Button } from './ui/button';
 import AchievementImages from './AchievementImages';
 import GanttChart from './GanttChart';
 import { Position } from '../types/portfolio';
+
 interface PositionAccordionProps {
   positions: Position[];
 }
+
 const PositionAccordion: React.FC<PositionAccordionProps> = ({
   positions
 }) => {
@@ -18,6 +20,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
   const [expandedAchievements, setExpandedAchievements] = useState<{
     [positionId: string]: string[];
   }>({});
+
+  // Refs for scroll navigation
+  const horizontalContainerRef = useRef<HTMLDivElement>(null);
 
   // Initialize state from URL parameters
   useEffect(() => {
@@ -39,6 +44,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       setExpandedAchievements(achievementMap);
     }
   }, [searchParams]);
+
   const updateURL = (newExpandedPositions: string[], newExpandedAchievements: {
     [key: string]: string[];
   }) => {
@@ -52,6 +58,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     setSearchParams(params);
   };
+
   const handlePositionChange = (value: string[]) => {
     setExpandedPositions(value);
 
@@ -67,6 +74,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(value, newExpandedAchievements);
   };
+
   const handleAchievementChange = (positionId: string, value: string[]) => {
     const newExpandedAchievements = {
       ...expandedAchievements,
@@ -75,13 +83,44 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setExpandedAchievements(newExpandedAchievements);
     updateURL(expandedPositions, newExpandedAchievements);
   };
+
   const handleMouseEnter = (positionId: string) => {
     console.log('Hovering over position:', positionId);
     setHoveredPosition(positionId);
   };
+
   const handleMouseLeave = () => {
     console.log('Mouse left position');
     setHoveredPosition(null);
+  };
+
+  // Scroll handler functions
+  const handleBrowseTimelineClick = () => {
+    // Scroll to top of page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Scroll horizontally to show accordion view (left)
+    if (horizontalContainerRef.current) {
+      horizontalContainerRef.current.scrollTo({
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleQuickDetailsClick = () => {
+    // Scroll to top of page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Scroll horizontally to show Gantt chart view (right)
+    if (horizontalContainerRef.current) {
+      const scrollWidth = horizontalContainerRef.current.scrollWidth;
+      const containerWidth = horizontalContainerRef.current.clientWidth;
+      horizontalContainerRef.current.scrollTo({
+        left: scrollWidth - containerWidth,
+        behavior: 'smooth'
+      });
+    }
   };
 
   // Get current background image (hover takes priority over expanded)
@@ -93,7 +132,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
     return null;
   };
+
   const currentImageUrl = getCurrentBackgroundImage();
+
   return <div className="relative min-h-screen">
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out" style={{
@@ -126,13 +167,25 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
           {/* Button Row */}
           <div className="flex justify-center gap-4 mb-8 max-w-[992px] mx-auto">
-            <Button variant="outline" className="flex-1 max-w-[40vw]">Browse Timeline</Button>
+            <Button 
+              variant="outline" 
+              className="flex-1 max-w-[40vw]"
+              onClick={handleBrowseTimelineClick}
+            >
+              Browse Timeline
+            </Button>
             
-            <Button variant="outline" className="flex-1 max-w-[40vw]">Quick Details</Button>
+            <Button 
+              variant="outline" 
+              className="flex-1 max-w-[40vw]"
+              onClick={handleQuickDetailsClick}
+            >
+              Quick Details
+            </Button>
           </div>
 
           {/* Horizontal Layout Container */}
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" ref={horizontalContainerRef}>
             <div className="flex gap-8 min-w-[200vw] lg:min-w-[160vw]">
               {/* Accordion View Section */}
               <div className="flex-shrink-0 w-[90vw] lg:w-[70vw]">
@@ -248,4 +301,5 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       </div>
     </div>;
 };
+
 export default PositionAccordion;
