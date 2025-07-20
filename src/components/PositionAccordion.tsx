@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Calendar, MapPin, Tag, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
-import { Button } from './ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import AchievementImages from './AchievementImages';
 import GanttChart from './GanttChart';
 import { Position } from '../types/portfolio';
@@ -20,10 +20,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
   const [expandedAchievements, setExpandedAchievements] = useState<{
     [positionId: string]: string[];
   }>({});
-
-  // Refs for scroll navigation
-  const horizontalContainerRef = useRef<HTMLDivElement>(null);
-  const buttonRowRef = useRef<HTMLDivElement>(null);
 
   // Initialize state from URL parameters
   useEffect(() => {
@@ -95,64 +91,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setHoveredPosition(null);
   };
 
-  // Scroll handler functions
-  const handleBrowseTimelineClick = () => {
-    // Calculate navigation header height (estimated)
-    const navHeaderHeight = 80;
-    
-    // Get button row position and scroll to position it below nav header
-    if (buttonRowRef.current) {
-      const buttonRowTop = buttonRowRef.current.getBoundingClientRect().top + window.scrollY;
-      const targetScrollTop = buttonRowTop - navHeaderHeight;
-      
-      window.scrollTo({ 
-        top: Math.max(0, targetScrollTop), 
-        behavior: 'smooth' 
-      });
-    }
-    
-    // Scroll horizontally to show accordion view (left)
-    if (horizontalContainerRef.current) {
-      horizontalContainerRef.current.scrollTo({
-        left: 0,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  const handleQuickDetailsClick = () => {
-    // Calculate navigation header height (estimated)
-    const navHeaderHeight = 80;
-    
-    // Get button row position and scroll to position it below nav header
-    if (buttonRowRef.current) {
-      const buttonRowTop = buttonRowRef.current.getBoundingClientRect().top + window.scrollY;
-      const targetScrollTop = buttonRowTop - navHeaderHeight;
-      
-      window.scrollTo({ 
-        top: Math.max(0, targetScrollTop), 
-        behavior: 'smooth' 
-      });
-    }
-    
-    // Scroll horizontally to show Gantt chart view at the left edge
-    if (horizontalContainerRef.current) {
-      // Get the accordion section (first flex item) width
-      const accordionSection = horizontalContainerRef.current.querySelector('div:first-child');
-      if (accordionSection) {
-        const accordionWidth = accordionSection.getBoundingClientRect().width;
-        // Add gap between sections (gap-8 = 2rem = 32px)
-        const gapWidth = 32;
-        
-        // Scroll to position Gantt chart at the left edge
-        horizontalContainerRef.current.scrollTo({
-          left: accordionWidth + gapWidth,
-          behavior: 'smooth'
-        });
-      }
-    }
-  };
-
   // Get current background image (hover takes priority over expanded)
   const getCurrentBackgroundImage = () => {
     const targetPosition = hoveredPosition || (expandedPositions.length > 0 ? expandedPositions[0] : null);
@@ -165,18 +103,20 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
   const currentImageUrl = getCurrentBackgroundImage();
 
-  return <div className="relative min-h-screen">
+  return (
+    <div className="relative min-h-screen">
+      {/* Background Image */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out" style={{
-        backgroundImage: currentImageUrl ? `url(${currentImageUrl})` : 'none',
-        opacity: currentImageUrl ? 0.9 : 0
-      }} />
+          backgroundImage: currentImageUrl ? `url(${currentImageUrl})` : 'none',
+          opacity: currentImageUrl ? 0.9 : 0
+        }} />
         <div className="absolute inset-0 bg-noise transition-opacity duration-700" style={{
-        opacity: currentImageUrl ? 0.1 : 1
-      }} />
+          opacity: currentImageUrl ? 0.1 : 1
+        }} />
         <div className="absolute inset-0 transition-all duration-700" style={{
-        background: currentImageUrl ? 'linear-gradient(135deg, hsl(var(--background) / 0.3) 0%, hsl(12 8% 12% / 0.4) 50%, hsl(var(--background) / 0.3) 100%)' : 'linear-gradient(135deg, hsl(var(--background)) 0%, hsl(12 8% 12%) 50%, hsl(var(--background)) 100%)'
-      }} />
+          background: currentImageUrl ? 'linear-gradient(135deg, hsl(var(--background) / 0.3) 0%, hsl(12 8% 12% / 0.4) 50%, hsl(var(--background) / 0.3) 100%)' : 'linear-gradient(135deg, hsl(var(--background)) 0%, hsl(12 8% 12%) 50%, hsl(var(--background)) 100%)'
+        }} />
       </div>
 
       <div className="relative z-10 pt-12 pb-12">
@@ -190,149 +130,153 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
               <span>UX Product & Design Principal</span> 
               <span>Multiple Exits B2C, B2B</span>
               <span>Award Winning Regulated AI ML <Sparkles className="inline w-4 h-4 ml-1" /></span>
-              
               <span>Consumer-Grade Enterprise</span>
             </div>
           </header>
 
-          {/* Button Row */}
-          <div 
-            ref={buttonRowRef}
-            className="flex justify-center gap-4 mb-8 max-w-[992px] mx-auto"
-          >
-            <Button 
-              variant="outline" 
-              className="flex-1 max-w-[40vw]"
-              onClick={handleBrowseTimelineClick}
-            >
-              Browse Timeline
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              className="flex-1 max-w-[40vw]"
-              onClick={handleQuickDetailsClick}
-            >
-              Quick Details
-            </Button>
-          </div>
+          {/* Tabs Container */}
+          <div className="max-w-[992px] mx-auto">
+            <Tabs defaultValue="browse-timeline" className="w-full">
+              {/* Tab Navigation */}
+              <TabsList className="grid w-full grid-cols-2 mb-8">
+                <TabsTrigger value="browse-timeline">Browse Timeline</TabsTrigger>
+                <TabsTrigger value="quick-details">Quick Details</TabsTrigger>
+              </TabsList>
 
-          {/* Horizontal Layout Container */}
-          <div className="overflow-x-auto" ref={horizontalContainerRef}>
-            <div className="flex gap-8 min-w-[200vw] lg:min-w-[160vw]">
-              {/* Accordion View Section */}
-              <div className={`flex-shrink-0 transition-all duration-500 ${expandedPositions.length > 0 ? 'w-[90vw] lg:w-[70vw]' : 'w-[63vw] lg:w-[49vw]'}`}>
-                <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10 max-w-[992px]">
-                  <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
-                    {positions.map(position => <AccordionItem key={position.id} value={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
-                        <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
-                          <div className="flex items-center justify-between w-full">
-                            <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
-                              <div className="flex flex-col md:flex-row md:justify-between mb-0">
-                                <div>
-                                  <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal">
-                                    {position.title}
-                                  </h2>
-                                  <p className="text-lg text-accent font-normal">
-                                    {position.company}
-                                  </p>
-                                </div>
-                                <div className="flex flex-shrink flex-row mt-1 md:mt-0 justify-end text-right text-primary-foreground">
-                                  <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
-                                    <Calendar size={14} className="mr-1" aria-hidden="true" />
-                                    <span>{position.period}</span>
+              {/* Browse Timeline Tab Content */}
+              <TabsContent value="browse-timeline" className="mt-0">
+                <div className={`transition-all duration-500 ${expandedPositions.length > 0 ? 'w-full' : 'w-[70%] mx-auto'}`}>
+                  <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10">
+                    <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
+                      {positions.map(position => (
+                        <AccordionItem key={position.id} value={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
+                          <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
+                            <div className="flex items-center justify-between w-full">
+                              <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
+                                <div className="flex flex-col md:flex-row md:justify-between mb-0">
+                                  <div>
+                                    <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal">
+                                      {position.title}
+                                    </h2>
+                                    <p className="text-lg text-accent font-normal">
+                                      {position.company}
+                                    </p>
                                   </div>
-                                  <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
-                                    <MapPin size={14} className="mr-1" aria-hidden="true" />
-                                    <span className="h-auto">{position.location}</span>
+                                  <div className="flex flex-shrink flex-row mt-1 md:mt-0 justify-end text-right text-primary-foreground">
+                                    <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
+                                      <Calendar size={14} className="mr-1" aria-hidden="true" />
+                                      <span>{position.period}</span>
+                                    </div>
+                                    <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
+                                      <MapPin size={14} className="mr-1" aria-hidden="true" />
+                                      <span className="h-auto">{position.location}</span>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
 
-                              <p className="text-muted-foreground mb-1 leading-relaxed pl-[2vw]">
-                                {position.blurb}
-                              </p>
+                                <p className="text-muted-foreground mb-1 leading-relaxed pl-[2vw]">
+                                  {position.blurb}
+                                </p>
 
-                              <div className="flex flex-wrap justify-between items-end gap-1 mb-3 pl-[2vw]">
-                                <div className="flex flex-wrap gap-1">
-                                  {position.tags.slice(0, 4).map(tag => <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
-                                      {tag}
-                                    </span>)}
-                                  {position.tags.length > 4 && <span className="text-xs text-muted-foreground px-2 py-1">
-                                      +{position.tags.length - 4} more
-                                    </span>}
+                                <div className="flex flex-wrap justify-between items-end gap-1 mb-3 pl-[2vw]">
+                                  <div className="flex flex-wrap gap-1">
+                                    {position.tags.slice(0, 4).map(tag => (
+                                      <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
+                                        {tag}
+                                      </span>
+                                    ))}
+                                    {position.tags.length > 4 && (
+                                      <span className="text-xs text-muted-foreground px-2 py-1">
+                                        +{position.tags.length - 4} more
+                                      </span>
+                                    )}
+                                  </div>
+                                  
+                                  {position.exit && (
+                                    <div className="flex items-center gap-1">
+                                      {position.exit.type === 'IPO' ? (
+                                        <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-green-500/20 text-green-400 text-sm border border-green-500/30">
+                                          <TrendingUp size={12} className="mr-1" />
+                                          IPO
+                                        </span>
+                                      ) : (
+                                        <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-blue-500/20 text-blue-400 text-sm border border-blue-500/30">
+                                          <Building2 size={12} className="mr-1" />
+                                          Acquired by {position.exit.company}
+                                        </span>
+                                      )}
+                                    </div>
+                                  )}
                                 </div>
-                                
-                                {position.exit && <div className="flex items-center gap-1">
-                                    {position.exit.type === 'IPO' ? <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-green-500/20 text-green-400 text-sm border border-green-500/30">
-                                        <TrendingUp size={12} className="mr-1" />
-                                        IPO
-                                      </span> : <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-blue-500/20 text-blue-400 text-sm border border-blue-500/30">
-                                        <Building2 size={12} className="mr-1" />
-                                        Acquired by {position.exit.company}
-                                      </span>}
-                                  </div>}
                               </div>
                             </div>
-                          </div>
-                        </AccordionTrigger>
+                          </AccordionTrigger>
 
-                        <AccordionContent className="px-2 pt-2 rounded-b-lg">
-                          <div className="backdrop-blur-xl px-2 py-2 rounded-sm space-y-3">
-                            {/* Position Header Details */}
-                            <header className="mb-3">
-                              <p className="leading-relaxed mb-2 text-slate-50 max-w-[660px] text-lg font-normal">
-                                {position.description}
-                              </p>
-                            </header>
+                          <AccordionContent className="px-2 pt-2 rounded-b-lg">
+                            <div className="backdrop-blur-xl px-2 py-2 rounded-sm space-y-3">
+                              {/* Position Header Details */}
+                              <header className="mb-3">
+                                <p className="leading-relaxed mb-2 text-slate-50 max-w-[660px] text-lg font-normal">
+                                  {position.description}
+                                </p>
+                              </header>
 
-                            {/* Achievements Accordion */}
-                            <section className="px-2 py-2">
-                              <h3 className="text-lg font-semibold mb-1 text-muted-foreground">Key Achievements</h3>
-                              <Accordion type="multiple" value={expandedAchievements[position.id] || []} onValueChange={value => handleAchievementChange(position.id, value)}>
-                                {position.achievements.map(achievement => <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
-                                    <AccordionTrigger className="px-2 py-2 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-green-500 bg-green-500/20 hover:bg-green-500/30">
-                                      <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
-                                        <span className="block mb-1 text-lg text-white">{achievement.title}</span>
-                                        {/* Image thumbnails strip - show only when collapsed */}
-                                        <div className={`flex gap-1 overflow-hidden transition-all duration-300 ${(expandedAchievements[position.id] || []).includes(achievement.id) ? 'opacity-0 h-0 transform scale-95' : 'opacity-100 h-6 transform scale-100'}`}>
-                                          {achievement.images.slice(0, 4).map((image, index) => <div key={index} className="w-8 h-6 rounded overflow-hidden border border-gray-300 flex-shrink-0">
-                                              <img src={image.url} alt="" className="w-full h-full object-cover" />
-                                            </div>)}
-                                          {achievement.images.length > 4 && <div className="w-8 h-6 rounded bg-gray-300 border border-gray-400 flex items-center justify-center text-xs text-gray-600 flex-shrink-0">
-                                              +{achievement.images.length - 4}
-                                            </div>}
+                              {/* Achievements Accordion */}
+                              <section className="px-2 py-2">
+                                <h3 className="text-lg font-semibold mb-1 text-muted-foreground">Key Achievements</h3>
+                                <Accordion type="multiple" value={expandedAchievements[position.id] || []} onValueChange={value => handleAchievementChange(position.id, value)}>
+                                  {position.achievements.map(achievement => (
+                                    <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
+                                      <AccordionTrigger className="px-2 py-2 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-green-500 bg-green-500/20 hover:bg-green-500/30">
+                                        <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
+                                          <span className="block mb-1 text-lg text-white">{achievement.title}</span>
+                                          {/* Image thumbnails strip - show only when collapsed */}
+                                          <div className={`flex gap-1 overflow-hidden transition-all duration-300 ${(expandedAchievements[position.id] || []).includes(achievement.id) ? 'opacity-0 h-0 transform scale-95' : 'opacity-100 h-6 transform scale-100'}`}>
+                                            {achievement.images.slice(0, 4).map((image, index) => (
+                                              <div key={index} className="w-8 h-6 rounded overflow-hidden border border-gray-300 flex-shrink-0">
+                                                <img src={image.url} alt="" className="w-full h-full object-cover" />
+                                              </div>
+                                            ))}
+                                            {achievement.images.length > 4 && (
+                                              <div className="w-8 h-6 rounded bg-gray-300 border border-gray-400 flex items-center justify-center text-xs text-gray-600 flex-shrink-0">
+                                                +{achievement.images.length - 4}
+                                              </div>
+                                            )}
+                                          </div>
                                         </div>
-                                      </div>
-                                    </AccordionTrigger>
-                                    <AccordionContent className="px-2 pt-2">
-                                      <div className="space-y-2">
-                                        <p className="text-white leading-relaxed max-w-[660px] text-base font-normal">
-                                          {achievement.description}
-                                        </p>
-                                        
-                                        <AchievementImages images={achievement.images} />
-                                      </div>
-                                    </AccordionContent>
-                                  </AccordionItem>)}
-                              </Accordion>
-                            </section>
-                          </div>
-                        </AccordionContent>
-                      </AccordionItem>)}
-                  </Accordion>
+                                      </AccordionTrigger>
+                                      <AccordionContent className="px-2 pt-2">
+                                        <div className="space-y-2">
+                                          <p className="text-white leading-relaxed max-w-[660px] text-base font-normal">
+                                            {achievement.description}
+                                          </p>
+                                          
+                                          <AchievementImages images={achievement.images} />
+                                        </div>
+                                      </AccordionContent>
+                                    </AccordionItem>
+                                  ))}
+                                </Accordion>
+                              </section>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  </div>
                 </div>
-              </div>
+              </TabsContent>
 
-              {/* Gantt Chart Section */}
-              <div className="flex-shrink-0 w-[90vw] lg:w-[70vw]">
+              {/* Quick Details Tab Content */}
+              <TabsContent value="quick-details" className="mt-0">
                 <GanttChart positions={positions} />
-              </div>
-            </div>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default PositionAccordion;
