@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home, User, Briefcase, Mail } from 'lucide-react';
+import { Menu, X, User, Mail } from 'lucide-react';
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const navItems = [{
-    href: '/',
-    label: 'Timeline',
-    icon: Home
-  }, {
-    href: '/about',
-    label: 'About',
-    icon: User
-  }, {
-    href: '/experience',
-    label: 'Experience',
-    icon: Briefcase
-  }, {
-    href: '/contact',
-    label: 'Contact',
-    icon: Mail
-  }];
+  
+  const navItems = [
+    {
+      href: '/about',
+      label: 'About',
+      icon: User
+    }, 
+    {
+      href: '/contact',
+      label: 'Contact',
+      icon: Mail
+    }
+  ];
+  
   const toggleMenu = () => setIsOpen(!isOpen);
-  return <nav role="navigation" aria-label="Main navigation" className="fixed top-0 left-0 right-0 z-50 bg-background/10 backdrop-blur-lg border-0 ">
+  
+  return (
+    <nav role="navigation" aria-label="Main navigation" className="fixed top-0 left-0 right-0 z-50 bg-background/10 backdrop-blur-lg border-0 ">
       <div className="w-full px-2 sm:px-4 lg:px-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -62,7 +62,8 @@ const Navigation = () => {
       </div>
 
       {/* Mobile Navigation */}
-      {isOpen && <div id="mobile-menu" className="md:hidden bg-card border-b border-border" role="menu">
+      {isOpen && (
+        <div id="mobile-menu" className="md:hidden bg-card border-b border-border" role="menu">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navItems.map(item => {
               const isActive = location.pathname === item.href;
@@ -85,7 +86,10 @@ const Navigation = () => {
               );
             })}
           </div>
-        </div>}
-    </nav>;
+        </div>
+      )}
+    </nav>
+  );
 };
+
 export default Navigation;
