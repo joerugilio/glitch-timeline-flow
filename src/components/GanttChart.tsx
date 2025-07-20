@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Calendar, MapPin, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Position } from '../types/portfolio';
@@ -90,8 +89,8 @@ const GanttChart: React.FC<GanttChartProps> = ({
 
   return (
     <div className="fluid-container">
-      <div className="gantt-container">
-        <div className="min-w-[50rem] space-y-gantt-spacing mt-fluid-lg mb-fluid-xl">
+      <div className="gantt-container overflow-x-auto">
+        <div className="w-full space-y-gantt-spacing mt-fluid-lg mb-fluid-xl">
           <div className="bg-[#1b1f1b]/30 rounded-lg p-fluid-md">
             <h3 className="text-xl text-primary mb-fluid-md font-normal">Experience</h3>
             
