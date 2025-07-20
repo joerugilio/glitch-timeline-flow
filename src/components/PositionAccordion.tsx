@@ -178,7 +178,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           <div className="w-full" data-split-content>
             {/* Sticky Navigation */}
             <div className="sticky top-16 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 mb-8">
-              <div className="max-w-[992px] mx-auto py-4">
+              <div className="max-w-[992px] mx-auto py-1">
                 <div className="grid grid-cols-2 gap-4">
                   <button
                     onClick={() => setSelectedView(selectedView === 'timeline' ? 'split' : 'timeline')}
