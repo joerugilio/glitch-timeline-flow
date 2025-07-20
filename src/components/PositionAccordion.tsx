@@ -223,12 +223,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
               {/* Timeline Section */}
               <div className={`transition-all duration-500 ease-in-out ${
                 selectedView === 'timeline' 
-                  ? 'w-full max-w-[992px]' 
+                  ? 'w-full' 
                   : selectedView === 'gantt' 
                     ? 'hidden' 
                     : 'w-[40vw] transform scale-75 origin-top'
               }`}>
-                <div className={`transition-all duration-500 ${expandedPositions.length > 0 ? 'w-full' : 'w-[70%] mx-auto'}`}>
+                <div className="w-full">
                   <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10">
                     <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
                       {positions.map(position => (
@@ -350,7 +350,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
               {/* Gantt Chart Section */}
               <div className={`transition-all duration-500 ease-in-out ${
                 selectedView === 'gantt' 
-                  ? 'w-full max-w-[992px]' 
+                  ? 'w-full' 
                   : selectedView === 'timeline' 
                     ? 'hidden' 
                     : 'w-[40vw] transform scale-75 origin-top'
