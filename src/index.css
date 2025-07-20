@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,22 +24,6 @@
     --input: 12 8% 15%;
     --ring: 270 100% 85%;
     --radius: 0.25rem;
-    
-    /* Fluid spacing system */
-    --space-fluid-xs: clamp(0.25rem, 0.125rem + 0.5vw, 0.5rem);
-    --space-fluid-sm: clamp(0.5rem, 0.25rem + 1vw, 1rem);
-    --space-fluid-md: clamp(1rem, 0.5rem + 2vw, 2rem);
-    --space-fluid-lg: clamp(1.5rem, 1rem + 2vw, 3rem);
-    --space-fluid-xl: clamp(2rem, 1.5rem + 2vw, 4rem);
-    
-    /* Gantt specific sizing */
-    --gantt-bar-height: clamp(4rem, 3rem + 4vw, 8rem);
-    --gantt-spacing: clamp(0.5rem, 0.25rem + 1vw, 1.5rem);
-    --gantt-timeline-height: clamp(1.5rem, 1rem + 2vw, 3rem);
-    
-    /* Logo sizing */
-    --logo-width: clamp(8rem, 6rem + 8vw, 16rem);
-    --logo-height: clamp(2.5rem, 2rem + 2vw, 5rem);
   }
 }
 
@@ -52,8 +35,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1rem);
-    line-height: 1.5;
+    font-size: 14px;
   }
 
   html {
@@ -68,16 +50,33 @@
 @layer utilities {
   /* Hero Section Styles */
   .hero-title {
-    font-size: clamp(8vw, 6vw + 2rem, 20vh);
+    font-size: 8vw;
     font-weight: 100;
     line-height: 0.75;
     letter-spacing: -0.04em;
-    @apply text-primary;
-    margin-bottom: var(--space-fluid-md);
+    @apply text-primary mb-4;
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
     text-align: left;
+  }
+
+  @media (min-width: 480px) {
+    .hero-title {
+      font-size: 12vw;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 15vh;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-title {
+      font-size: 20vh;
+    }
   }
 
   .hero-title span {
@@ -95,16 +94,19 @@
   }
 
   .hero-subtitle {
-    font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1.125rem);
-    @apply text-white;
-    padding-left: var(--space-fluid-md);
-    padding-right: var(--space-fluid-md);
+    @apply text-sm text-white px-4;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--space-fluid-xs);
+    gap: 0.25rem;
     text-align: left;
-    max-width: min(37.5rem, 90vw);
+    max-width: 600px;
+  }
+
+  @media (min-width: 768px) {
+    .hero-subtitle {
+      @apply text-lg px-0;
+    }
   }
 
   .hero-subtitle span {
@@ -157,7 +159,7 @@
       transform: translate(0);
     }
     75% {
-      transform: translate(-0.125rem, 0.125rem);
+      transform: translate(-2px, 2px);
     }
   }
 
@@ -166,7 +168,7 @@
       transform: translate(0);
     }
     75% {
-      transform: translate(0.125rem, -0.125rem);
+      transform: translate(2px, -2px);
     }
   }
 
@@ -175,7 +177,7 @@
       transform: translate(0);
     }
     75% {
-      transform: translate(-0.125rem, -0.125rem);
+      transform: translate(-2px, -2px);
     }
   }
 
@@ -195,44 +197,11 @@
   }
 
   .hover-lift:hover {
-    transform: translateY(-0.125rem);
-    box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
   }
 
   .bg-noise {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-  }
-
-  /* Fluid responsive utilities */
-  .fluid-container {
-    width: min(100%, 87.5rem);
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: var(--space-fluid-md);
-    padding-right: var(--space-fluid-md);
-  }
-
-  .gantt-container {
-    width: 100%;
-    overflow-x: auto;
-    scrollbar-width: thin;
-    scrollbar-color: hsl(var(--primary) / 0.3) transparent;
-  }
-
-  .gantt-container::-webkit-scrollbar {
-    height: 0.5rem;
-  }
-
-  .gantt-container::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .gantt-container::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary) / 0.3);
-    border-radius: 0.25rem;
-  }
-
-  .gantt-container::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary) / 0.5);
   }
 }

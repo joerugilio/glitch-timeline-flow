@@ -15,7 +15,7 @@ export default {
 			center: true,
 			padding: '1rem',
 			screens: {
-				'2xl': '87.5rem' // 1400px
+				'2xl': '1400px'
 			}
 		},
 		extend: {
@@ -66,47 +66,32 @@ export default {
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 0.125rem)',
-				sm: 'calc(var(--radius) - 0.25rem)'
+				md: 'calc(var(--radius) - 2px)',
+				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontSize: {
-				xs: ['clamp(0.625rem, 0.5rem + 0.5vw, 0.75rem)', { lineHeight: '1.4' }],
-				sm: ['clamp(0.75rem, 0.625rem + 0.5vw, 0.875rem)', { lineHeight: '1.4' }],
-				base: ['clamp(0.875rem, 0.75rem + 0.5vw, 1rem)', { lineHeight: '1.5' }],
-				lg: ['clamp(1rem, 0.875rem + 0.5vw, 1.125rem)', { lineHeight: '1.5' }],
-				xl: ['clamp(1.125rem, 1rem + 0.5vw, 1.25rem)', { lineHeight: '1.4' }],
-				'2xl': ['clamp(1.25rem, 1.125rem + 0.5vw, 1.5rem)', { lineHeight: '1.3' }],
-				'3xl': ['clamp(1.5rem, 1.25rem + 1vw, 1.875rem)', { lineHeight: '1.2' }],
-				'4xl': ['clamp(1.875rem, 1.5rem + 1.5vw, 2.25rem)', { lineHeight: '1.1' }],
+				xs: ['0.625rem', { lineHeight: '0.875rem' }],
+				sm: ['0.75rem', { lineHeight: '1rem' }],
+				base: ['0.875rem', { lineHeight: '1.25rem' }],
+				lg: ['1rem', { lineHeight: '1.5rem' }],
+				xl: ['1.125rem', { lineHeight: '1.75rem' }],
+				'2xl': ['1.25rem', { lineHeight: '1.875rem' }],
+				'3xl': ['1.5rem', { lineHeight: '2rem' }],
+				'4xl': ['1.75rem', { lineHeight: '2.25rem' }],
 			},
 			spacing: {
-				'fluid-xs': 'clamp(0.25rem, 0.125rem + 0.5vw, 0.5rem)',
-				'fluid-sm': 'clamp(0.5rem, 0.25rem + 1vw, 1rem)',
-				'fluid-md': 'clamp(1rem, 0.5rem + 2vw, 2rem)',
-				'fluid-lg': 'clamp(1.5rem, 1rem + 2vw, 3rem)',
-				'fluid-xl': 'clamp(2rem, 1.5rem + 2vw, 4rem)',
-				'fluid-2xl': 'clamp(3rem, 2rem + 4vw, 6rem)',
-				'gantt-bar': 'clamp(4rem, 3rem + 4vw, 8rem)',
-				'gantt-spacing': 'clamp(0.5rem, 0.25rem + 1vw, 1.5rem)',
-				'logo-width': 'clamp(8rem, 6rem + 8vw, 16rem)',
-				'logo-height': 'clamp(2.5rem, 2rem + 2vw, 5rem)',
-			},
-			height: {
-				'fluid-xs': 'clamp(0.25rem, 0.125rem + 0.5vw, 0.5rem)',
-				'fluid-sm': 'clamp(0.5rem, 0.25rem + 1vw, 1rem)',
-				'fluid-md': 'clamp(1rem, 0.5rem + 2vw, 2rem)',
-				'fluid-lg': 'clamp(1.5rem, 1rem + 2vw, 3rem)',
-				'fluid-xl': 'clamp(2rem, 1.5rem + 2vw, 4rem)',
-				'gantt-bar': 'clamp(4rem, 3rem + 4vw, 8rem)',
-				'gantt-timeline': 'clamp(1.5rem, 1rem + 2vw, 3rem)',
-			},
-			width: {
-				'fluid-xs': 'clamp(0.25rem, 0.125rem + 0.5vw, 0.5rem)',
-				'fluid-sm': 'clamp(0.5rem, 0.25rem + 1vw, 1rem)',
-				'fluid-md': 'clamp(1rem, 0.5rem + 2vw, 2rem)',
-				'fluid-lg': 'clamp(1.5rem, 1rem + 2vw, 3rem)',
-				'fluid-xl': 'clamp(2rem, 1.5rem + 2vw, 4rem)',
-				'logo-width': 'clamp(8rem, 6rem + 8vw, 16rem)',
+				'0.5': '0.125rem',
+				'1': '0.25rem',
+				'1.5': '0.375rem',
+				'2': '0.5rem',
+				'2.5': '0.625rem',
+				'3': '0.75rem',
+				'3.5': '0.875rem',
+				'4': '1rem',
+				'5': '1.25rem',
+				'6': '1.5rem',
+				'7': '1.75rem',
+				'8': '2rem',
 			},
 			keyframes: {
 				'accordion-down': {
