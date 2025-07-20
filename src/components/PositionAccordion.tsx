@@ -243,7 +243,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                         : 'bg-green-500 text-white hover:bg-muted hover:text-muted-foreground'
                     }`}
                   >
-                    Quick Details
+                    Quick View
                   </button>
                 </div>
               </div>
