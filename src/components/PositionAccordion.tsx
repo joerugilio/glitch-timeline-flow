@@ -119,7 +119,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
               <span>UX Product & Design Principal</span> 
               <span>Multiple Exits B2C, B2B</span>
               <span>Award Winning Regulated AI ML <Sparkles className="inline w-4 h-4 ml-1" /></span>
-              <span>SaaS Brand eCom Mrktg</span>
+              
               <span>Consumer-Grade Enterprise</span>
             </div>
           </header>
