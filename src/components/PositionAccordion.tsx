@@ -42,7 +42,6 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }
   }, [searchParams]);
 
-
   const updateURL = (newExpandedPositions: string[], newExpandedAchievements: {
     [key: string]: string[];
   }) => {
@@ -106,6 +105,31 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     }, 500);
   };
 
+  const scrollToStickyNav = () => {
+    const stickyNav = document.querySelector('[data-sticky-nav]');
+    if (stickyNav) {
+      const rect = stickyNav.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const targetPosition = scrollTop + rect.top - 32; // Account for top-8 (32px) positioning
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleTabClick = (newView: 'split' | 'timeline' | 'gantt') => {
+    const currentView = selectedView;
+    const targetView = currentView === newView ? 'split' : newView;
+    setSelectedView(targetView);
+    
+    // Scroll to position sticky nav at top after state change
+    setTimeout(() => {
+      scrollToStickyNav();
+    }, 100);
+  };
+
   const handleMouseEnter = (positionId: string) => {
     console.log('Hovering over position:', positionId);
     setHoveredPosition(positionId);
@@ -162,25 +186,25 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           {/* Custom Split View Container */}
           <div className="w-full" data-split-content>
             {/* Sticky Navigation */}
-            <div className="sticky top-8 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 mb-8">
+            <div className="sticky top-8 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 mb-8" data-sticky-nav>
               <div className="max-w-[992px] mx-auto py-1">
                 <div className="grid grid-cols-2 gap-4">
                   <button
-                    onClick={() => setSelectedView(selectedView === 'timeline' ? 'split' : 'timeline')}
+                    onClick={() => handleTabClick('timeline')}
                     className={`p-3 rounded-md font-medium transition-all duration-300 ${
                       selectedView === 'timeline' 
-                        ? 'bg-primary text-primary-foreground' 
-                        : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                        ? 'bg-green-600 text-white shadow-lg' 
+                        : 'bg-green-500 text-white hover:bg-muted hover:text-muted-foreground'
                     }`}
                   >
                     Browse Timeline
                   </button>
                   <button
-                    onClick={() => setSelectedView(selectedView === 'gantt' ? 'split' : 'gantt')}
+                    onClick={() => handleTabClick('gantt')}
                     className={`p-3 rounded-md font-medium transition-all duration-300 ${
                       selectedView === 'gantt' 
-                        ? 'bg-primary text-primary-foreground' 
-                        : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                        ? 'bg-green-600 text-white shadow-lg' 
+                        : 'bg-green-500 text-white hover:bg-muted hover:text-muted-foreground'
                     }`}
                   >
                     Quick Details
