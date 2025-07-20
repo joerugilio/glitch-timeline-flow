@@ -177,7 +177,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           {/* Custom Split View Container */}
           <div className="w-full" data-split-content>
             {/* Sticky Navigation */}
-            <div className="sticky top-5 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 mb-8">
+            <div className="sticky top-6 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 mb-8">
               <div className="max-w-[992px] mx-auto py-1">
                 <div className="grid grid-cols-2 gap-4">
                   <button
