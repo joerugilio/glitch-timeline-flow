@@ -57,6 +57,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
   };
 
   const handlePositionChange = (value: string[]) => {
+    const wasInSplitView = selectedView === 'split';
+    const isExpanding = value.length > expandedPositions.length;
+    
     setExpandedPositions(value);
 
     // Clean up achievements for collapsed positions
@@ -70,6 +73,15 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     });
     setExpandedAchievements(newExpandedAchievements);
     updateURL(value, newExpandedAchievements);
+
+    // If we're in split view and expanding an accordion, switch to timeline and scroll
+    if (wasInSplitView && isExpanding && value.length > 0) {
+      setSelectedView('timeline');
+      // Scroll to sticky nav after view transition
+      setTimeout(() => {
+        scrollToStickyNav();
+      }, 500);
+    }
   };
 
   const handleAchievementChange = (positionId: string, value: string[]) => {
