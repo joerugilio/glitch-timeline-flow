@@ -283,16 +283,18 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                                         {position.company}
                                       </p>
                                     </div>
-                                    <div className="flex flex-shrink flex-row mt-1 md:mt-0 justify-end text-right text-primary-foreground">
-                                      <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
-                                        <Calendar size={14} className="mr-1" aria-hidden="true" />
-                                        <span>{position.period}</span>
+                                    {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
+                                      <div className="flex flex-shrink flex-row mt-1 md:mt-0 justify-end text-right text-primary-foreground">
+                                        <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
+                                          <Calendar size={14} className="mr-1" aria-hidden="true" />
+                                          <span>{position.period}</span>
+                                        </div>
+                                        <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
+                                          <MapPin size={14} className="mr-1" aria-hidden="true" />
+                                          <span className="h-auto">{position.location}</span>
+                                        </div>
                                       </div>
-                                      <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
-                                        <MapPin size={14} className="mr-1" aria-hidden="true" />
-                                        <span className="h-auto">{position.location}</span>
-                                      </div>
-                                    </div>
+                                    )}
                                   </div>
 
                                   {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
