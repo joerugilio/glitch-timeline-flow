@@ -1,79 +1,121 @@
 import { AboutData } from '../types/about';
 
 export const aboutData: AboutData = {
-  hero: {
+  personalInfo: {
     name: 'Alex Johnson',
     title: 'Senior Product Designer',
-    imageUrl: '/images/about/profile.jpg',
-    description: 'I create user experiences that drive business results. With 10+ years in product design, I specialize in scaling design systems and leading cross-functional teams.',
-    stats: [
-      { label: 'Years Experience', value: '10+' },
-      { label: 'Products Launched', value: '50+' },
-      { label: 'Teams Led', value: '15+' },
-      { label: 'Users Impacted', value: '10M+' }
-    ]
+    tagline: 'I create user experiences that drive business results',
+    profileImage: '/images/about/profile.jpg',
+    location: 'San Francisco, CA',
+    email: 'alex.johnson@email.com',
+    website: 'www.alexjohnson.design'
   },
-  biography: {
-    title: 'About Me',
-    content: 'I\'m a product designer who believes great design is invisible. My journey began in graphic design, but I quickly discovered my passion for solving complex user problems through thoughtful interface design. I\'ve had the privilege of working with startups and Fortune 500 companies alike, helping them create products that users love and businesses thrive on.',
-    imageUrl: '/images/about/workspace.jpg',
-    highlights: [
-      'Led design for 3 successful product launches',
-      'Managed international design teams across 4 time zones',
-      'Established design systems used by 100+ engineers',
-      'Mentored 25+ junior designers throughout my career'
-    ]
-  },
-  skills: {
-    title: 'Skills & Expertise',
-    categories: [
-      {
-        name: 'Design',
-        skills: [
-          { name: 'User Research', level: 95 },
-          { name: 'Interface Design', level: 98 },
-          { name: 'Prototyping', level: 90 },
-          { name: 'Design Systems', level: 85 }
-        ]
-      },
-      {
-        name: 'Technical',
-        skills: [
-          { name: 'Figma', level: 95 },
-          { name: 'HTML/CSS', level: 80 },
-          { name: 'JavaScript', level: 70 },
-          { name: 'React', level: 65 }
-        ]
-      },
-      {
-        name: 'Leadership',
-        skills: [
-          { name: 'Team Management', level: 90 },
-          { name: 'Strategy', level: 85 },
-          { name: 'Mentoring', level: 92 },
-          { name: 'Cross-functional Collaboration', level: 88 }
-        ]
-      }
-    ]
-  },
-  interests: {
-    title: 'Beyond Design',
-    items: [
-      {
-        name: 'Photography',
-        description: 'Capturing moments and exploring composition through street photography.',
-        imageUrl: '/images/about/interests/photography.jpg'
-      },
-      {
-        name: 'Cooking',
-        description: 'Experimenting with flavors and techniques from different cuisines.',
-        imageUrl: '/images/about/interests/cooking.jpg'
-      },
-      {
-        name: 'Hiking',
-        description: 'Finding inspiration in nature and maintaining work-life balance.',
-        imageUrl: '/images/about/interests/hiking.jpg'
-      }
+  biography: [
+    {
+      id: 'intro',
+      title: 'About Me',
+      content: ['I\'m a product designer who believes great design is invisible. My journey began in graphic design, but I quickly discovered my passion for solving complex user problems through thoughtful interface design.', 'I\'ve had the privilege of working with startups and Fortune 500 companies alike, helping them create products that users love and businesses thrive on.'],
+      image: '/images/about/workspace.jpg'
+    }
+  ],
+  skillCategories: [
+    {
+      name: 'Design',
+      skills: [
+        { name: 'User Research', level: 95, category: 'Design' },
+        { name: 'Interface Design', level: 98, category: 'Design' },
+        { name: 'Prototyping', level: 90, category: 'Design' },
+        { name: 'Design Systems', level: 85, category: 'Design' }
+      ]
+    },
+    {
+      name: 'Technical',
+      skills: [
+        { name: 'Figma', level: 95, category: 'Technical' },
+        { name: 'HTML/CSS', level: 80, category: 'Technical' },
+        { name: 'JavaScript', level: 70, category: 'Technical' },
+        { name: 'React', level: 65, category: 'Technical' }
+      ]
+    },
+    {
+      name: 'Leadership',
+      skills: [
+        { name: 'Team Management', level: 90, category: 'Leadership' },
+        { name: 'Strategy', level: 85, category: 'Leadership' },
+        { name: 'Mentoring', level: 92, category: 'Leadership' },
+        { name: 'Cross-functional Collaboration', level: 88, category: 'Leadership' }
+      ]
+    }
+  ],
+  values: [
+    {
+      title: 'User-Centered Design',
+      description: 'Every decision starts with the user. I believe in creating experiences that are intuitive, accessible, and delightful.',
+      icon: 'Users'
+    },
+    {
+      title: 'Collaborative Innovation',
+      description: 'The best solutions emerge from diverse perspectives. I foster environments where creativity and collaboration thrive.',
+      icon: 'Lightbulb'
+    },
+    {
+      title: 'Continuous Learning',
+      description: 'Design is ever-evolving. I stay curious, embrace new technologies, and constantly refine my craft.',
+      icon: 'BookOpen'
+    }
+  ],
+  education: [
+    {
+      institution: 'Stanford University',
+      degree: 'Master of Science',
+      field: 'Human-Computer Interaction',
+      year: '2014',
+      description: 'Focused on user research methodologies and interaction design principles'
+    },
+    {
+      institution: 'UC Berkeley',
+      degree: 'Bachelor of Arts',
+      field: 'Graphic Design',
+      year: '2012'
+    }
+  ],
+  awards: [
+    {
+      title: 'Design Excellence Award',
+      organization: 'UX Awards 2023',
+      year: '2023',
+      description: 'Recognized for outstanding contribution to user experience design in fintech'
+    },
+    {
+      title: 'Innovation in Design',
+      organization: 'Tech Design Summit',
+      year: '2022',
+      description: 'Awarded for pioneering work in design system architecture'
+    }
+  ],
+  interests: [
+    {
+      title: 'Photography',
+      description: 'Capturing moments and exploring composition through street photography.',
+      image: '/images/about/interests/photography.jpg'
+    },
+    {
+      title: 'Cooking',
+      description: 'Experimenting with flavors and techniques from different cuisines.',
+      image: '/images/about/interests/cooking.jpg'
+    },
+    {
+      title: 'Hiking',
+      description: 'Finding inspiration in nature and maintaining work-life balance.',
+      image: '/images/about/interests/hiking.jpg'
+    }
+  ],
+  workPhilosophy: {
+    title: 'My Design Philosophy',
+    content: [
+      'Great design is invisible - it solves problems without drawing attention to itself.',
+      'Every pixel serves a purpose, and every interaction should feel natural and intuitive.',
+      'The best designs emerge from deep understanding of user needs and business goals.'
     ]
   }
 };
