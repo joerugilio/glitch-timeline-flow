@@ -41,6 +41,10 @@
   html {
     scroll-behavior: smooth;
   }
+
+  h2 {
+    @apply text-left;
+  }
 }
 
 @layer utilities {
