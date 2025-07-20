@@ -135,14 +135,21 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       });
     }
     
-    // Scroll horizontally to show Gantt chart view (right)
+    // Scroll horizontally to show Gantt chart view at the left edge
     if (horizontalContainerRef.current) {
-      const scrollWidth = horizontalContainerRef.current.scrollWidth;
-      const containerWidth = horizontalContainerRef.current.clientWidth;
-      horizontalContainerRef.current.scrollTo({
-        left: scrollWidth - containerWidth,
-        behavior: 'smooth'
-      });
+      // Get the accordion section (first flex item) width
+      const accordionSection = horizontalContainerRef.current.querySelector('div:first-child');
+      if (accordionSection) {
+        const accordionWidth = accordionSection.getBoundingClientRect().width;
+        // Add gap between sections (gap-8 = 2rem = 32px)
+        const gapWidth = 32;
+        
+        // Scroll to position Gantt chart at the left edge
+        horizontalContainerRef.current.scrollTo({
+          left: accordionWidth + gapWidth,
+          behavior: 'smooth'
+        });
+      }
     }
   };
 
