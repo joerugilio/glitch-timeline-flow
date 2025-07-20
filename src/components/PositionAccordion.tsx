@@ -399,7 +399,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                     ? 'hidden' 
                     : 'w-[90%] transform scale-50 origin-top'
               }`}>
-                <GanttChart positions={positions} onPositionClick={handleGanttPositionClick} />
+                <GanttChart 
+                  positions={positions} 
+                  onPositionClick={handleGanttPositionClick}
+                  onPositionHover={handleMouseEnter}
+                  onPositionLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>

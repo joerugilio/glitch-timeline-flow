@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Calendar, MapPin, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Position } from '../types/portfolio';
@@ -7,11 +6,15 @@ import { parsePeriod, getTimelineRange } from '../utils/dateUtils';
 interface GanttChartProps {
   positions: Position[];
   onPositionClick?: (positionId: string) => void;
+  onPositionHover?: (positionId: string) => void;
+  onPositionLeave?: () => void;
 }
 
 const GanttChart: React.FC<GanttChartProps> = ({
   positions,
-  onPositionClick
+  onPositionClick,
+  onPositionHover,
+  onPositionLeave
 }) => {
   const [hoveredPosition, setHoveredPosition] = useState<string | null>(null);
   const [selectedAchievements, setSelectedAchievements] = useState<{
@@ -69,6 +72,20 @@ const GanttChart: React.FC<GanttChartProps> = ({
     }
   };
 
+  const handlePositionMouseEnter = (positionId: string) => {
+    setHoveredPosition(positionId);
+    if (onPositionHover) {
+      onPositionHover(positionId);
+    }
+  };
+
+  const handlePositionMouseLeave = () => {
+    setHoveredPosition(null);
+    if (onPositionLeave) {
+      onPositionLeave();
+    }
+  };
+
   return (
     <div className="space-y-[1vh] mt-[3vh] mb-10">
       <div className="bg-[#1b1f1b]/30 rounded-lg p-4">
@@ -101,8 +118,8 @@ const GanttChart: React.FC<GanttChartProps> = ({
                 <div
                   className="relative h-16 bg-primary/20 rounded border border-primary/30 hover:border-primary/50 transition-all duration-300 cursor-pointer"
                   style={positionStyle}
-                  onMouseEnter={() => setHoveredPosition(position.id)}
-                  onMouseLeave={() => setHoveredPosition(null)}
+                  onMouseEnter={() => handlePositionMouseEnter(position.id)}
+                  onMouseLeave={handlePositionMouseLeave}
                   onClick={() => handlePositionClick(position.id)}
                 >
                   {/* Hover overlay */}
@@ -111,7 +128,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
                   </div>
 
                   {/* Position content */}
-                  <div className="absolute inset-0 p-2 flex items-center justify-between">
+                  <div className="absolute inset-0 p-2 flex items-center justify-between bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] transition-all duration-300">
                     <div className="flex-1 min-w-0">
                       <h4 className="text-sm font-medium text-primary truncate">
                         {position.title}
