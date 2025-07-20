@@ -136,15 +136,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
 
           {/* Button Row */}
           <div className="flex justify-center gap-4 mb-8 max-w-[992px] mx-auto">
-            <Button variant="outline" className="flex-1 max-w-[20vw]">
+            <Button variant="outline" className="flex-1 max-w-[40vw]">
               All Positions
             </Button>
             
-            <Button variant="outline" className="flex-1 max-w-[20vw]">
+            <Button variant="outline" className="flex-1 max-w-[40vw]">
               Product Design
-            </Button>
-            <Button variant="outline" className="flex-1 max-w-[20vw]">
-              Exits Only
             </Button>
           </div>
 
