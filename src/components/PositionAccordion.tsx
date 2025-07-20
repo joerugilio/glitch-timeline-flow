@@ -221,7 +221,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           <div className="overflow-x-auto" ref={horizontalContainerRef}>
             <div className="flex gap-8 min-w-[200vw] lg:min-w-[160vw]">
               {/* Accordion View Section */}
-              <div className="flex-shrink-0 w-[90vw] lg:w-[70vw]">
+              <div className={`flex-shrink-0 transition-all duration-500 ${expandedPositions.length > 0 ? 'w-[90vw] lg:w-[70vw]' : 'w-[63vw] lg:w-[49vw]'}`}>
                 <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10 max-w-[992px]">
                   <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
                     {positions.map(position => <AccordionItem key={position.id} value={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
