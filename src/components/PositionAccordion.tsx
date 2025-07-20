@@ -298,7 +298,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                                   </div>
 
                                   {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
-                                    <p className="text-muted-foreground mb-1 leading-relaxed">
+                                    <p className="text-muted-foreground mb-1 leading-relaxed text-left">
                                       {position.blurb}
                                     </p>
                                   )}
