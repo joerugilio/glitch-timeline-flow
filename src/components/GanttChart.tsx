@@ -104,6 +104,11 @@ const GanttChart: React.FC<GanttChartProps> = ({
                   onMouseLeave={() => setHoveredPosition(null)}
                   onClick={() => handlePositionClick(position.id)}
                 >
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-primary/80 backdrop-blur-sm flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200 rounded">
+                    <span className="text-primary-foreground text-sm font-medium">View Details</span>
+                  </div>
+
                   {/* Position content */}
                   <div className="absolute inset-0 p-2 flex items-center justify-between">
                     <div className="flex-1 min-w-0">
