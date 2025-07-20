@@ -13,17 +13,18 @@ const GanttChart: React.FC<GanttChartProps> = ({ positions }) => {
   const [selectedAchievements, setSelectedAchievements] = useState<{[key: string]: boolean}>({});
 
   const timelineRange = getTimelineRange(positions);
+  // Sort positions by newest first (descending order)
   const sortedPositions = [...positions].sort((a, b) => 
-    parsePeriod(a.period).startDate.getTime() - parsePeriod(b.period).startDate.getTime()
+    parsePeriod(b.period).startDate.getTime() - parsePeriod(a.period).startDate.getTime()
   );
 
   const getPositionStyle = (position: Position) => {
     const parsed = parsePeriod(position.period);
-    const startOffset = ((parsed.startDate.getTime() - timelineRange.start.getTime()) / (1000 * 60 * 60 * 24 * 30.44)) / timelineRange.totalMonths;
+    const endOffset = ((timelineRange.end.getTime() - parsed.endDate.getTime()) / (1000 * 60 * 60 * 24 * 30.44)) / timelineRange.totalMonths;
     const width = (parsed.duration / timelineRange.totalMonths);
     
     return {
-      left: `${startOffset * 100}%`,
+      left: `${endOffset * 100}%`,
       width: `${width * 100}%`
     };
   };
@@ -33,14 +34,15 @@ const GanttChart: React.FC<GanttChartProps> = ({ positions }) => {
     const start = new Date(timelineRange.start);
     const end = new Date(timelineRange.end);
     
-    let current = new Date(start.getFullYear(), 0, 1);
+    let current = new Date(end.getFullYear(), 0, 1);
     
-    while (current <= end) {
+    while (current >= start) {
+      const position = 100 - ((current.getTime() - start.getTime()) / (end.getTime() - start.getTime())) * 100;
       labels.push({
         year: current.getFullYear(),
-        position: ((current.getTime() - start.getTime()) / (end.getTime() - start.getTime())) * 100
+        position: position
       });
-      current.setFullYear(current.getFullYear() + 1);
+      current.setFullYear(current.getFullYear() - 1);
     }
     
     return labels;
