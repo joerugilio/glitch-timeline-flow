@@ -229,7 +229,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                     : 'w-[40vw] transform scale-75 origin-top'
               }`}>
                 <div className="w-full">
-                  <div className="space-y-[1vh] mt-[3vh] mx-auto mb-10">
+                  <div className="space-y-[1vh] mt-[3vh] mb-10">
                     <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
                       {positions.map(position => (
                         <AccordionItem key={position.id} value={position.id} data-accordion-item={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
