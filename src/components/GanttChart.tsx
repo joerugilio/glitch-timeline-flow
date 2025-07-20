@@ -51,7 +51,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
         year: current.getFullYear(),
         position: position
       });
-      current.setFullYear(current.getFullYear() - 1);
+      current.setFullYear(current.getFullYear() - 5);
     }
     
     return labels;
