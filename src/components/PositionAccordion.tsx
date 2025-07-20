@@ -233,7 +233,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                         : 'bg-green-500 text-white hover:bg-muted hover:text-muted-foreground'
                     }`}
                   >
-                    Browse Timeline
+                    Details Timeline
                   </button>
                   <button
                     onClick={() => handleTabClick('gantt')}
