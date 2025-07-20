@@ -62,16 +62,7 @@ const About = () => {
         
 
         {/* Work Philosophy Section */}
-        <section className="px-4 py-16">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-light text-primary mb-12">{workPhilosophy.title}</h2>
-            <div className="space-y-6">
-              {workPhilosophy.content.map((paragraph, index) => <p key={index} className="text-lg text-foreground leading-relaxed" dangerouslySetInnerHTML={{
-              __html: paragraph
-            }} />)}
-            </div>
-          </div>
-        </section>
+        
 
         {/* Education & Awards Section */}
         <section className="px-4 py-16 bg-muted/30">
