@@ -179,17 +179,17 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
         }} />
       </div>
 
-      <div className="relative z-10 pt-12 pb-12">
-        <div className="w-full">
-          <header className="text-center mb-8 h-1/4">
-            <h2 className="hero-title caption-timeline mb-4">
+      <div className="relative z-10 pt-fluid-xl pb-fluid-xl">
+        <div className="fluid-container">
+          <header className="text-center mb-fluid-lg h-1/4">
+            <h2 className="hero-title caption-timeline mb-fluid-md">
               <span className="opacity-[0.33]">user-centered leadership robust-ops strategy + brand-science</span> 
             </h2>
             
             <div className="hero-subtitle caption-timeline ml-[auto] mr-[auto]">
               <span>UX Product & Design Principal</span> 
               <span>Multiple Exits B2C, B2B</span>
-              <span>Award Winning Regulated AI ML <Sparkles className="inline w-4 h-4 ml-1" /></span>
+              <span>Award Winning Regulated AI ML <Sparkles className="inline w-fluid-md h-fluid-md ml-fluid-xs" /></span>
               <span>Consumer-Grade Enterprise</span>
             </div>
           </header>
@@ -197,12 +197,12 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
           {/* Custom Split View Container */}
           <div className="w-full" data-split-content>
             {/* Sticky Navigation */}
-            <div className="sticky top-8 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 mb-8" data-sticky-nav>
-              <div className="w-full py-1">
-                <div className="grid grid-cols-2 gap-4">
+            <div className="sticky top-fluid-lg z-50 bg-background/80 backdrop-blur-md border-b border-border/50 mb-fluid-lg" data-sticky-nav>
+              <div className="w-full py-fluid-xs">
+                <div className="grid grid-cols-2 gap-fluid-md">
                   <button
                     onClick={() => handleTabClick('timeline')}
-                    className={`p-3 rounded-md font-medium transition-all duration-300 ${
+                    className={`p-fluid-sm rounded-md font-medium transition-all duration-300 ${
                       selectedView === 'timeline' 
                         ? 'bg-green-600 text-white shadow-lg' 
                         : 'bg-green-500 text-white hover:bg-muted hover:text-muted-foreground'
@@ -212,7 +212,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                   </button>
                   <button
                     onClick={() => handleTabClick('gantt')}
-                    className={`p-3 rounded-md font-medium transition-all duration-300 ${
+                    className={`p-fluid-sm rounded-md font-medium transition-all duration-300 ${
                       selectedView === 'gantt' 
                         ? 'bg-green-600 text-white shadow-lg' 
                         : 'bg-green-500 text-white hover:bg-muted hover:text-muted-foreground'
@@ -227,7 +227,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
             {/* Split Content Container */}
             <div className={`transition-all duration-500 ease-in-out h-auto w-fit mx-auto ${
               selectedView === 'split' 
-                ? 'flex gap-4 items-start' 
+                ? 'flex gap-fluid-md items-start' 
                 : 'flex justify-center items-start'
             }`}>
               
@@ -240,15 +240,15 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                     : 'w-[90%] transform scale-50 origin-top'
               }`}>
                 <div className="w-full">
-                  <div className="space-y-[1vh] mt-[3vh] mb-10">
-                    <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-[1vh]">
+                  <div className="space-y-gantt-spacing mt-fluid-lg mb-fluid-xl">
+                    <Accordion type="multiple" value={expandedPositions} onValueChange={handlePositionChange} className="space-y-gantt-spacing">
                       {positions.map(position => (
                         <AccordionItem key={position.id} value={position.id} data-accordion-item={position.id} className="border border-transparent hover:border-primary/30 data-[state=open]:border-primary/50 data-[state=open]:hover:border-primary/70 transition-all duration-300 rounded-lg bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] data-[state=open]:bg-[#1b1f1b]">
-                          <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
+                          <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-fluid-sm hover:no-underline pt-fluid-xs pb-0 px-fluid-sm rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
                             <div className="flex items-center justify-between w-full">
                               <div className="flex items-start w-full backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
                                 <LogoPlaceholder />
-                                <div className="flex-1 ml-3">
+                                <div className="flex-1 ml-fluid-sm">
                                   <div className="flex flex-col md:flex-row md:justify-between mb-0">
                                     <div>
                                       <h2 className="text-xl md:text-2xl text-primary transition-colors font-normal text-left">
@@ -259,13 +259,13 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                                       </p>
                                     </div>
                                     {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
-                                      <div className="flex flex-shrink flex-row mt-1 md:mt-0 justify-end text-right text-primary-foreground">
-                                        <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
-                                          <Calendar size={14} className="mr-1" aria-hidden="true" />
+                                      <div className="flex flex-shrink flex-row mt-fluid-xs md:mt-0 justify-end text-right text-primary-foreground">
+                                        <div className="flex items-center justify-end text-muted-foreground text-sm mb-fluid-xs">
+                                          <Calendar size={14} className="mr-fluid-xs" aria-hidden="true" />
                                           <span>{position.period}</span>
                                         </div>
-                                        <div className="flex items-center justify-end text-muted-foreground text-sm mb-1">
-                                          <MapPin size={14} className="mr-1" aria-hidden="true" />
+                                        <div className="flex items-center justify-end text-muted-foreground text-sm mb-fluid-xs">
+                                          <MapPin size={14} className="mr-fluid-xs" aria-hidden="true" />
                                           <span className="h-auto">{position.location}</span>
                                         </div>
                                       </div>
@@ -273,36 +273,36 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                                   </div>
 
                                   {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
-                                    <p className="text-muted-foreground mb-1 leading-relaxed text-left">
+                                    <p className="text-muted-foreground mb-fluid-xs leading-relaxed text-left">
                                       {position.blurb}
                                     </p>
                                   )}
 
                                   {(selectedView !== 'split' || expandedPositions.includes(position.id)) && (
-                                    <div className="flex flex-wrap justify-between items-end gap-1 mb-3">
-                                      <div className="flex flex-wrap gap-1">
+                                    <div className="flex flex-wrap justify-between items-end gap-fluid-xs mb-fluid-sm">
+                                      <div className="flex flex-wrap gap-fluid-xs">
                                         {position.tags.slice(0, 4).map(tag => (
-                                          <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-primary/20 text-sm">
+                                          <span key={tag} className="inline-flex items-center px-fluid-sm py-fluid-xs rounded-full font-medium bg-primary/20 text-sm">
                                             {tag}
                                           </span>
                                         ))}
                                         {position.tags.length > 4 && (
-                                          <span className="text-xs text-muted-foreground px-2 py-1">
+                                          <span className="text-xs text-muted-foreground px-fluid-sm py-fluid-xs">
                                             +{position.tags.length - 4} more
                                           </span>
                                         )}
                                       </div>
                                       
                                       {position.exit && (
-                                        <div className="flex items-center gap-1">
+                                        <div className="flex items-center gap-fluid-xs">
                                           {position.exit.type === 'IPO' ? (
-                                            <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-green-500/20 text-green-400 text-sm border border-green-500/30">
-                                              <TrendingUp size={12} className="mr-1" />
+                                            <span className="inline-flex items-center px-fluid-sm py-fluid-xs rounded-full font-medium bg-green-500/20 text-green-400 text-sm border border-green-500/30">
+                                              <TrendingUp size={12} className="mr-fluid-xs" />
                                               IPO
                                             </span>
                                           ) : (
-                                            <span className="inline-flex items-center px-2 py-1 rounded-full font-medium bg-blue-500/20 text-blue-400 text-sm border border-blue-500/30">
-                                              <Building2 size={12} className="mr-1" />
+                                            <span className="inline-flex items-center px-fluid-sm py-fluid-xs rounded-full font-medium bg-blue-500/20 text-blue-400 text-sm border border-blue-500/30">
+                                              <Building2 size={12} className="mr-fluid-xs" />
                                               Acquired by {position.exit.company}
                                             </span>
                                           )}
@@ -315,39 +315,39 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                             </div>
                           </AccordionTrigger>
 
-                          <AccordionContent className="px-2 pt-2 rounded-b-lg">
-                            <div className="backdrop-blur-xl px-2 py-2 rounded-sm space-y-3">
-                              <header className="mb-3">
-                                <p className="leading-relaxed mb-2 text-slate-50 max-w-[660px] text-lg font-normal">
+                          <AccordionContent className="px-fluid-sm pt-fluid-sm rounded-b-lg">
+                            <div className="backdrop-blur-xl px-fluid-sm py-fluid-sm rounded-sm space-y-fluid-sm">
+                              <header className="mb-fluid-sm">
+                                <p className="leading-relaxed mb-fluid-sm text-slate-50 max-w-[41.25rem] text-lg font-normal">
                                   {position.description}
                                 </p>
                               </header>
 
-                              <section className="px-2 py-2">
-                                <h3 className="text-lg font-semibold mb-1 text-muted-foreground">Key Achievements</h3>
+                              <section className="px-fluid-sm py-fluid-sm">
+                                <h3 className="text-lg font-semibold mb-fluid-xs text-muted-foreground">Key Achievements</h3>
                                 <Accordion type="multiple" value={expandedAchievements[position.id] || []} onValueChange={value => handleAchievementChange(position.id, value)}>
                                   {position.achievements.map(achievement => (
                                     <AccordionItem key={achievement.id} value={achievement.id} className="bg-card/60 backdrop-blur-sm border-0 border-border/60 rounded-lg hover:border-primary/40 hover:bg-card/80 transition-all duration-300 data-[state=open]:border-primary/60 data-[state=open]:bg-card/90 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10">
-                                      <AccordionTrigger className="px-2 py-2 hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-green-500 bg-green-500/20 hover:bg-green-500/30">
+                                      <AccordionTrigger className="px-fluid-sm py-fluid-sm hover:no-underline rounded-t-lg text-sm font-semibold transition-all duration-200 text-green-500 bg-green-500/20 hover:bg-green-500/30">
                                         <div className="flex-1 text-left backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
-                                          <span className="block mb-1 text-lg text-white">{achievement.title}</span>
-                                          <div className={`flex gap-1 overflow-hidden transition-all duration-300 ${(expandedAchievements[position.id] || []).includes(achievement.id) ? 'opacity-0 h-0 transform scale-95' : 'opacity-100 h-6 transform scale-100'}`}>
+                                          <span className="block mb-fluid-xs text-lg text-white">{achievement.title}</span>
+                                          <div className={`flex gap-fluid-xs overflow-hidden transition-all duration-300 ${(expandedAchievements[position.id] || []).includes(achievement.id) ? 'opacity-0 h-0 transform scale-95' : 'opacity-100 h-fluid-md transform scale-100'}`}>
                                             {achievement.images.slice(0, 4).map((image, index) => (
-                                              <div key={index} className="w-8 h-6 rounded overflow-hidden border border-gray-300 flex-shrink-0">
+                                              <div key={index} className="w-fluid-lg h-fluid-md rounded overflow-hidden border border-gray-300 flex-shrink-0">
                                                 <img src={image.url} alt="" className="w-full h-full object-cover" />
                                               </div>
                                             ))}
                                             {achievement.images.length > 4 && (
-                                              <div className="w-8 h-6 rounded bg-gray-300 border border-gray-400 flex items-center justify-center text-xs text-gray-600 flex-shrink-0">
+                                              <div className="w-fluid-lg h-fluid-md rounded bg-gray-300 border border-gray-400 flex items-center justify-center text-xs text-gray-600 flex-shrink-0">
                                                 +{achievement.images.length - 4}
                                               </div>
                                             )}
                                           </div>
                                         </div>
                                       </AccordionTrigger>
-                                      <AccordionContent className="px-2 pt-2">
-                                        <div className="space-y-2">
-                                          <p className="text-white leading-relaxed max-w-[660px] text-base font-normal">
+                                      <AccordionContent className="px-fluid-sm pt-fluid-sm">
+                                        <div className="space-y-fluid-sm">
+                                          <p className="text-white leading-relaxed max-w-[41.25rem] text-base font-normal">
                                             {achievement.description}
                                           </p>
                                           

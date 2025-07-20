@@ -3,12 +3,11 @@ import React from 'react';
 
 const LogoPlaceholder = () => (
   <svg 
-    width="180" 
-    height="60" 
+    className="w-logo-width h-logo-height flex-shrink-0 max-w-full max-h-full"
     viewBox="0 0 180 60" 
-    className="flex-shrink-0"
     fill="none" 
     xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid meet"
   >
     <rect 
       width="180" 
