@@ -11,7 +11,7 @@ const CompanyLogo: React.FC<CompanyLogoProps> = ({ company, className = "flex-sh
   const getLogoPath = (companyName: string): string => {
     const logoMap: Record<string, string> = {
       'TechCorp Innovation': '/logos/techcorp-innovation.svg',
-      'FinanceFlow': '/logos/financeflow.svg',
+      'FinanceFlow': '/logos/financeflow.svg', 
       'StartupVenture': '/logos/startupventure.svg',
       'Enterprise Solutions Inc': '/logos/enterprise-solutions-inc.svg',
       'InnovateLabs': '/logos/innovatelabs.svg'
