@@ -37,8 +37,36 @@ const GanttChart: React.FC<GanttChartProps> = ({
     
     return {
       left: `${endOffset * 100}%`,
-      width: `${width * 100}%`
+      width: `${width * 100}%`,
+      leftOffset: endOffset * 100,
+      barWidth: width * 100
     };
+  };
+
+  const getTooltipPositioning = (leftOffset: number, barWidth: number) => {
+    const barCenter = leftOffset + (barWidth / 2);
+    
+    // If bar is on the left third of timeline, position tooltip to the right
+    if (barCenter < 33) {
+      return {
+        positioning: 'left-0',
+        transform: ''
+      };
+    }
+    // If bar is on the right third of timeline, position tooltip to the left
+    else if (barCenter > 67) {
+      return {
+        positioning: 'right-0',
+        transform: ''
+      };
+    }
+    // For bars in the middle, center the tooltip
+    else {
+      return {
+        positioning: 'left-1/2',
+        transform: '-translate-x-1/2'
+      };
+    }
   };
 
   const generateTimeLabels = () => {
@@ -111,7 +139,9 @@ const GanttChart: React.FC<GanttChartProps> = ({
         {/* Position bars */}
         <div className="space-y-3">
           {sortedPositions.map(position => {
-            const positionStyle = getPositionStyle(position);
+            const positionStyleData = getPositionStyle(position);
+            const { left, width } = positionStyleData;
+            const tooltipPos = getTooltipPositioning(positionStyleData.leftOffset, positionStyleData.barWidth);
             const parsed = parsePeriod(position.period);
             
             return (
@@ -119,7 +149,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
                 {/* Position bar */}
                 <div
                   className="relative h-20 bg-primary/20 rounded border border-primary/30 hover:border-primary/50 transition-all duration-300 cursor-pointer"
-                  style={positionStyle}
+                  style={{ left, width }}
                   onMouseEnter={() => handlePositionMouseEnter(position.id)}
                   onMouseLeave={handlePositionMouseLeave}
                   onClick={() => handlePositionClick(position.id)}
@@ -158,9 +188,9 @@ const GanttChart: React.FC<GanttChartProps> = ({
                   </div>
                 </div>
 
-                {/* Hover details - mobile responsive */}
+                {/* Hover details - dynamically positioned */}
                 {hoveredPosition === position.id && (
-                  <div className="absolute z-[60] bottom-full left-0 mb-2 p-3 md:p-4 bg-card/90 backdrop-blur-sm border border-border/60 rounded-lg shadow-lg w-full sm:w-auto sm:min-w-80 md:min-w-96 md:max-w-lg">
+                  <div className={`absolute z-[60] bottom-full mb-2 p-3 md:p-4 bg-card/90 backdrop-blur-sm border border-border/60 rounded-lg shadow-lg w-full sm:w-auto sm:min-w-80 md:min-w-96 md:max-w-lg ${tooltipPos.positioning} ${tooltipPos.transform ? `transform ${tooltipPos.transform}` : ''}`}>
                     <div className="space-y-2 md:space-y-3">
                       {/* Header - mobile responsive */}
                       <div className="flex flex-col md:flex-row md:justify-between">
