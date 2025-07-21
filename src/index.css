@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -50,7 +51,7 @@
 @layer utilities {
   /* Hero Section Styles */
   .hero-title {
-    font-size: 8vw;
+    font-size: 5vh;
     font-weight: 100;
     line-height: 0.75;
     letter-spacing: -0.04em;
@@ -63,7 +64,7 @@
 
   @media (min-width: 480px) {
     .hero-title {
-      font-size: 12vw;
+      font-size: 7vh;
     }
   }
 
