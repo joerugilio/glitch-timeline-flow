@@ -3,7 +3,7 @@ import { AboutData } from '../types/about';
 
 export const aboutData: AboutData = {
   personalInfo: {
-    name: 'Alex Johnson',
+    name: 'Alex Johnsons',
     title: 'Senior Product Designer',
     tagline: 'I create user experiences that drive business results',
     profileImage: '/images/about/profile.jpg',
