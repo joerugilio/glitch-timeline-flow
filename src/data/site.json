@@ -5,6 +5,11 @@
     "description": "Personal portfolio website",
     "defaultBackgroundImage": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3543&q=80"
   },
+  "pages": {
+    "about": {
+      "backgroundImage": "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3543&q=80"
+    }
+  },
   "navigation": {
     "brand": "Portfolio",
     "items": [

@@ -5,6 +5,11 @@ export interface SiteConfig {
     description: string;
     defaultBackgroundImage: string;
   };
+  pages: {
+    about: {
+      backgroundImage: string;
+    };
+  };
   navigation: {
     brand: string;
     items: NavigationItem[];
