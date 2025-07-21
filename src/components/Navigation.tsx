@@ -16,11 +16,6 @@ const Navigation = () => {
       href: '/about',
       label: 'About',
       icon: User
-    }, 
-    {
-      href: '/contact',
-      label: 'Contact',
-      icon: Mail
     }
   ];
   
