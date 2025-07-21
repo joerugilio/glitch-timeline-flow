@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Mail, MapPin, Globe, Award, GraduationCap } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,7 +21,7 @@ const About = () => {
     workPhilosophy
   } = aboutData;
 
-  const renderSkillBar = (skill: typeof skillCategories[0]['skills'][0]) => <div key={skill.name} className="mb-4">
+  const renderSkillBar = (skill: typeof skillCategories[0]['skills'][0]) => <div key={skill.name} className="mb-2">
       <div className="flex justify-between items-center mb-1">
         <span className="text-sm font-medium text-foreground">{skill.name}</span>
         <span className="text-xs text-muted-foreground">{skill.level}%</span>
@@ -49,16 +50,16 @@ const About = () => {
         
 
         {/* Biography Section */}
-        <section className="px-4 bg-muted/30 py-[16px]">
+        <section className="px-2 bg-muted/30 py-2">
           <div className="max-w-4xl mx-auto">
-            {biography.map((section, index) => <div key={section.id} className={`mb-16 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''} lg:flex lg:gap-12 lg:items-center`}>
+            {biography.map((section, index) => <div key={section.id} className={`mb-8 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''} lg:flex lg:gap-8 lg:items-center`}>
                 <div className="lg:flex-1">
-                  <h2 className="text-3xl font-light text-primary mb-6">{section.title}</h2>
-                  {section.content.map((paragraph, pIndex) => <p key={pIndex} className="text-foreground mb-4 leading-relaxed">
+                  <h2 className="text-3xl font-light text-primary mb-3">{section.title}</h2>
+                  {section.content.map((paragraph, pIndex) => <p key={pIndex} className="text-foreground mb-2 leading-relaxed">
                       {paragraph}
                     </p>)}
                 </div>
-                {section.image && <div className="lg:flex-1 mt-8 lg:mt-0">
+                {section.image && <div className="lg:flex-1 mt-4 lg:mt-0">
                     
                   </div>}
               </div>)}
@@ -75,16 +76,16 @@ const About = () => {
         
 
         {/* Education & Awards Section */}
-        <section className="px-4 py-16 bg-muted/30">
+        <section className="px-2 py-8 bg-muted/30">
           <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16">
+            <div className="grid lg:grid-cols-2 gap-8">
               {/* Education */}
               <div>
-                <h2 className="text-3xl font-light text-primary mb-8 flex items-center gap-3">
+                <h2 className="text-3xl font-light text-primary mb-4 flex items-center gap-3">
                   <GraduationCap size={32} />
                   Education
                 </h2>
-                <div className="space-y-6">
+                <div className="space-y-3">
                   {education.map((edu, index) => <Card key={index} className="hover-lift">
                       <CardHeader>
                         <CardTitle className="text-lg">{edu.degree} in {edu.field}</CardTitle>
@@ -100,11 +101,11 @@ const About = () => {
 
               {/* Awards */}
               <div>
-                <h2 className="text-3xl font-light text-primary mb-8 flex items-center gap-3">
+                <h2 className="text-3xl font-light text-primary mb-4 flex items-center gap-3">
                   <Award size={32} />
                   Recognition
                 </h2>
-                <div className="space-y-6">
+                <div className="space-y-3">
                   {awards.map((award, index) => <Card key={index} className="hover-lift">
                       <CardHeader>
                         <CardTitle className="text-lg">{award.title}</CardTitle>
@@ -122,10 +123,10 @@ const About = () => {
         </section>
 
         {/* Personal Interests Section */}
-        <section className="px-4 py-16">
+        <section className="px-2 py-8">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-light text-primary mb-12 text-center">Beyond Design</h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            <h2 className="text-4xl font-light text-primary mb-6 text-center">Beyond Design</h2>
+            <div className="grid md:grid-cols-3 gap-4">
               {interests.map(interest => <Card key={interest.title} className="overflow-hidden hover-lift">
                   {interest.image && <div className="h-48 overflow-hidden">
                       <img src={interest.image} alt={interest.title} className="w-full h-full object-cover" />
@@ -144,10 +145,10 @@ const About = () => {
         </section>
 
         {/* Call to Action */}
-        <section className="px-4 py-16 bg-gradient-dark text-center">
+        <section className="px-2 py-8 bg-gradient-dark text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-light text-primary mb-6">Let's Create Something Amazing</h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <h2 className="text-4xl font-light text-primary mb-3">Let's Create Something Amazing</h2>
+            <p className="text-xl text-muted-foreground mb-4">
               New opportunities, sharing design insights, or simply connecting with fellow creators.
             </p>
             <Button size="lg" className="hover-lift" onClick={handleLinkedInClick}>
