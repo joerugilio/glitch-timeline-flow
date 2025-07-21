@@ -40,6 +40,15 @@ jobs:
         echo "✅ Build successful - dist folder exists"
         ls -la dist/
         
+    - name: Create release archive
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        cd dist
+        zip -r ../static-site-build.zip .
+        cd ..
+        echo "✅ Created release archive: static-site-build.zip"
+        ls -la static-site-build.zip
+        
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -58,10 +67,10 @@ jobs:
           - Commit: ${{ github.sha }}
           - Build Date: ${{ github.event.head_commit.timestamp }}
           
-          Download the `static-site-${{ github.sha }}` artifact from the workflow run for the compiled files.
+          Download the attached `static-site-build.zip` file for the compiled static site files.
+          You can also download the `static-site-${{ github.sha }}` artifact from the workflow run.
         draft: false
         prerelease: false
-        files: |
-          dist/**/*
+        files: static-site-build.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
