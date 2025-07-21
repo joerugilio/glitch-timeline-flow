@@ -94,7 +94,8 @@
   }
 
   .hero-subtitle {
-    @apply text-base text-white px-4;
+    @apply text-white px-4;
+    font-size: 3vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -104,7 +105,14 @@
 
   @media (min-width: 768px) {
     .hero-subtitle {
-      @apply text-xl px-0;
+      @apply px-0;
+      font-size: 4vh;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-subtitle {
+      font-size: 4.5vh;
     }
   }
 
