@@ -1,0 +1,16 @@
+
+<svg width="180" height="60" viewBox="0 0 180 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="60" rx="12" fill="hsl(var(--muted))" stroke="hsl(var(--border))" stroke-width="2"/>
+  
+  <!-- Financial growth arrow -->
+  <path d="M10 40 L30 25 L50 30 L70 15" stroke="hsl(var(--primary))" stroke-width="3" fill="none"/>
+  <path d="M65 15 L70 15 L70 20" stroke="hsl(var(--primary))" stroke-width="3" fill="none"/>
+  
+  <!-- Dollar symbol -->
+  <circle cx="25" cy="30" r="10" fill="hsl(var(--primary))" opacity="0.8"/>
+  <text x="25" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="hsl(var(--primary-foreground))" text-anchor="middle">$</text>
+  
+  <!-- Company name -->
+  <text x="80" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="hsl(var(--primary))">FinanceFlow</text>
+  <text x="80" y="40" font-family="Arial, sans-serif" font-size="10" fill="hsl(var(--muted-foreground))">Financial Solutions</text>
+</svg>

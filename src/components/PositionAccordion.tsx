@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Calendar, MapPin, Tag, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import AchievementImages from './AchievementImages';
 import GanttChart from './GanttChart';
-import LogoPlaceholder from './LogoPlaceholder';
+import CompanyLogo from './CompanyLogo';
 import { Position } from '../types/portfolio';
 
 interface PositionAccordionProps {
@@ -254,7 +255,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
                           <AccordionTrigger onMouseEnter={() => handleMouseEnter(position.id)} onMouseLeave={handleMouseLeave} className="p-3 hover:no-underline pt-[5px] pb-0 px-[15px] rounded-t-lg data-[state=open]:rounded-b-none hover:bg-primary/10 data-[state=open]:hover:bg-green-500/20">
                             <div className="flex items-center justify-between w-full">
                               <div className="flex flex-col sm:flex-row items-start w-full backdrop-blur-md data-[state=open]:backdrop-blur-none transition-all duration-300">
-                                <LogoPlaceholder />
+                                <CompanyLogo company={position.company} />
                                 <div className="flex-1 ml-0 sm:ml-3 mt-3 sm:mt-0">
                                   <div className="flex flex-col md:flex-row md:justify-between mb-0">
                                     <div>

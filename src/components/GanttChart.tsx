@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Calendar, MapPin, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Position } from '../types/portfolio';
 import { parsePeriod, getTimelineRange } from '../utils/dateUtils';
-import LogoPlaceholder from './LogoPlaceholder';
+import CompanyLogo from './CompanyLogo';
 
 interface GanttChartProps {
   positions: Position[];
@@ -130,7 +130,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
 
                   {/* Logo content */}
                   <div className="absolute inset-0 flex items-center justify-center bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] transition-all duration-300">
-                    <LogoPlaceholder />
+                    <CompanyLogo company={position.company} />
                   </div>
 
                   {/* Achievement milestones */}
