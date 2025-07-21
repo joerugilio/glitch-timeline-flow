@@ -11,13 +11,21 @@ const Navigation = () => {
   
   const config = siteConfig as SiteConfig;
   
-  const navItems = [
-    {
-      href: '/about',
-      label: 'About',
-      icon: User
+  const getIconComponent = (iconName: string) => {
+    switch (iconName) {
+      case 'User':
+        return User;
+      case 'Mail':
+        return Mail;
+      default:
+        return User;
     }
-  ];
+  };
+
+  const navItems = config.navigation.items.map(item => ({
+    ...item,
+    icon: getIconComponent(item.icon)
+  }));
   
   const toggleMenu = () => setIsOpen(!isOpen);
   
