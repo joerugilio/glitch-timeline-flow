@@ -186,7 +186,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
               <span className="opacity-[0.33]">user-centered leadership robust-ops strategy + brand-science</span> 
             </h2>
             
-            <div className="hero-subtitle caption-timeline flex justify-center items-center flex-wrap gap-2">
+            <div className="hero-subtitle caption-timeline w-full flex justify-center items-center flex-wrap gap-2">
               <span>UX Product & Design Principal</span>
               <span>-</span>
               <span>Multiple Exits B2C, B2B</span>
