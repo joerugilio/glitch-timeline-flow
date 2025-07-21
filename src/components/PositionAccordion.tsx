@@ -228,7 +228,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
             </div>
 
             {/* Split Content Container */}
-            <div className={`pt-20 md:pt-24 lg:pt-28 transition-all duration-500 ease-in-out h-auto ${
+            <div className={`transition-all duration-500 ease-in-out h-auto ${
               selectedView === 'gantt' ? 'w-full' 
               : selectedView === 'timeline' ? 'w-full'
               : 'w-fit mx-auto'
