@@ -13,7 +13,7 @@ npm install
 npm run build
 
 # Or use the enhanced build script
-npm run build-static
+node scripts/build-static.js
 ```
 
 The compiled files will be in the `dist/` folder. You can then:
