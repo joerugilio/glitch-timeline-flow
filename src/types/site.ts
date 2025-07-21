@@ -3,6 +3,7 @@ export interface SiteConfig {
   site: {
     title: string;
     description: string;
+    defaultBackgroundImage: string;
   };
   navigation: {
     brand: string;

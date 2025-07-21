@@ -6,6 +6,7 @@ import AchievementImages from './AchievementImages';
 import GanttChart from './GanttChart';
 import CompanyLogo from './CompanyLogo';
 import { Position } from '../types/portfolio';
+import siteData from '../data/site.json';
 
 interface PositionAccordionProps {
   positions: Position[];
@@ -151,14 +152,15 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     setHoveredPosition(null);
   };
 
-  // Get current background image (hover takes priority over expanded)
+  // Get current background image (hover takes priority over expanded, then default)
   const getCurrentBackgroundImage = () => {
     const targetPosition = hoveredPosition || (expandedPositions.length > 0 ? expandedPositions[0] : null);
     if (targetPosition) {
       const position = positions.find(p => p.id === targetPosition);
       return position?.imageUrl;
     }
-    return null;
+    // Return default background image from site configuration
+    return siteData.site.defaultBackgroundImage;
   };
 
   const currentImageUrl = getCurrentBackgroundImage();
