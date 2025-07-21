@@ -1,10 +1,15 @@
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, User, Mail } from 'lucide-react';
+import siteConfig from '../data/site.json';
+import type { SiteConfig } from '../types/site';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  
+  const config = siteConfig as SiteConfig;
   
   const navItems = [
     {
@@ -27,7 +32,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" aria-label="Portfolio home" className="text-xl font-bold hover:opacity-80 transition-opacity">
-            Portfolio
+            {config.navigation.brand}
           </Link>
 
           {/* Desktop Navigation */}
