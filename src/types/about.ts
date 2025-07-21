@@ -1,4 +1,3 @@
-
 export interface PersonalInfo {
   name: string;
   title: string;
@@ -8,6 +7,9 @@ export interface PersonalInfo {
   email: string;
   phone?: string;
   website?: string;
+  socialLinks: {
+    linkedin: string;
+  };
 }
 
 export interface BiographySection {

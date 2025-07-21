@@ -1,3 +1,4 @@
+
 import { AboutData } from '../types/about';
 
 export const aboutData: AboutData = {
@@ -8,7 +9,10 @@ export const aboutData: AboutData = {
     profileImage: '/images/about/profile.jpg',
     location: 'San Francisco, CA',
     email: 'alex.johnson@email.com',
-    website: 'www.alexjohnson.design'
+    website: 'www.alexjohnson.design',
+    socialLinks: {
+      linkedin: 'https://www.linkedin.com/in/alexjohnson-design'
+    }
   },
   biography: [
     {

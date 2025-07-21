@@ -1,10 +1,13 @@
 import React from 'react';
 import { Mail, MapPin, Globe, Award, GraduationCap } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Navigation from '@/components/Navigation';
 import { aboutData } from '@/data/about';
 import * as LucideIcons from 'lucide-react';
+
 const About = () => {
   const {
     personalInfo,
@@ -16,6 +19,7 @@ const About = () => {
     interests,
     workPhilosophy
   } = aboutData;
+
   const renderSkillBar = (skill: typeof skillCategories[0]['skills'][0]) => <div key={skill.name} className="mb-4">
       <div className="flex justify-between items-center mb-1">
         <span className="text-sm font-medium text-foreground">{skill.name}</span>
@@ -27,10 +31,16 @@ const About = () => {
       }} />
       </div>
     </div>;
+
   const getIcon = (iconName: string) => {
     const Icon = (LucideIcons as any)[iconName];
     return Icon ? <Icon size={24} /> : null;
   };
+
+  const handleLinkedInClick = () => {
+    window.open(personalInfo.socialLinks.linkedin, '_blank', 'noopener,noreferrer');
+  };
+
   return <div className="min-h-screen bg-background">
       <Navigation />
       
@@ -140,13 +150,14 @@ const About = () => {
             <p className="text-xl text-muted-foreground mb-8">
               I'm always interested in discussing new opportunities, sharing design insights, or simply connecting with fellow creators.
             </p>
-            <Button size="lg" className="hover-lift">
-              <Mail className="mr-2" size={18} />
-              Start a Conversation
+            <Button size="lg" className="hover-lift" onClick={handleLinkedInClick}>
+              <FontAwesomeIcon icon={faLinkedin} className="mr-2" size="lg" />
+              Contact me via LinkedIn
             </Button>
           </div>
         </section>
       </main>
     </div>;
 };
+
 export default About;
