@@ -100,7 +100,6 @@
     flex-wrap: wrap;
     gap: 0.25rem;
     text-align: left;
-    max-width: 600px;
   }
 
   @media (min-width: 768px) {
