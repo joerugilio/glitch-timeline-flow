@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Calendar, MapPin, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { Position } from '../types/portfolio';
@@ -130,7 +131,7 @@ const GanttChart: React.FC<GanttChartProps> = ({
 
                   {/* Logo content */}
                   <div className="absolute inset-0 flex items-center justify-center bg-[#1b1f1b]/30 hover:bg-[#1b1f1b] transition-all duration-300">
-                    <CompanyLogo company={position.company} />
+                    <CompanyLogo company={position.company} logoUrl={position.logoUrl} />
                   </div>
 
                   {/* Achievement milestones */}

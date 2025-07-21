@@ -1,5 +1,4 @@
 
-
 export interface AchievementImage {
   url: string;
   alt: string;
@@ -29,6 +28,7 @@ export interface Position {
   description: string;
   tags: string[];
   imageUrl: string;
+  logoUrl?: string;
   achievements: Achievement[];
   exit?: Exit;
 }
@@ -36,4 +36,3 @@ export interface Position {
 export interface PortfolioData {
   positions: Position[];
 }
-

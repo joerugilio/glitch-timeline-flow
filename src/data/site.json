@@ -13,5 +13,22 @@
         "icon": "User"
       }
     ]
+  },
+  "companies": {
+    "TechCorp Innovation": {
+      "logo": "/logos/techcorp-innovation.svg"
+    },
+    "FinanceFlow": {
+      "logo": "/logos/financeflow.svg"
+    },
+    "StartupVenture": {
+      "logo": "/logos/startupventure.svg"
+    },
+    "Enterprise Solutions Inc": {
+      "logo": "/logos/enterprise-solutions-inc.svg"
+    },
+    "InnovateLabs": {
+      "logo": "/logos/innovatelabs.svg"
+    }
   }
 }

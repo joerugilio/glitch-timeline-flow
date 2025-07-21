@@ -1,4 +1,3 @@
-
 import { PortfolioData } from '../types/portfolio';
 
 export const portfolioData: PortfolioData = {
@@ -13,6 +12,7 @@ export const portfolioData: PortfolioData = {
       description: 'Spearheading design strategy across multiple product lines, establishing design systems, and building world-class design teams. Focus on user-centered innovation and scalable design processes.',
       tags: ['principal', 'design ops', 'design2code', 'international design team', 'full-stack ux'],
       imageUrl: '/images/portfolio/principal-designer-tech/position-bg.jpg',
+      logoUrl: '/logos/techcorp-innovation.svg',
       achievements: [
         {
           id: 'team-scaling',
@@ -92,6 +92,7 @@ export const portfolioData: PortfolioData = {
       description: 'Led product design for B2B financial platform serving Fortune 500 companies. Established design practices and mentored junior designers while driving product strategy.',
       tags: ['market leadership', 'full-stack ux', 'started design team', 'data-science'],
       imageUrl: '/images/portfolio/design-lead-fintech/position-bg.jpg',
+      logoUrl: '/logos/financeflow.svg',
       achievements: [
         {
           id: 'transaction-platform',
@@ -176,6 +177,7 @@ export const portfolioData: PortfolioData = {
       description: 'Led product development from concept to public exit. Managed entire product lifecycle including user research, design, development, and go-to-market strategy.',
       tags: ['full-stack-product-management', 'public exit', 'full pl', 'market leadership'],
       imageUrl: '/images/portfolio/product-manager-startup/position-bg.jpg',
+      logoUrl: '/logos/startupventure.svg',
       exit: {
         type: 'IPO',
         details: 'Successful public offering'
@@ -234,6 +236,7 @@ export const portfolioData: PortfolioData = {
       description: 'Directed UX strategy for enterprise software suite used by millions of users worldwide. Focused on accessibility, internationalization, and scalable design systems.',
       tags: ['design ops', 'international design team', 'full-stack ux', 'partial pl'],
       imageUrl: '/images/portfolio/ux-director-enterprise/position-bg.jpg',
+      logoUrl: '/logos/enterprise-solutions-inc.svg',
       achievements: [
         {
           id: 'accessibility-compliance',
@@ -293,6 +296,7 @@ export const portfolioData: PortfolioData = {
       description: 'Led design for consumer-facing products with focus on user acquisition and retention. Drove design strategy that contributed to successful acquisition by major tech company.',
       tags: ['full-stack ux', 'private exit', 'data-science', 'market leadership'],
       imageUrl: '/images/portfolio/product-designer-acquisition/position-bg.jpg',
+      logoUrl: '/logos/innovatelabs.svg',
       exit: {
         type: 'Acquisition',
         company: 'TechGiant Corp',
