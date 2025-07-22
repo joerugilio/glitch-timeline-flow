@@ -35,6 +35,30 @@ export const getFileStructure = (): FileItem[] => {
       description: 'Main JavaScript bundle with React app'
     },
     {
+      name: 'site.json',
+      path: '/data/site.json',
+      type: 'file',
+      size: '~2KB',
+      category: 'data',
+      description: 'Site configuration, navigation, and company data'
+    },
+    {
+      name: 'portfolio.json',
+      path: '/data/portfolio.json',
+      type: 'file',
+      size: '~25KB',
+      category: 'data',
+      description: 'Portfolio positions, achievements, and project data'
+    },
+    {
+      name: 'about.json',
+      path: '/data/about.json',
+      type: 'file',
+      size: '~8KB',
+      category: 'data',
+      description: 'Personal information, skills, education, and biography'
+    },
+    {
       name: 'favicon.ico',
       path: '/favicon.ico',
       type: 'file',
