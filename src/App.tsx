@@ -18,8 +18,8 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <Navigation />
         <div className="min-h-screen bg-background">
-          <Navigation />
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
