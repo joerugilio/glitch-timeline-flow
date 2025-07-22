@@ -17,7 +17,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({ position }) => {
         <AccordionTrigger>
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center">
-              <CompanyLogo logoUrl={position.logoUrl} companyName={position.company} size="sm" />
+              <CompanyLogo logoUrl={position.logoUrl} company={position.company} className="w-12 h-8" />
               <div className="ml-4">
                 <h3 className="text-lg font-semibold">{position.title}</h3>
                 <div className="flex items-center text-sm text-muted-foreground">

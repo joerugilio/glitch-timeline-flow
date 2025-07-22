@@ -28,7 +28,7 @@ const PositionDetail = () => {
           <div>
             <h1 className="text-3xl font-bold mb-2">{position.title}</h1>
             <div className="flex items-center space-x-2">
-              <CompanyLogo logoUrl={position.logoUrl} companyName={position.company} size="md" />
+              <CompanyLogo logoUrl={position.logoUrl} company={position.company} className="w-16 h-10" />
               <span className="text-lg">{position.company}</span>
             </div>
           </div>

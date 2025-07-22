@@ -5,11 +5,12 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { FileSystemItem, getFileStructure } from '@/utils/fileSystem';
-import { exportAllData } from '@/utils/dataExporter';
+import { FileItem, getFileStructure, getCategoryIcon, getCategoryColor } from '@/utils/fileSystem';
+import { downloadJsonFiles } from '@/utils/dataExporter';
+import { toast } from '@/components/ui/sonner';
 
 const FileBrowser = () => {
-  const [fileStructure, setFileStructure] = useState<FileSystemItem[]>(getFileStructure());
+  const [files] = useState<FileItem[]>(getFileStructure());
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
@@ -17,34 +18,34 @@ const FileBrowser = () => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredFiles = fileStructure.filter(item =>
+  const filteredFiles = files.filter(item =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const renderItem = (item: FileSystemItem) => (
+  const handleExportAll = () => {
+    downloadJsonFiles();
+    toast("All JSON files have been downloaded successfully.");
+  };
+
+  const renderItem = (item: FileItem) => (
     <Card key={item.name} className="w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">{item.name}</CardTitle>
-        {item.type === 'file' ? (
-          <Badge variant="secondary">File</Badge>
-        ) : (
-          <Badge variant="outline">Folder</Badge>
-        )}
+        <CardTitle className="text-sm font-medium flex items-center gap-2">
+          <span>{getCategoryIcon(item.category)}</span>
+          {item.name}
+        </CardTitle>
+        <Badge variant={item.isGenerated ? "default" : "secondary"}>
+          {item.isGenerated ? "Generated" : item.category.toUpperCase()}
+        </Badge>
       </CardHeader>
       <CardContent>
         <div className="flex items-center space-x-4 text-sm">
-          {item.type === 'file' ? (
-            <>
-              <FileText className="h-4 w-4 opacity-70" />
-              <span className="text-muted-foreground">Size: {item.size}</span>
-            </>
-          ) : (
-            <>
-              <Folder className="h-4 w-4 opacity-70" />
-              <span className="text-muted-foreground">Contains: {item.children?.length} items</span>
-            </>
-          )}
+          <FileText className="h-4 w-4 opacity-70" />
+          <span className="text-muted-foreground">Size: {item.size}</span>
         </div>
+        {item.description && (
+          <p className="text-xs text-muted-foreground mt-2">{item.description}</p>
+        )}
       </CardContent>
     </Card>
   );
@@ -60,19 +61,19 @@ const FileBrowser = () => {
       {filteredFiles.map(item => (
         <div key={item.name} className="flex items-center justify-between py-4">
           <div className="flex items-center space-x-4">
-            {item.type === 'file' ? (
-              <FileText className="h-5 w-5" />
-            ) : (
-              <FolderOpen className="h-5 w-5" />
-            )}
-            <span className="text-sm font-medium">{item.name}</span>
+            <span className="text-lg">{getCategoryIcon(item.category)}</span>
+            <div>
+              <span className="text-sm font-medium">{item.name}</span>
+              {item.description && (
+                <p className="text-xs text-muted-foreground">{item.description}</p>
+              )}
+            </div>
           </div>
-          <div>
-            {item.type === 'file' ? (
-              <Badge variant="secondary">File</Badge>
-            ) : (
-              <Badge variant="outline">Folder</Badge>
-            )}
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground">{item.size}</span>
+            <Badge variant={item.isGenerated ? "default" : "secondary"}>
+              {item.isGenerated ? "Generated" : item.category.toUpperCase()}
+            </Badge>
           </div>
         </div>
       ))}
@@ -95,9 +96,9 @@ const FileBrowser = () => {
               onChange={handleSearch}
             />
             <div className="flex space-x-2">
-              <Button onClick={() => exportAllData()}>
+              <Button onClick={handleExportAll}>
                 <Download className="mr-2 h-4 w-4" />
-                Export All
+                Download All JSON
               </Button>
             </div>
           </div>
