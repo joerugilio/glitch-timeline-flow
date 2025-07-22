@@ -95,6 +95,29 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     updateURL(expandedPositions, newExpandedAchievements);
   };
 
+  const scrollToPositionRespectingTabs = (positionId: string) => {
+    const element = document.querySelector(`[data-accordion-item="${positionId}"]`);
+    const stickyNav = document.querySelector('[data-sticky-nav]');
+    
+    if (element && stickyNav) {
+      const stickyNavRect = stickyNav.getBoundingClientRect();
+      const stickyNavHeight = stickyNavRect.height;
+      const stickyNavTop = 32; // top-8 = 32px
+      const bufferSpace = 24; // Additional breathing room
+      
+      const elementRect = element.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Calculate target position: element top - sticky nav height - top positioning - buffer
+      const targetPosition = scrollTop + elementRect.top - stickyNavHeight - stickyNavTop - bufferSpace;
+      
+      window.scrollTo({
+        top: Math.max(0, targetPosition), // Ensure we don't scroll above page top
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const handleGanttPositionClick = (positionId: string) => {
     // Switch to timeline view
     setSelectedView('timeline');
@@ -110,12 +133,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     // Update URL
     updateURL(newExpandedPositions, newExpandedAchievements);
     
-    // Scroll to position after view transition
+    // Scroll to position after view transition with proper tab respect
     setTimeout(() => {
-      const element = document.querySelector(`[data-accordion-item="${positionId}"]`);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+      scrollToPositionRespectingTabs(positionId);
     }, 500);
   };
 
