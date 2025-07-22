@@ -1,17 +1,19 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getFileStructure, getCategoryIcon, getCategoryColor, type FileItem } from '@/utils/fileSystem';
-import { Search, Download, Eye, Copy, FileText } from 'lucide-react';
+import { generateJsonUrls, downloadJsonFiles } from '@/utils/dataExporter';
+import { Search, Download, Eye, Copy, FileText, RefreshCw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const FileBrowser: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [generatedUrls, setGeneratedUrls] = useState<Record<string, string>>({});
   const { toast } = useToast();
 
   const files = getFileStructure();
@@ -25,6 +27,17 @@ const FileBrowser: React.FC = () => {
 
   const categories = ['all', ...Array.from(new Set(files.map(f => f.category)))];
   
+  // Generate URLs for data files on component mount
+  useEffect(() => {
+    const urls = generateJsonUrls();
+    setGeneratedUrls(urls);
+    
+    // Cleanup URLs on unmount
+    return () => {
+      Object.values(urls).forEach(url => URL.revokeObjectURL(url));
+    };
+  }, []);
+
   const handleCopyPath = (path: string) => {
     navigator.clipboard.writeText(window.location.origin + path);
     toast({
@@ -34,16 +47,55 @@ const FileBrowser: React.FC = () => {
   };
 
   const handleViewFile = (file: FileItem) => {
-    window.open(file.path, '_blank');
+    if (file.isGenerated && file.name.endsWith('.json')) {
+      const url = generatedUrls[file.name];
+      if (url) {
+        window.open(url, '_blank');
+      } else {
+        toast({
+          title: "Error",
+          description: "Generated file URL not available",
+          variant: "destructive"
+        });
+      }
+    } else {
+      window.open(file.path, '_blank');
+    }
   };
 
   const handleDownloadFile = (file: FileItem) => {
-    const link = document.createElement('a');
-    link.href = file.path;
-    link.download = file.name;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (file.isGenerated && file.name.endsWith('.json')) {
+      const url = generatedUrls[file.name];
+      if (url) {
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = file.name;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        toast({
+          title: "Error",
+          description: "Generated file not available for download",
+          variant: "destructive"
+        });
+      }
+    } else {
+      const link = document.createElement('a');
+      link.href = file.path;
+      link.download = file.name;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
+  const handleGenerateFiles = () => {
+    downloadJsonFiles();
+    toast({
+      title: "Files Generated!",
+      description: "JSON data files have been downloaded",
+    });
   };
 
   const FileCard: React.FC<{ file: FileItem }> = ({ file }) => (
@@ -53,7 +105,12 @@ const FileBrowser: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="text-2xl">{getCategoryIcon(file.category)}</span>
             <div>
-              <CardTitle className="text-base">{file.name}</CardTitle>
+              <CardTitle className="text-base flex items-center gap-2">
+                {file.name}
+                {file.isGenerated && (
+                  <Badge variant="secondary" className="text-xs">Generated</Badge>
+                )}
+              </CardTitle>
               <CardDescription className="text-xs font-mono">
                 {file.path}
               </CardDescription>
@@ -134,6 +191,10 @@ const FileBrowser: React.FC = () => {
               />
             </div>
           </div>
+          <Button onClick={handleGenerateFiles} variant="outline" className="flex items-center gap-2">
+            <RefreshCw className="w-4 h-4" />
+            Download All JSON
+          </Button>
         </div>
 
         <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>

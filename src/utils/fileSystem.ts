@@ -1,3 +1,4 @@
+
 export interface FileItem {
   name: string;
   path: string;
@@ -5,6 +6,7 @@ export interface FileItem {
   size?: string;
   category: 'html' | 'css' | 'js' | 'image' | 'data' | 'other';
   description?: string;
+  isGenerated?: boolean;
 }
 
 export const getFileStructure = (): FileItem[] => {
@@ -51,7 +53,7 @@ export const getFileStructure = (): FileItem[] => {
     },
     {
       name: 'site.json',
-      path: '/data/site.json',
+      path: '/src/data/site.json',
       type: 'file',
       size: '~2KB',
       category: 'data',
@@ -63,7 +65,8 @@ export const getFileStructure = (): FileItem[] => {
       type: 'file',
       size: '~25KB',
       category: 'data',
-      description: 'Portfolio positions, achievements, and project data'
+      description: 'Portfolio positions, achievements, and project data',
+      isGenerated: true
     },
     {
       name: 'about.json',
@@ -71,7 +74,8 @@ export const getFileStructure = (): FileItem[] => {
       type: 'file',
       size: '~8KB',
       category: 'data',
-      description: 'Personal information, skills, education, and biography'
+      description: 'Personal information, skills, education, and biography',
+      isGenerated: true
     },
     {
       name: 'favicon.ico',
