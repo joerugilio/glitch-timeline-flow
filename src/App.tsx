@@ -1,61 +1,38 @@
-import React from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
-import Index from "./pages/Index";
-import About from "./pages/About";
-import PositionDetail from "./pages/PositionDetail";
-import NotFound from "./pages/NotFound";
-import ScrollToTop from "./components/ScrollToTop";
-import FileBrowser from "./pages/FileBrowser";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60 * 1000, // 1 minute
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+import { Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { Toaster } from '@/components/ui/sonner';
+import Navigation from './components/Navigation';
+import Index from './pages/Index';
+import About from './pages/About';
+import PositionDetail from './pages/PositionDetail';
+import FileBrowser from './pages/FileBrowser';
+import NotFound from './pages/NotFound';
+import ScrollToTop from './components/ScrollToTop';
+import './App.css';
 
-// Redirect component for old position URLs
-const PositionRedirect: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const searchParams = new URLSearchParams(window.location.search);
-  const achievement = searchParams.get('achievement');
-  
-  const redirectParams = new URLSearchParams();
-  if (id) {
-    redirectParams.set('position', id);
-    if (achievement) {
-      redirectParams.set('achievement', achievement);
-    }
-  }
-  
-  return <Navigate to={`/?${redirectParams.toString()}`} replace />;
-};
+const queryClient = new QueryClient();
 
-const App: React.FC = () => {
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+        <div className="min-h-screen bg-background">
+          <Navigation />
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
+            <Route path="/position/:id" element={<PositionDetail />} />
             <Route path="/files" element={<FileBrowser />} />
-            <Route path="/position/:id" element={<PositionRedirect />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
+          <Toaster />
+        </div>
       </TooltipProvider>
     </QueryClientProvider>
   );
-};
+}
 
 export default App;

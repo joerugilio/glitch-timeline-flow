@@ -1,163 +1,192 @@
-
 import React from 'react';
-import { Mail, MapPin, Globe, Award, GraduationCap } from 'lucide-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MapPin, Mail, ExternalLink, Award, GraduationCap, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Navigation from '@/components/Navigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { aboutData } from '@/data/about';
-import * as LucideIcons from 'lucide-react';
 
 const About = () => {
-  const {
-    personalInfo,
-    biography,
-    skillCategories,
-    values,
-    education,
-    awards,
-    interests,
-    workPhilosophy
-  } = aboutData;
+  const { personalInfo, biography, skillCategories, values, education, awards, interests, workPhilosophy } = aboutData;
 
-  const renderSkillBar = (skill: typeof skillCategories[0]['skills'][0]) => <div key={skill.name} className="mb-2">
-      <div className="flex justify-between items-center mb-1">
-        <span className="text-sm font-medium text-foreground">{skill.name}</span>
-        <span className="text-xs text-muted-foreground">{skill.level}%</span>
-      </div>
-      <div className="w-full bg-muted rounded-full h-2">
-        <div className="bg-primary h-2 rounded-full transition-all duration-500 ease-out" style={{
-        width: `${skill.level}%`
-      }} />
-      </div>
-    </div>;
-
-  const getIcon = (iconName: string) => {
-    const Icon = (LucideIcons as any)[iconName];
-    return Icon ? <Icon size={24} /> : null;
-  };
-
-  const handleLinkedInClick = () => {
-    window.open(personalInfo.socialLinks.linkedin, '_blank', 'noopener,noreferrer');
-  };
-
-  return <div className="min-h-screen bg-background">
-      <Navigation />
-      
-      <main className="pt-16">
-        {/* Hero Section */}
-        
-
-        {/* Biography Section */}
-        <section className="px-2 bg-muted/30 py-2">
-          <div className="max-w-4xl mx-auto">
-            {biography.map((section, index) => <div key={section.id} className={`mb-8 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''} lg:flex lg:gap-8 lg:items-center`}>
-                <div className="lg:flex-1">
-                  <h2 className="text-3xl font-light text-primary mb-3">{section.title}</h2>
-                  {section.content.map((paragraph, pIndex) => <p key={pIndex} className="text-foreground mb-2 leading-relaxed">
-                      {paragraph}
-                    </p>)}
-                </div>
-                {section.image && <div className="lg:flex-1 mt-4 lg:mt-0">
-                    
-                  </div>}
-              </div>)}
+  return (
+    <div className="container mx-auto py-10">
+      {/* Personal Information Section */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>{personalInfo.name}</CardTitle>
+          <CardDescription>{personalInfo.title}</CardDescription>
+        </CardHeader>
+        <CardContent className="grid sm:grid-cols-2 gap-4">
+          <div className="flex flex-col items-start">
+            <img
+              src={personalInfo.profileImage}
+              alt="Profile"
+              className="rounded-full w-32 h-32 mb-4"
+            />
+            <p className="text-muted-foreground">{personalInfo.tagline}</p>
           </div>
-        </section>
-
-        {/* Skills Section */}
-        
-
-        {/* Values Section */}
-        
-
-        {/* Work Philosophy Section */}
-        
-
-        {/* Education & Awards Section */}
-        <section className="px-2 py-8 bg-muted/30">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-8">
-              {/* Education */}
-              <div>
-                <h2 className="text-3xl font-light text-primary mb-4 flex items-center gap-3">
-                  <GraduationCap size={32} />
-                  Education
-                </h2>
-                <div className="space-y-3">
-                  {education.map((edu, index) => <Card key={index} className="hover-lift">
-                      <CardHeader>
-                        <CardTitle className="text-lg">{edu.degree} in {edu.field}</CardTitle>
-                        <p className="text-primary font-medium">{edu.institution}</p>
-                      </CardHeader>
-                      {edu.description && <CardContent>
-                          <p className="text-muted-foreground">{edu.description}</p>
-                        </CardContent>}
-                    </Card>)}
-                </div>
-              </div>
-
-              {/* Awards */}
-              <div>
-                <h2 className="text-3xl font-light text-primary mb-4 flex items-center gap-3">
-                  <Award size={32} />
-                  Recognition
-                </h2>
-                <div className="space-y-3">
-                  {awards.map((award, index) => <Card key={index} className="hover-lift">
-                      <CardHeader>
-                        <CardTitle className="text-lg">{award.title}</CardTitle>
-                        <p className="text-primary font-medium">{award.organization}</p>
-                        <p className="text-sm text-muted-foreground">{award.year}</p>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-muted-foreground">{award.description}</p>
-                      </CardContent>
-                    </Card>)}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Personal Interests Section */}
-        <section className="px-2 py-8">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-light text-primary mb-6 text-center">Beyond Design</h2>
-            <div className="grid md:grid-cols-3 gap-4">
-              {interests.map(interest => <Card key={interest.title} className="overflow-hidden hover-lift">
-                  {interest.image && <div className="h-48 overflow-hidden">
-                      <img src={interest.image} alt={interest.title} className="w-full h-full object-cover" />
-                    </div>}
-                  <CardHeader>
-                    <CardTitle className="text-xl">{interest.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {interest.description}
-                    </p>
-                  </CardContent>
-                </Card>)}
-            </div>
-          </div>
-        </section>
-
-        {/* Call to Action */}
-        <section className="px-2 py-8 bg-gradient-dark text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-light text-primary mb-3">Let's Create Something Amazing</h2>
-            <p className="text-xl text-muted-foreground mb-4">
-              New opportunities, sharing design insights, or simply connecting with fellow creators.
+          <div>
+            <p className="flex items-center text-sm">
+              <MapPin className="mr-2 h-4 w-4" />
+              {personalInfo.location}
             </p>
-            <Button size="lg" className="hover-lift" onClick={handleLinkedInClick}>
-              <FontAwesomeIcon icon={faLinkedin} className="mr-2" size="lg" />
-              Contact me via LinkedIn
-            </Button>
+            <p className="flex items-center text-sm">
+              <Mail className="mr-2 h-4 w-4" />
+              <a href={`mailto:${personalInfo.email}`} className="hover:underline">
+                {personalInfo.email}
+              </a>
+            </p>
+            {personalInfo.website && (
+              <p className="flex items-center text-sm">
+                <ExternalLink className="mr-2 h-4 w-4" />
+                <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  Website
+                </a>
+              </p>
+            )}
+            <div className="mt-4">
+              <Button asChild>
+                <a href={personalInfo.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                  LinkedIn <ExternalLink className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+            </div>
           </div>
-        </section>
-      </main>
-    </div>;
+        </CardContent>
+      </Card>
+
+      {/* Biography Section */}
+      {biography.map((bio) => (
+        <Card key={bio.id} className="mb-8">
+          <CardHeader>
+            <CardTitle>{bio.title}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {bio.content.map((paragraph, index) => (
+              <p key={index} className="mb-4">
+                {paragraph}
+              </p>
+            ))}
+            {bio.image && <img src={bio.image} alt={bio.title} className="mt-4 rounded-md" />}
+          </CardContent>
+        </Card>
+      ))}
+
+      {/* Skills Section */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Skills</CardTitle>
+          <CardDescription>Technical proficiencies and areas of expertise.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {skillCategories.map((category) => (
+            <div key={category.name} className="mb-6">
+              <h3 className="text-lg font-semibold mb-2">{category.name}</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {category.skills.map((skill) => (
+                  <div key={skill.name} className="flex items-center justify-between">
+                    <span>{skill.name}</span>
+                    <div className="w-1/2 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                      <div className="bg-primary h-2.5 rounded-full" style={{ width: `${skill.level}%` }}></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* Values Section */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Core Values</CardTitle>
+          <CardDescription>Principles that guide my work and interactions.</CardDescription>
+        </CardHeader>
+        <CardContent className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {values.map((value, index) => (
+            <div key={index} className="flex flex-col items-center text-center">
+              {value.icon === 'Heart' ? <Heart className="h-6 w-6 mb-2 text-primary" /> : null}
+              <h4 className="font-semibold">{value.title}</h4>
+              <p className="text-sm text-muted-foreground">{value.description}</p>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* Education Section */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Education</CardTitle>
+          <CardDescription>Academic qualifications and learning experiences.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {education.map((edu, index) => (
+            <div key={index} className="mb-4">
+              <div className="flex items-center mb-1">
+                <GraduationCap className="mr-2 h-4 w-4 text-muted-foreground" />
+                <h5 className="font-semibold">{edu.institution}</h5>
+              </div>
+              <p className="text-sm">{edu.degree} in {edu.field} ({edu.year})</p>
+              {edu.description && <p className="text-sm text-muted-foreground">{edu.description}</p>}
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* Awards Section */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Awards & Recognition</CardTitle>
+          <CardDescription>Notable achievements and recognitions.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {awards.map((award, index) => (
+            <div key={index} className="mb-4">
+              <div className="flex items-center mb-1">
+                <Award className="mr-2 h-4 w-4 text-muted-foreground" />
+                <h5 className="font-semibold">{award.title}</h5>
+              </div>
+              <p className="text-sm">{award.organization} ({award.year})</p>
+              <p className="text-sm text-muted-foreground">{award.description}</p>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* Interests Section */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Personal Interests</CardTitle>
+          <CardDescription>Hobbies and interests outside of work.</CardDescription>
+        </CardHeader>
+        <CardContent className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {interests.map((interest, index) => (
+            <div key={index} className="flex flex-col items-center text-center">
+              {interest.image && <img src={interest.image} alt={interest.title} className="rounded-md w-24 h-24 mb-2" />}
+              <h4 className="font-semibold">{interest.title}</h4>
+              <p className="text-sm text-muted-foreground">{interest.description}</p>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* Work Philosophy Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Work Philosophy</CardTitle>
+          <CardDescription>My approach to professional work and collaboration.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <h4 className="font-semibold mb-2">{workPhilosophy.title}</h4>
+          {workPhilosophy.content.map((paragraph, index) => (
+            <p key={index} className="mb-4">
+              {paragraph}
+            </p>
+          ))}
+        </CardContent>
+      </Card>
+    </div>
+  );
 };
 
 export default About;
