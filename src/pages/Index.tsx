@@ -21,9 +21,7 @@ const Index = () => {
       <div className="relative z-10">
         <Navigation />
         <div className="px-0 py-1">
-          {portfolioData.positions.map((position) => (
-            <PositionAccordion key={position.id} position={position} />
-          ))}
+          <PositionAccordion positions={portfolioData.positions} />
         </div>
       </div>
     </div>

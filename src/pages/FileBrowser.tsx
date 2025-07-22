@@ -1,121 +1,171 @@
+
 import React, { useState } from 'react';
-import { Download, FileText, Folder, FolderOpen } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { FileItem, getFileStructure, getCategoryIcon, getCategoryColor } from '@/utils/fileSystem';
-import { downloadJsonFiles } from '@/utils/dataExporter';
-import { toast } from '@/components/ui/sonner';
+import { getFileStructure, getCategoryIcon, getCategoryColor, type FileItem } from '@/utils/fileSystem';
+import { Search, Download, Eye, Copy, FileText } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
-const FileBrowser = () => {
-  const [files] = useState<FileItem[]>(getFileStructure());
+const FileBrowser: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const { toast } = useToast();
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
+  const files = getFileStructure();
+  
+  const filteredFiles = files.filter(file => {
+    const matchesSearch = file.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         file.description?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || file.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  const categories = ['all', ...Array.from(new Set(files.map(f => f.category)))];
+  
+  const handleCopyPath = (path: string) => {
+    navigator.clipboard.writeText(window.location.origin + path);
+    toast({
+      title: "Copied!",
+      description: "File URL copied to clipboard",
+    });
   };
 
-  const filteredFiles = files.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const handleExportAll = () => {
-    downloadJsonFiles();
-    toast("All JSON files have been downloaded successfully.");
+  const handleViewFile = (file: FileItem) => {
+    window.open(file.path, '_blank');
   };
 
-  const renderItem = (item: FileItem) => (
-    <Card key={item.name} className="w-full">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium flex items-center gap-2">
-          <span>{getCategoryIcon(item.category)}</span>
-          {item.name}
-        </CardTitle>
-        <Badge variant={item.isGenerated ? "default" : "secondary"}>
-          {item.isGenerated ? "Generated" : item.category.toUpperCase()}
-        </Badge>
-      </CardHeader>
-      <CardContent>
-        <div className="flex items-center space-x-4 text-sm">
-          <FileText className="h-4 w-4 opacity-70" />
-          <span className="text-muted-foreground">Size: {item.size}</span>
+  const handleDownloadFile = (file: FileItem) => {
+    const link = document.createElement('a');
+    link.href = file.path;
+    link.download = file.name;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const FileCard: React.FC<{ file: FileItem }> = ({ file }) => (
+    <Card className="hover:shadow-md transition-shadow">
+      <CardHeader className="pb-3">
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">{getCategoryIcon(file.category)}</span>
+            <div>
+              <CardTitle className="text-base">{file.name}</CardTitle>
+              <CardDescription className="text-xs font-mono">
+                {file.path}
+              </CardDescription>
+            </div>
+          </div>
+          <Badge variant="outline" className={getCategoryColor(file.category)}>
+            {file.category}
+          </Badge>
         </div>
-        {item.description && (
-          <p className="text-xs text-muted-foreground mt-2">{item.description}</p>
+      </CardHeader>
+      <CardContent className="pt-0">
+        {file.description && (
+          <p className="text-sm text-muted-foreground mb-3">
+            {file.description}
+          </p>
         )}
+        {file.size && (
+          <p className="text-xs text-muted-foreground mb-3">
+            Size: {file.size}
+          </p>
+        )}
+        <div className="flex gap-2 flex-wrap">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => handleViewFile(file)}
+            className="flex items-center gap-1 text-xs"
+          >
+            <Eye className="w-3 h-3" />
+            View
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => handleDownloadFile(file)}
+            className="flex items-center gap-1 text-xs"
+          >
+            <Download className="w-3 h-3" />
+            Download
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => handleCopyPath(file.path)}
+            className="flex items-center gap-1 text-xs"
+          >
+            <Copy className="w-3 h-3" />
+            Copy URL
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );
 
-  const renderGrid = () => (
-    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {filteredFiles.map(item => renderItem(item))}
-    </div>
-  );
-
-  const renderList = () => (
-    <div className="divide-y divide-border">
-      {filteredFiles.map(item => (
-        <div key={item.name} className="flex items-center justify-between py-4">
-          <div className="flex items-center space-x-4">
-            <span className="text-lg">{getCategoryIcon(item.category)}</span>
-            <div>
-              <span className="text-sm font-medium">{item.name}</span>
-              {item.description && (
-                <p className="text-xs text-muted-foreground">{item.description}</p>
-              )}
-            </div>
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-8">
+          <div className="flex items-center gap-2 mb-2">
+            <FileText className="w-6 h-6" />
+            <h1 className="text-3xl font-bold">Site Files</h1>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground">{item.size}</span>
-            <Badge variant={item.isGenerated ? "default" : "secondary"}>
-              {item.isGenerated ? "Generated" : item.category.toUpperCase()}
-            </Badge>
+          <p className="text-muted-foreground">
+            Browse and download individual files from the compiled site. 
+            This page provides direct access to all static assets, compiled bundles, and resources.
+          </p>
+        </div>
+
+        <div className="flex gap-4 mb-6">
+          <div className="flex-1">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                placeholder="Search files..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+              />
+            </div>
           </div>
         </div>
-      ))}
-    </div>
-  );
 
-  return (
-    <div className="container mx-auto py-10">
-      <Card>
-        <CardHeader>
-          <CardTitle>File Browser</CardTitle>
-          <CardDescription>Explore and manage your files.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
-            <Input
-              type="search"
-              placeholder="Search files..."
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-            <div className="flex space-x-2">
-              <Button onClick={handleExportAll}>
-                <Download className="mr-2 h-4 w-4" />
-                Download All JSON
-              </Button>
+        <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
+          <TabsList className="mb-6">
+            {categories.map(category => (
+              <TabsTrigger key={category} value={category} className="capitalize">
+                {category === 'all' ? 'All Files' : `${getCategoryIcon(category as FileItem['category'])} ${category}`}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          <TabsContent value={selectedCategory}>
+            <div className="mb-4">
+              <p className="text-sm text-muted-foreground">
+                {filteredFiles.length} file{filteredFiles.length !== 1 ? 's' : ''} found
+              </p>
             </div>
-          </div>
-          <Tabs defaultValue="grid" className="mt-4">
-            <TabsList>
-              <TabsTrigger value="grid" onClick={() => setViewMode('grid')}>Grid</TabsTrigger>
-              <TabsTrigger value="list" onClick={() => setViewMode('list')}>List</TabsTrigger>
-            </TabsList>
-            <TabsContent value="grid">
-              {renderGrid()}
-            </TabsContent>
-            <TabsContent value="list">
-              {renderList()}
-            </TabsContent>
-          </Tabs>
-        </CardContent>
-      </Card>
+            
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {filteredFiles.map((file) => (
+                <FileCard key={file.path} file={file} />
+              ))}
+            </div>
+            
+            {filteredFiles.length === 0 && (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">No files found matching your criteria.</p>
+              </div>
+            )}
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 };
