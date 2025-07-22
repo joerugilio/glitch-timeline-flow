@@ -9,6 +9,7 @@ import About from "./pages/About";
 import PositionDetail from "./pages/PositionDetail";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import FileBrowser from "./pages/FileBrowser";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,6 +48,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
+            <Route path="/files" element={<FileBrowser />} />
             <Route path="/position/:id" element={<PositionRedirect />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
