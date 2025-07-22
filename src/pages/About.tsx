@@ -90,7 +90,6 @@ const About = () => {
                       <CardHeader>
                         <CardTitle className="text-lg">{edu.degree} in {edu.field}</CardTitle>
                         <p className="text-primary font-medium">{edu.institution}</p>
-                        <p className="text-sm text-muted-foreground">{edu.year}</p>
                       </CardHeader>
                       {edu.description && <CardContent>
                           <p className="text-muted-foreground">{edu.description}</p>
