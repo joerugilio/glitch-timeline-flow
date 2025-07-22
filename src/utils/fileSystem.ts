@@ -1,4 +1,3 @@
-
 export interface FileItem {
   name: string;
   path: string;
@@ -17,6 +16,22 @@ export const getFileStructure = (): FileItem[] => {
       size: '~15KB',
       category: 'html',
       description: 'Main HTML entry point'
+    },
+    {
+      name: 'about.html',
+      path: '/about.html',
+      type: 'file',
+      size: '~18KB',
+      category: 'html',
+      description: 'About page with personal information and contact details'
+    },
+    {
+      name: 'files.html',
+      path: '/files.html',
+      type: 'file',
+      size: '~12KB',
+      category: 'html',
+      description: 'Site files browser page for downloading static assets'
     },
     {
       name: 'index.css',
