@@ -3,6 +3,7 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import PositionAccordion from '../components/PositionAccordion';
 import portfolioData from '../data/portfolio.json';
+import { PortfolioData } from '../types/portfolio';
 
 const Index = () => {
   return (
@@ -21,7 +22,7 @@ const Index = () => {
       <div className="relative z-10">
         <Navigation />
         <div className="px-0 py-1">
-          <PositionAccordion positions={portfolioData.positions} />
+          <PositionAccordion positions={(portfolioData as PortfolioData).positions} />
         </div>
       </div>
     </div>
