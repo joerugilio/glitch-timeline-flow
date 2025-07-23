@@ -62,6 +62,9 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
     const wasInSplitView = selectedView === 'split';
     const isExpanding = value.length > expandedPositions.length;
     
+    // Find newly expanded position for scroll targeting
+    const newlyExpandedPosition = value.find(posId => !expandedPositions.includes(posId));
+    
     setExpandedPositions(value);
 
     // Clean up achievements for collapsed positions
@@ -83,6 +86,13 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
       setTimeout(() => {
         scrollToStickyNav();
       }, 500);
+    }
+    // If we're already in timeline view and expanding, scroll to the expanded item
+    else if (selectedView === 'timeline' && isExpanding && newlyExpandedPosition) {
+      // Wait for accordion animation to complete before scrolling
+      setTimeout(() => {
+        scrollToPositionRespectingTabs(newlyExpandedPosition);
+      }, 300);
     }
   };
 
