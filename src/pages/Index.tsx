@@ -3,7 +3,20 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import PositionAccordion from '../components/PositionAccordion';
 import portfolioData from '../data/portfolio.json';
-import { PortfolioData } from '../types/portfolio';
+import { PortfolioData, Position } from '../types/portfolio';
+
+// Type validation function to ensure JSON data matches TypeScript types
+const validatePortfolioData = (data: any): PortfolioData => {
+  return {
+    positions: data.positions.map((pos: any): Position => ({
+      ...pos,
+      exit: pos.exit ? {
+        ...pos.exit,
+        type: pos.exit.type as "IPO" | "Acquisition"
+      } : undefined
+    }))
+  };
+};
 
 const Index = () => {
   return (
@@ -22,7 +35,7 @@ const Index = () => {
       <div className="relative z-10">
         <Navigation />
         <div className="px-0 py-1">
-          <PositionAccordion positions={(portfolioData as PortfolioData).positions} />
+          <PositionAccordion positions={validatePortfolioData(portfolioData).positions} />
         </div>
       </div>
     </div>

@@ -7,6 +7,16 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '..
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
 import portfolioData from '../data/portfolio.json';
+import { Position } from '../types/portfolio';
+
+// Type validation function to ensure JSON data matches TypeScript types
+const validatePosition = (pos: any): Position => ({
+  ...pos,
+  exit: pos.exit ? {
+    ...pos.exit,
+    type: pos.exit.type as "IPO" | "Acquisition"
+  } : undefined
+});
 
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -44,8 +54,8 @@ const PositionDetail = () => {
       </div>;
   }
   const currentPositionIndex = portfolioData.positions.findIndex(p => p.id === currentPosition.id);
-  const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? portfolioData.positions[currentPositionIndex + 1] : null;
-  const prevPosition = currentPositionIndex > 0 ? portfolioData.positions[currentPositionIndex - 1] : null;
+  const nextPosition = currentPositionIndex < portfolioData.positions.length - 1 ? validatePosition(portfolioData.positions[currentPositionIndex + 1]) : null;
+  const prevPosition = currentPositionIndex > 0 ? validatePosition(portfolioData.positions[currentPositionIndex - 1]) : null;
   return <div className="min-h-screen bg-background relative ">
       {/* Background Image - Full Screen Cover */}
       <div className="fixed inset-0 z-0">
