@@ -1,7 +1,7 @@
 
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { portfolioData } from '../data/portfolio';
+import portfolioData from '../data/portfolio.json';
 
 export const useAchievementNavigation = () => {
   const { id } = useParams<{ id: string }>();

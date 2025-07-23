@@ -2,7 +2,7 @@
 import React from 'react';
 import Navigation from '../components/Navigation';
 import PositionAccordion from '../components/PositionAccordion';
-import { portfolioData } from '../data/portfolio';
+import portfolioData from '../data/portfolio.json';
 
 const Index = () => {
   return (

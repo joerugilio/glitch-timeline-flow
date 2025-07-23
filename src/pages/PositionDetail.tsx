@@ -6,7 +6,8 @@ import AchievementImages from '../components/AchievementImages';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
 import { Button } from '../components/ui/button';
 import { useAchievementNavigation } from '../hooks/useAchievementNavigation';
-import { portfolioData } from '../data/portfolio';
+import portfolioData from '../data/portfolio.json';
+
 const PositionDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
@@ -197,4 +198,5 @@ const PositionDetail = () => {
       </div>
     </div>;
 };
+
 export default PositionDetail;

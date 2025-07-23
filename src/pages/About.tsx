@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Mail, MapPin, Globe, Award, GraduationCap } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,7 +5,7 @@ import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Navigation from '@/components/Navigation';
-import { aboutData } from '@/data/about';
+import aboutData from '@/data/about.json';
 import * as LucideIcons from 'lucide-react';
 
 const About = () => {
