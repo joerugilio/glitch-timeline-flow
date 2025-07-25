@@ -68,6 +68,78 @@ function flattenFiles(srcDir, destDir, prefix = '') {
 // Flatten the build files
 flattenFiles(secretDir, flattenedDir);
 
+// Generate inline HTML files
+console.log('🔄 Creating self-contained HTML files...');
+try {
+  // Read the main index.html
+  const indexPath = path.join('dist', 'index.html');
+  let htmlContent = fs.readFileSync(indexPath, 'utf8');
+
+  // Extract CSS and JS file paths from the HTML
+  const cssMatch = htmlContent.match(/href="([^"]*\.css)"/);
+  const jsMatch = htmlContent.match(/src="([^"]*\.js)"/);
+
+  if (cssMatch && jsMatch) {
+    const cssFile = cssMatch[1].replace('/', '');
+    const jsFile = jsMatch[1].replace('/', '');
+
+    // Read CSS and JS content
+    const cssContent = fs.readFileSync(path.join('dist', cssFile), 'utf8');
+    const jsContent = fs.readFileSync(path.join('dist', jsFile), 'utf8');
+
+    // Create self-contained HTML
+    const inlineHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Design & Product Leadership</title>
+    <meta name="description" content="Career timeline showcasing design leadership, product management, and innovation across successful ventures" />
+    <meta name="author" content="Portfolio" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta property="og:title" content="Portfolio - Design & Product Leadership" />
+    <meta property="og:description" content="Career timeline showcasing design leadership, product management, and innovation" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=1200&h=630&fit=crop" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=1200&h=630&fit=crop" />
+
+    <style>
+${cssContent}
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+${jsContent}
+    </script>
+</body>
+</html>`;
+
+    // Write self-contained files
+    fs.writeFileSync(path.join(secretDir, 'app-complete.html'), inlineHtml);
+    fs.writeFileSync(path.join(flattenedDir, 'app-complete.html'), inlineHtml);
+
+    // Create offline version without Google Fonts
+    const offlineHtml = inlineHtml.replace(
+      /<link rel="preconnect"[^>]*>\s*<link rel="preconnect"[^>]*>\s*<link href="https:\/\/fonts\.googleapis\.com[^>]*>/g,
+      '<!-- Google Fonts removed for offline version -->'
+    );
+    fs.writeFileSync(path.join(secretDir, 'app-offline.html'), offlineHtml);
+    fs.writeFileSync(path.join(flattenedDir, 'app-offline.html'), offlineHtml);
+
+    console.log('✅ Self-contained HTML files created!');
+  }
+} catch (error) {
+  console.log('⚠️ Could not create inline HTML files:', error.message);
+}
+
 // Create an index file for the build directory
 const indexContent = `
 <!DOCTYPE html>
