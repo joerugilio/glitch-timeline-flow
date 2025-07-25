@@ -1,17 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
 
-console.log('🚀 Starting build process...');
-
-// Run the build first
-try {
-  execSync('npm run build', { stdio: 'inherit' });
-  console.log('✅ Build completed successfully!');
-} catch (error) {
-  console.error('❌ Build failed:', error.message);
-  process.exit(1);
-}
+console.log('🚀 Creating rrrun build directory...');
 
 // Use fixed directory name "rrrun"
 const secretPath = 'rrrun';
