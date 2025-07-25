@@ -78,12 +78,12 @@ function flattenFiles(srcDir, destDir, prefix = '') {
 // Flatten the build files
 flattenFiles(secretDir, flattenedDir);
 
-// Create an index file for the secret directory
+// Create an index file for the build directory
 const indexContent = `
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Secret Build - ${secretHash}</title>
+    <title>Build Files - rrrun</title>
     <style>
         body { font-family: monospace; background: #1a1a1a; color: #00ff00; padding: 20px; }
         .container { max-width: 800px; margin: 0 auto; }
@@ -91,33 +91,33 @@ const indexContent = `
         .file-list li { margin: 5px 0; }
         .file-list a { color: #00ff00; text-decoration: none; }
         .file-list a:hover { background: #333; padding: 2px; }
-        .secret-info { background: #2a2a2a; padding: 15px; border-left: 3px solid #00ff00; margin: 20px 0; }
+        .build-info { background: #2a2a2a; padding: 15px; border-left: 3px solid #00ff00; margin: 20px 0; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🔒 Secret Build Access</h1>
-        <div class="secret-info">
-            <strong>Secret Hash:</strong> ${secretHash}<br>
+        <h1>📦 Build Files Ready</h1>
+        <div class="build-info">
+            <strong>Directory:</strong> rrrun<br>
             <strong>Build Time:</strong> ${new Date().toISOString()}<br>
             <strong>Access URL:</strong> /${secretPath}
         </div>
-        
+
         <h2>📁 Available Files</h2>
         <ul class="file-list">
             <li><a href="./index.html">🌐 Main Application</a></li>
             <li><a href="./flattened/">📦 Flattened Files Directory</a></li>
         </ul>
-        
-        <h2>📦 Flattened Files</h2>
+
+        <h2>📦 Flattened Files (Ready for Download)</h2>
         <ul class="file-list">
-${fs.readdirSync(flattenedDir).map(file => 
+${fs.readdirSync(flattenedDir).map(file =>
     `            <li><a href="./flattened/${file}" download>📄 ${file}</a></li>`
 ).join('\n')}
         </ul>
-        
+
         <h2>🔧 Build Info</h2>
-        <p>This is a compiled, flattened version of the application accessible via a secret URL.</p>
+        <p>This is a compiled, flattened version of the application in the rrrun directory.</p>
         <p>All files are self-contained and can be downloaded individually.</p>
     </div>
 </body>
