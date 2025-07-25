@@ -124,11 +124,11 @@ ${fs.readdirSync(flattenedDir).map(file =>
 </html>
 `;
 
-fs.writeFileSync(path.join(secretDir, 'secret-index.html'), indexContent);
+fs.writeFileSync(path.join(secretDir, 'index.html'), indexContent);
 
 // Create a download info file
 const downloadInfo = {
-  secretHash,
+  directory: 'rrrun',
   secretPath,
   buildTime: new Date().toISOString(),
   accessUrl: `/${secretPath}`,
@@ -138,7 +138,7 @@ const downloadInfo = {
 
 fs.writeFileSync(path.join(secretDir, 'download-info.json'), JSON.stringify(downloadInfo, null, 2));
 
-console.log(`✅ Secret build created successfully!`);
-console.log(`📍 Access URL: /${secretPath}/secret-index.html`);
-console.log(`📦 Flattened files: ${downloadInfo.totalFiles} files`);
-console.log(`🔑 Secret hash: ${secretHash}`);
+console.log(`✅ Build created successfully in rrrun directory!`);
+console.log(`📍 Access URL: /${secretPath}/`);
+console.log(`📦 Flattened files: ${downloadInfo.totalFiles} files available for download`);
+console.log(`📁 Directory: dist/${secretPath}/flattened/`);
