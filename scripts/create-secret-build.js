@@ -1,14 +1,24 @@
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
+import { execSync } from 'child_process';
 
-// Generate a secret hash for the hidden URL
-const secretHash = crypto.randomBytes(16).toString('hex');
-const secretPath = `secret-${secretHash}`;
+console.log('🚀 Starting build process...');
 
-console.log(`Creating secret build at: /${secretPath}`);
+// Run the build first
+try {
+  execSync('npm run build', { stdio: 'inherit' });
+  console.log('✅ Build completed successfully!');
+} catch (error) {
+  console.error('❌ Build failed:', error.message);
+  process.exit(1);
+}
 
-// Create secret directory
+// Use fixed directory name "rrrun"
+const secretPath = 'rrrun';
+
+console.log(`Creating build in: /${secretPath}`);
+
+// Create rrrun directory
 const secretDir = path.join('dist', secretPath);
 if (!fs.existsSync(secretDir)) {
   fs.mkdirSync(secretDir, { recursive: true });
