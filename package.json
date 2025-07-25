@@ -8,6 +8,7 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "build:rrrun": "npm run build && node scripts/create-secret-build.js",
+    "build:inline": "npm run build && node scripts/create-inline-build.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
