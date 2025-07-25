@@ -215,7 +215,7 @@ const PositionAccordion: React.FC<PositionAccordionProps> = ({
         <div className="w-full">
           <header className="text-center mb-8 h-1/4">
             <h2 className="hero-title caption-timeline mb-4">
-              <span style={{color: "rgba(129, 228, 154, 0.69)"}}>
+              <span style={{color: "rgba(129, 228, 154, 0.89)"}}>
                 user-centered leadership robust-ops strategy + brand-science
               </span>
             </h2>
