@@ -167,8 +167,10 @@ const indexContent = `
 
         <h2>📁 Available Files</h2>
         <ul class="file-list">
-            <li><a href="./index.html">🌐 Main Application</a></li>
-            <li><a href="./flattened/">📦 Flattened Files Directory</a></li>
+            <li><a href="./index.html">🌐 Main Application (requires server)</a></li>
+            <li><a href="./app-complete.html">📦 Complete Self-Contained App</a></li>
+            <li><a href="./app-offline.html">📱 Offline Self-Contained App</a></li>
+            <li><a href="./flattened/">📂 Flattened Files Directory</a></li>
         </ul>
 
         <h2>📦 Flattened Files (Ready for Download)</h2>
